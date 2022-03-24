@@ -25,7 +25,7 @@ def encodeProfileSave():
         with io.open( "Profile_unpacked.json", "rb" ) as fd:
             encode_bytes = dgdata_encode( fd.read() )
 
-        with open('Profile_packed.save', 'wb') as f:
+        with open('Profile.save', 'wb') as f:
             f.write(encode_bytes)
     except FileNotFoundError as err:
         main.title()
