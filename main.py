@@ -1,10 +1,11 @@
 from colorama import Fore, init
 from encodingDecoding import *
-import time, os
+import time, os, random
 from os import system, name
 init(autoreset=True)
 
 GREEN = Fore.GREEN
+NUMS = '123456789'
 
 def factionGuild():
     title()
@@ -138,8 +139,99 @@ def o2():
         return mainMenu()
     elif o2options == '2':
         title()
+        profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n\n[2] Profile 2\n\n[3] Profile 3\n\n[4] Profile 4\n\n[5] Profile 5\n\n[6] Profile 6\n\n>')
+        if profile == '1':
+            profile = 'Profile0'
+        elif profile == '2':
+            profile = 'Profile1'
+        elif profile == '3':
+            profile = 'Profile2'
+        elif profile == '4':
+            profile = 'Profile3'
+        elif profile == '5':
+            profile = 'Profile4'
+        elif profile == '6':
+            profile = 'Profile5'
+        else:
+            title()
+            print('This profile does not exist.')
+            time.sleep(3)
+            return o2()
+        title()
+        try:
+            blackkeys = int(input('Set your back keys ammount\n\n>'))
+        except ValueError as err:
+            title()
+            print("Please, enter a valid number.")
+            time.sleep(3)
+            return o2()
+        title()
+        print('Loading, please wait...')
+        decodeProfileSave()
+        with open('Profile_unpacked.json', 'r+') as f:
+            data = json.load(f)
+            f.seek( 0 )
+            f.truncate()
+            data['Inventory'][f'{profile}']['Skills']['AvailableBlackKeys'] = blackkeys
+            json.dump( data, f )
+        if os.path.exists('Profile.save'):
+            os.remove('Profile.save')
+        encodeProfileSave()
+        os.remove('Profile_unpacked.json')
+        title()
+        print('Profile.save has been successfuly updated.')
+        time.sleep(3)
+        return mainMenu()
     elif o2options == '3':
         title()
+        profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
+        if profile == '1':
+            profile = 'Profile0'
+        elif profile == '2':
+            profile = 'Profile1'
+        elif profile == '3':
+            profile = 'Profile2'
+        elif profile == '4':
+            profile = 'Profile3'
+        elif profile == '5':
+            profile = 'Profile4'
+        elif profile == '6':
+            profile = 'Profile5'
+        else:
+            title()
+            print('This profile does not exist.')
+            time.sleep(3)
+            return o2()
+        title()
+        try:
+            blackbox = int(input('Set your black strongboxes ammount\n\n>'))
+        except ValueError as err:
+            title()
+            print("Please, enter a valid number.")
+            time.sleep(3)
+            return o2()
+        title()
+        print("Loading, please wait...")
+        decodeProfileSave()
+        for x in range(0, blackbox): # Ammount of black boxes to generate
+            genBox = ''
+            for x in range(0, 10):
+                chars = random.choice(NUMS)
+                genBox = genBox + chars
+            with open('Profile_unpacked.json', 'r+') as f:
+                data = json.load(f)
+                f.seek( 0 )
+                f.truncate()
+                data['Inventory'][f'{profile}']['Skills']['AvailableBlackStrongboxes'].append(int(genBox))
+                json.dump(data, f, indent=4, sort_keys=False)
+        if os.path.exists('Profile.save'):
+            os.remove('Profile.save')
+        encodeProfileSave()
+        os.remove('Profile_unpacked.json')
+        title()
+        print('Profile.save has been successfuly updated.')
+        time.sleep(3)
+        return mainMenu()
     elif o2options == '4':
         title()
     elif o2options == '5':
