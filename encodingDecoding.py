@@ -1,3 +1,4 @@
+from base64 import decode
 import io, json
 from dgdata import *
 import main
@@ -32,3 +33,5 @@ def encodeProfileSave():
         print("Profile_unpacked.json does not exist in the current directory, please try again.")
         time.sleep(3)
         return main.mainMenu()
+
+decodeProfileSave()
