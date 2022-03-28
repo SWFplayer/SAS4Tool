@@ -1820,6 +1820,7 @@ def equipment():
                 equipCfg(strongbox2, equipID, equipVersion, profile)
             elif equip == '11':
                 equipID = 10130
+                equipCfg(strongbox2, equipID, equipVersion, profile)
             else:
                 main.title()
                 print('Invalid Option.')
