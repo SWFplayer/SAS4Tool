@@ -2422,6 +2422,12 @@ def equipment():
                 return equipment()
 
 def setSupport():
+    turretjson = '''
+    {
+        "TurretId": 0,
+        "TurretCount": 0
+    }'''
+    
     main.title()
     profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
     if profile == '1':
@@ -2441,10 +2447,18 @@ def setSupport():
         print('This profile does not exist.')
         time.sleep(3)
         return setSupport()
-    supply = input('[1] Frag grenades\n[2] Cryo grenades\n[3] HVM turrets\n[4] Cryo turrets\n[5] Heavyshot\n[6] Flugkorper\n[7] Flame turret\n[8] CM Supernova\n[9] CM Zeus\n')
+    main.title()
+    supply = input('[1] Frag grenades\n[2] Cryo grenades\n[3] HVM turrets\n[4] Cryo turrets\n[5] Heavyshot\n[6] Flugkorper\n[7] Flame turret\n[8] CM Supernova\n[9] CM Zeus\n\n>')
     if supply == '1':
         main.title()
-        a = int(input('Set your supply ammount\n\n>'))
+        try:
+            a = int(input('Set your supply ammount\n\n>'))
+        except ValueError as err:
+            main.title()
+            print('Invalid value')
+            time.sleep(3)
+            return setSupport()
+        main.title()
         print('Loading, please wait...')
         d.decodeProfileSave()
         with open('Profile_unpacked.json', 'r+') as f:
@@ -2463,7 +2477,14 @@ def setSupport():
         return main.mainMenu()
     elif supply == '2':
         main.title()
-        a = int(input('Set your supply ammount\n\n>'))
+        try:
+            a = int(input('Set your supply ammount\n\n>'))
+        except ValueError as err:
+            main.title()
+            print('Invalid value')
+            time.sleep(3)
+            return setSupport()
+        main.title()
         print('Loading, please wait...')
         d.decodeProfileSave()
         with open('Profile_unpacked.json', 'r+') as f:
@@ -2482,16 +2503,32 @@ def setSupport():
         return main.mainMenu()
     elif supply == '3':
         main.title()
-        a = int(input('Set your supply ammount\n\n>'))
+        try:
+            a = int(input('Set your supply ammount\n\n>'))
+        except ValueError as err:
+            main.title()
+            print('Invalid value')
+            time.sleep(3)
+            return setSupport()
+        main.title()
         print('Loading, please wait...')
         d.decodeProfileSave()
         with open('Profile_unpacked.json', 'r+') as f:
             data = json.load(f)
+            p = json.loads(turretjson)
             f.seek( 0 )
             f.truncate()
-            data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = 133
-            data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-            json.dump( data, f )
+            turretID = 133
+            try:
+                data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = 133
+                data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
+                json.dump( data, f )
+            except IndexError:
+                p['TurretsId'] = turretID
+                p['TurretsCount'] = int(a)
+                data['Inventory'][f'{profile}']['Turrets'].append(p)
+                json.dump( data, f )
+                pass
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
         d.encodeProfileSave()
@@ -2502,16 +2539,32 @@ def setSupport():
         return main.mainMenu()
     elif supply == '4':
         main.title()
-        a = int(input('Set your supply ammount\n\n>'))
+        try:
+            a = int(input('Set your supply ammount\n\n>'))
+        except ValueError as err:
+            main.title()
+            print('Invalid value')
+            time.sleep(3)
+            return setSupport()
+        main.title()
         print('Loading, please wait...')
         d.decodeProfileSave()
         with open('Profile_unpacked.json', 'r+') as f:
             data = json.load(f)
+            p = json.loads(turretjson)
             f.seek( 0 )
             f.truncate()
-            data['Inventory'][f'{profile}']['Turrets'][1]['TurretCount'] = 134
-            data['Inventory'][f'{profile}']['Turrets'][1]['TurretCount'] = int(a)
-            json.dump( data, f )
+            turretID = 134
+            try:
+                data['Inventory'][f'{profile}']['Turrets'][1]['TurretId'] = 134
+                data['Inventory'][f'{profile}']['Turrets'][1]['TurretCount'] = int(a)
+                json.dump( data, f )
+            except IndexError:
+                p['TurretsId'] = turretID
+                p['TurretsCount'] = int(a)
+                data['Inventory'][f'{profile}']['Turrets'].append(p)
+                json.dump( data, f )
+                pass
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
         d.encodeProfileSave()
@@ -2522,16 +2575,32 @@ def setSupport():
         return main.mainMenu()
     elif supply == '5':
         main.title()
-        a = int(input('Set your supply ammount\n\n>'))
+        try:
+            a = int(input('Set your supply ammount\n\n>'))
+        except ValueError as err:
+            main.title()
+            print('Invalid value')
+            time.sleep(3)
+            return setSupport()
+        main.title()
         print('Loading, please wait...')
         d.decodeProfileSave()
         with open('Profile_unpacked.json', 'r+') as f:
             data = json.load(f)
+            p = json.loads(turretjson)
             f.seek( 0 )
             f.truncate()
-            data['Inventory'][f'{profile}']['Turrets'][2]['TurretCount'] = 135
-            data['Inventory'][f'{profile}']['Turrets'][2]['TurretCount'] = int(a)
-            json.dump( data, f )
+            turretID = 135
+            try:
+                data['Inventory'][f'{profile}']['Turrets'][2]['TurretId'] = 135
+                data['Inventory'][f'{profile}']['Turrets'][2]['TurretCount'] = int(a)
+                json.dump( data, f )
+            except IndexError:
+                p['TurretsId'] = turretID
+                p['TurretsCount'] = int(a)
+                data['Inventory'][f'{profile}']['Turrets'].append(p)
+                json.dump( data, f )
+                pass
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
         d.encodeProfileSave()
@@ -2542,16 +2611,32 @@ def setSupport():
         return main.mainMenu()
     elif supply == '6':
         main.title()
-        a = int(input('Set your supply ammount\n\n>'))
+        try:
+            a = int(input('Set your supply ammount\n\n>'))
+        except ValueError as err:
+            main.title()
+            print('Invalid value')
+            time.sleep(3)
+            return setSupport()
+        main.title()
         print('Loading, please wait...')
         d.decodeProfileSave()
         with open('Profile_unpacked.json', 'r+') as f:
             data = json.load(f)
+            p = json.loads(turretjson)
             f.seek( 0 )
             f.truncate()
-            data['Inventory'][f'{profile}']['Turrets'][3]['TurretCount'] = 136
-            data['Inventory'][f'{profile}']['Turrets'][3]['TurretCount'] = int(a)
-            json.dump( data, f )
+            turretID = 136
+            try:
+                data['Inventory'][f'{profile}']['Turrets'][3]['TurretId'] = 136
+                data['Inventory'][f'{profile}']['Turrets'][3]['TurretCount'] = int(a)
+                json.dump( data, f )
+            except IndexError:
+                p['TurretsId'] = turretID
+                p['TurretsCount'] = int(a)
+                data['Inventory'][f'{profile}']['Turrets'].append(p)
+                json.dump( data, f )
+                pass
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
         d.encodeProfileSave()
@@ -2562,16 +2647,32 @@ def setSupport():
         return main.mainMenu()
     elif supply == '7':
         main.title()
-        a = int(input('Set your supply ammount\n\n>'))
+        try:
+            a = int(input('Set your supply ammount\n\n>'))
+        except ValueError as err:
+            main.title()
+            print('Invalid value')
+            time.sleep(3)
+            return setSupport()
+        main.title()
         print('Loading, please wait...')
         d.decodeProfileSave()
         with open('Profile_unpacked.json', 'r+') as f:
             data = json.load(f)
+            p = json.loads(turretjson)
             f.seek( 0 )
             f.truncate()
-            data['Inventory'][f'{profile}']['Turrets'][4]['TurretCount'] = 137
-            data['Inventory'][f'{profile}']['Turrets'][4]['TurretCount'] = int(a)
-            json.dump( data, f )
+            turretID = 137
+            try:
+                data['Inventory'][f'{profile}']['Turrets'][4]['TurretId'] = 137
+                data['Inventory'][f'{profile}']['Turrets'][4]['TurretCount'] = int(a)
+                json.dump( data, f )
+            except IndexError:
+                p['TurretsId'] = turretID
+                p['TurretsCount'] = int(a)
+                data['Inventory'][f'{profile}']['Turrets'].append(p)
+                json.dump( data, f )
+                pass
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
         d.encodeProfileSave()
@@ -2582,16 +2683,32 @@ def setSupport():
         return main.mainMenu()
     elif supply == '8':
         main.title()
-        a = int(input('Set your supply ammount\n\n>'))
+        try:
+            a = int(input('Set your supply ammount\n\n>'))
+        except ValueError as err:
+            main.title()
+            print('Invalid value')
+            time.sleep(3)
+            return setSupport()
+        main.title()
         print('Loading, please wait...')
         d.decodeProfileSave()
         with open('Profile_unpacked.json', 'r+') as f:
             data = json.load(f)
+            p = json.loads(turretjson)
             f.seek( 0 )
             f.truncate()
-            data['Inventory'][f'{profile}']['Turrets'][5]['TurretCount'] = 138
-            data['Inventory'][f'{profile}']['Turrets'][5]['TurretCount'] = int(a)
-            json.dump( data, f )
+            turretID = 138
+            try:
+                data['Inventory'][f'{profile}']['Turrets'][5]['TurretId'] = 138
+                data['Inventory'][f'{profile}']['Turrets'][5]['TurretCount'] = int(a)
+                json.dump( data, f )
+            except IndexError:
+                p['TurretsId'] = turretID
+                p['TurretsCount'] = int(a)
+                data['Inventory'][f'{profile}']['Turrets'].append(p)
+                json.dump( data, f )
+                pass
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
         d.encodeProfileSave()
@@ -2600,18 +2717,34 @@ def setSupport():
         print('Profile.save has been successfuly updated.')
         time.sleep(3)
         return main.mainMenu()
-    elif supply == '8':
+    elif supply == '9':
         main.title()
-        a = int(input('Set your supply ammount\n\n>'))
+        try:
+            a = int(input('Set your supply ammount\n\n>'))
+        except ValueError as err:
+            main.title()
+            print('Invalid value')
+            time.sleep(3)
+            return setSupport()
+        main.title()
         print('Loading, please wait...')
         d.decodeProfileSave()
         with open('Profile_unpacked.json', 'r+') as f:
             data = json.load(f)
+            p = json.loads(turretjson)
             f.seek( 0 )
             f.truncate()
-            data['Inventory'][f'{profile}']['Turrets'][6]['TurretCount'] = 139
-            data['Inventory'][f'{profile}']['Turrets'][6]['TurretCount'] = int(a)
-            json.dump( data, f )
+            turretID = 139
+            try:
+                data['Inventory'][f'{profile}']['Turrets'][6]['TurretId'] = 139
+                data['Inventory'][f'{profile}']['Turrets'][6]['TurretCount'] = int(a)
+                json.dump( data, f )
+            except IndexError:
+                p['TurretsId'] = turretID
+                p['TurretsCount'] = int(a)
+                data['Inventory'][f'{profile}']['Turrets'].append(p)
+                json.dump( data, f )
+                pass
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
         d.encodeProfileSave()
