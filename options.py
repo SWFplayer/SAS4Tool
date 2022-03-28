@@ -3225,4 +3225,11 @@ def collection():
         data['CollectionArrayArmour'][194]['CollectionUnlocked'] = st
         data['CollectionArrayArmour'][195]['CollectionUnlocked'] = st
         json.dump( data, f, indent=4, sort_keys=False )
-    
+    if os.path.exists('Profile.save'):
+        os.remove('Profile.save')
+    d.encodeProfileSave()
+    os.remove('Profile_unpacked.json')
+    main.title()
+    print('Profile.save has been successfuly updated.')
+    time.sleep(3)
+    return main.mainMenu()
