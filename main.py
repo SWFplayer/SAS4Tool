@@ -29,9 +29,9 @@ def o1():
 [2] Set factions war credits
 \n>''')
     if o1options == '1':
-        opt.OptionsOne.factionGuild()
+        opt.factionGuild()
     elif o1options == '2':
-        opt.OptionsOne.factionCredits()
+        opt.factionCredits()
     else:
         title()
         print('Invalid option.')
@@ -81,7 +81,7 @@ def o3():
     opt.premGuns()
 
 def o4():
-    title()
+    opt.collection()
 
 def o5():
     title()
