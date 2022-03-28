@@ -71,6 +71,8 @@ def o2():
         opt.premProfile()
     elif o2options == '9':
         opt.setSupport()
+    elif o2options == '10':
+        opt.setSupport()
     else:
         title()
         print('Invalid option.')

@@ -3233,3 +3233,101 @@ def collection():
     print('Profile.save has been successfuly updated.')
     time.sleep(3)
     return main.mainMenu()
+
+def mastery():
+    main.title()
+    profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
+    if profile == '1':
+        profile = 'MasteryProfile0'
+    elif profile == '2':
+        profile = 'MasteryProfile1'
+    elif profile == '3':
+        profile = 'MasteryProfile2'
+    elif profile == '4':
+        profile = 'MasteryProfile3'
+    elif profile == '5':
+        profile = 'MasteryProfile4'
+    elif profile == '6':
+        profile = 'MasteryProfile5'
+    else:
+        main.title()
+        print('This profile does not exist.')
+        time.sleep(3)
+        return setSupport()
+    lvl = 5
+    xp = 540000
+    main.title()
+    mast = input('Do you want to set you mastery skills to max level?\n\n[1] Yes\n[2] No\n\n>')
+    if mast == '1':
+        main.title()
+        print('Loading, please wait...')
+        d.decodeProfileSave()
+        with open('Profile_unpacked.json', 'r+') as f:
+            data = json.load(f)
+            f.seek( 0 )
+            f.truncate()
+            data['MasteryProgress'][f'{profile}'][0]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][1]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][2]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][3]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][4]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][5]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][6]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][7]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][8]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][9]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][10]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][11]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][12]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][13]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][14]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][15]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][16]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][17]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][18]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][19]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][20]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][21]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][22]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][23]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][24]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][25]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][26]['MasteryXp'] = xp
+            data['MasteryProgress'][f'{profile}'][0]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][1]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][2]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][3]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][4]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][5]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][6]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][7]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][8]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][9]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][10]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][11]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][12]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][13]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][14]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][15]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][16]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][17]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][18]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][19]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][20]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][21]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][22]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][23]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][24]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][25]['MasteryLvl'] = lvl
+            data['MasteryProgress'][f'{profile}'][26]['MasteryLvl'] = lvl
+            json.dump( data, f, indent=4, sort_keys=False )
+        if os.path.exists('Profile.save'):
+            os.remove('Profile.save')
+        d.encodeProfileSave()
+        os.remove('Profile_unpacked.json')
+        main.title()
+        print('Profile.save has been successfuly updated.')
+        time.sleep(3)
+        return main.mainMenu()
+    elif mast == '2':
+        return main.mainMenu()
