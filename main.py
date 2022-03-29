@@ -51,7 +51,6 @@ def o2():
 [8] Add 2 pay to unlock profiles
 [9] Set support items
 [10] Set mastery to max level
-[11] Set player level
 \n>''')
     if o2options == '1':
         opt.reviveTokens()
