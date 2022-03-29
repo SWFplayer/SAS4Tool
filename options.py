@@ -593,12 +593,12 @@ def weaponCfg(strongbox, weaponID, equipVersion, profile):
             main.title()
             print('Please enter a valid value.')
             time.sleep(3)
-            return weaponCfg()
+            return weaponCfg(strongbox, weaponID, equipVersion, profile)
     except ValueError as err:
         main.title()
         print('Please enter a valid number.')
         time.sleep(3)
-        return weaponCfg()
+        return weaponCfg(strongbox, weaponID, equipVersion, profile)
     main.title()
     try:
         augmentSlots = int(input('Set your weapon augment slots (0-4)\n\n>'))
@@ -606,12 +606,12 @@ def weaponCfg(strongbox, weaponID, equipVersion, profile):
             main.title()
             print('Please enter a valid value.')
             time.sleep(3)
-            return equipCfg()
+            return weaponCfg(strongbox, weaponID, equipVersion, profile)
     except ValueError as err:
         main.title()
         print('Please enter a valid number.')
         time.sleep(3)
-        return weaponCfg()
+        return weaponCfg(strongbox, weaponID, equipVersion, profile)
     main.title()
     try:
         bonusGrade = int(input('Set your weapon bonus stats (0-10)\n\n>'))
@@ -619,12 +619,12 @@ def weaponCfg(strongbox, weaponID, equipVersion, profile):
             main.title()
             print('Please enter a valid value.')
             time.sleep(3)
-            return weaponCfg()
+            return weaponCfg(strongbox, weaponID, equipVersion, profile)
     except ValueError as err:
         main.title()
         print('Please enter a valid number.')
         time.sleep(3)
-        return weaponCfg()
+        return weaponCfg(strongbox, weaponID, equipVersion, profile)
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
@@ -914,6 +914,11 @@ def weapons():
                 print('Invalid Option.')
                 time.sleep(3)
                 return weapons()
+        else:
+            main.title()
+            print('Invalid Option.')
+            time.sleep(3)
+            return weapons()
     elif weaponType == '3':
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
@@ -1082,6 +1087,11 @@ def weapons():
                 print('Invalid Option.')
                 time.sleep(3)
                 return weapons()
+        else:
+            main.title()
+            print('Invalid Option.')
+            time.sleep(3)
+            return weapons()
     elif weaponType == '4':
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
@@ -1160,6 +1170,11 @@ def weapons():
                 print('Invalid Option.')
                 time.sleep(3)
                 return weapons()
+        else:
+            main.title()
+            print('Invalid Option.')
+            time.sleep(3)
+            return weapons()
     elif weaponType == '5':
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
@@ -1226,6 +1241,11 @@ def weapons():
                 print('Invalid Option.')
                 time.sleep(3)
                 return weapons()
+        else:
+            main.title()
+            print('Invalid Option.')
+            time.sleep(3)
+            return weapons()
     elif weaponType == '6':
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
@@ -1325,6 +1345,11 @@ def weapons():
                 print('Invalid Option.')
                 time.sleep(3)
                 return weapons()
+        else:
+            main.title()
+            print('Invalid Option.')
+            time.sleep(3)
+            return weapons()
     elif weaponType == '7':
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
@@ -1370,6 +1395,11 @@ def weapons():
                 print('Invalid Option.')
                 time.sleep(3)
                 return weapons()
+        else:
+            main.title()
+            print('Invalid Option.')
+            time.sleep(3)
+            return weapons()
     elif weaponType == '8':
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
@@ -1493,6 +1523,11 @@ def weapons():
                 print('Invalid Option.')
                 time.sleep(3)
                 return weapons()
+        else:
+            main.title()
+            print('Invalid Option.')
+            time.sleep(3)
+            return weapons()
     elif weaponType == '9':
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
@@ -1535,6 +1570,11 @@ def weapons():
                 print('Invalid Option.')
                 time.sleep(3)
                 return weapons()
+        else:
+            main.title()
+            print('Invalid Option.')
+            time.sleep(3)
+            return weapons()
     elif weaponType == '10':
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
@@ -1568,7 +1608,7 @@ def weapons():
         elif weaponVersion == '3':
             main.title()
             equipVersion = 2
-            weapon = input(laserRD)
+            weapon = input(laserBL)
             if weapon == '1':
                 weaponID = 10175
                 weaponCfg(strongbox, weaponID, equipVersion, profile)
@@ -1577,6 +1617,11 @@ def weapons():
                 print('Invalid Option.')
                 time.sleep(3)
                 return weapons()
+        else:
+            main.title()
+            print('Invalid Option.')
+            time.sleep(3)
+            return weapons()
 
 def equipCfg(strongbox2, equipID, equipVersion, profile):
     main.title()
@@ -1586,12 +1631,12 @@ def equipCfg(strongbox2, equipID, equipVersion, profile):
             main.title()
             print('Please enter a valid value.')
             time.sleep(3)
-            return equipCfg()
+            return equipCfg(strongbox2, equipID, equipVersion, profile)
     except ValueError as err:
         main.title()
         print('Please enter a valid number.')
         time.sleep(3)
-        return equipCfg()
+        return equipCfg(strongbox2, equipID, equipVersion, profile)
     main.title()
     try:
         augmentSlots = int(input('Set your weapon augment slots (0-3)\n\n>'))
@@ -1599,12 +1644,12 @@ def equipCfg(strongbox2, equipID, equipVersion, profile):
             main.title()
             print('Please enter a valid value.')
             time.sleep(3)
-            return equipCfg()
+            return equipCfg(strongbox2, equipID, equipVersion, profile)
     except ValueError as err:
         main.title()
         print('Please enter a valid number.')
         time.sleep(3)
-        return equipCfg()
+        return equipCfg(strongbox2, equipID, equipVersion, profile)
     main.title()
     try:
         bonusGrade = int(input('Set your weapon bonus stats (0-10)\n\n>'))
@@ -1612,12 +1657,12 @@ def equipCfg(strongbox2, equipID, equipVersion, profile):
             main.title()
             print('Please enter a valid value.')
             time.sleep(3)
-            return equipCfg()
+            return equipCfg(strongbox2, equipID, equipVersion, profile)
     except ValueError as err:
         main.title()
         print('Please enter a valid number.')
         time.sleep(3)
-        return equipCfg()
+        return equipCfg(strongbox2, equipID, equipVersion, profile)
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
@@ -1826,6 +1871,11 @@ def equipment():
                 print('Invalid Option.')
                 time.sleep(3)
                 return equipment()
+        else:
+            main.title()
+            print('Invalid Option.')
+            time.sleep(3)
+            return equipment()
     elif equipType == '2':
         main.title()
         equipmentVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
@@ -1988,6 +2038,11 @@ def equipment():
                 print('Invalid Option.')
                 time.sleep(3)
                 return equipment()
+        else:
+            main.title()
+            print('Invalid Option.')
+            time.sleep(3)
+            return equipment()
     elif equipType == '3':
         main.title()
         equipmentVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
@@ -2132,6 +2187,11 @@ def equipment():
                 print('Invalid Option.')
                 time.sleep(3)
                 return equipment()
+        else:
+            main.title()
+            print('Invalid Option.')
+            time.sleep(3)
+            return equipment()
     elif equipType == '4':
         main.title()
         equipmentVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
@@ -2276,6 +2336,11 @@ def equipment():
                 print('Invalid Option.')
                 time.sleep(3)
                 return equipment()
+        else:
+            main.title()
+            print('Invalid Option.')
+            time.sleep(3)
+            return equipment()
     elif equipType == '5':
         main.title()
         equipmentVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
@@ -2420,6 +2485,11 @@ def equipment():
                 print('Invalid Option.')
                 time.sleep(3)
                 return equipment()
+        else:
+            main.title()
+            print('Invalid Option.')
+            time.sleep(3)
+            return equipment()
 
 def setSupport():
     turretjson = '''
