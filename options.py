@@ -585,7 +585,7 @@ def premGuns():
     time.sleep(3)
     return main.mainMenu()
 
-def weaponCfg(strongbox, weaponID, equipVersion, profile):
+def weaponCfg(strongbox, weaponID, equipVersion, profile, type):
     main.title()
     try:
         grade = int(input('Set your weapon grade (0-12)\n\n>'))
@@ -593,12 +593,12 @@ def weaponCfg(strongbox, weaponID, equipVersion, profile):
             main.title()
             print('Please enter a valid value.')
             time.sleep(3)
-            return weaponCfg(strongbox, weaponID, equipVersion, profile)
+            return weaponCfg(strongbox, weaponID, equipVersion, profile, type)
     except ValueError as err:
         main.title()
         print('Please enter a valid number.')
         time.sleep(3)
-        return weaponCfg(strongbox, weaponID, equipVersion, profile)
+        return weaponCfg(strongbox, weaponID, equipVersion, profile, type)
     main.title()
     try:
         augmentSlots = int(input('Set your weapon augment slots (0-4)\n\n>'))
@@ -606,12 +606,12 @@ def weaponCfg(strongbox, weaponID, equipVersion, profile):
             main.title()
             print('Please enter a valid value.')
             time.sleep(3)
-            return weaponCfg(strongbox, weaponID, equipVersion, profile)
+            return weaponCfg(strongbox, weaponID, equipVersion, profile, type)
     except ValueError as err:
         main.title()
         print('Please enter a valid number.')
         time.sleep(3)
-        return weaponCfg(strongbox, weaponID, equipVersion, profile)
+        return weaponCfg(strongbox, weaponID, equipVersion, profile, type)
     main.title()
     try:
         bonusGrade = int(input('Set your weapon bonus stats (0-10)\n\n>'))
@@ -619,12 +619,12 @@ def weaponCfg(strongbox, weaponID, equipVersion, profile):
             main.title()
             print('Please enter a valid value.')
             time.sleep(3)
-            return weaponCfg(strongbox, weaponID, equipVersion, profile)
+            return weaponCfg(strongbox, weaponID, equipVersion, profile, type)
     except ValueError as err:
         main.title()
         print('Please enter a valid number.')
         time.sleep(3)
-        return weaponCfg(strongbox, weaponID, equipVersion, profile)
+        return weaponCfg(strongbox, weaponID, equipVersion, profile, type)
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
@@ -635,12 +635,13 @@ def weaponCfg(strongbox, weaponID, equipVersion, profile):
         f.truncate()
         box['ID'] = int(weaponID)
         box['EquipVersion'] = int(equipVersion)
+        box['EquipSlot'] = int(type)
         box['Grade'] = int(grade)
         box['AugmentSlots'] = int(augmentSlots)
         box['BonusStatsLevel'] = int(bonusGrade)
         data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(0))
         data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(box)
-        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(1))
+        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(8))
         data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(0))
         json.dump(data, f, indent=4, sort_keys=False)
     if os.path.exists('Profile.save'):
@@ -691,6 +692,7 @@ def weapons():
     main.title()
     weaponType = input('[1] Pistols\n[2] SMG\n[3] Assault Rifle\n[4] Shotgun\n[5] Sniper\n[6] Rocket Launcher\n[7] Flame Thrower\n[8] LMG\n[9] Disk Thrower\n[10] Laser\n\n>')
     if weaponType == '1':
+        type = 1
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
         if weaponVersion == '1':
@@ -699,40 +701,40 @@ def weapons():
             weapon = input(pistolNM)
             if weapon == '1':
                 weaponID = 22
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 23
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 9
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 84
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 141
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '6':
                 weaponID = 16
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '7':
                 weaponID = 21
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '8':
                 weaponID = 6
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '9':
                 weaponID = 145
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '10':
                 weaponID = 37
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '11':
                 weaponID = 98
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '12':
                 weaponID = 221
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -744,37 +746,37 @@ def weapons():
             weapon = input(pistolRD)
             if weapon == '1':
                 weaponID = 78
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 75
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 110
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 67
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 161
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '6':
                 weaponID = 111
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '7':
                 weaponID = 70
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '8':
                 weaponID = 116
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '9':
                 weaponID = 165
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '10':
                 weaponID = 77
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '11':
                 weaponID = 68
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -786,16 +788,16 @@ def weapons():
             weapon = input(pistolBL)
             if weapon == '1':
                 weaponID = 10111
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 10077
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 10116
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 10068
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -807,6 +809,7 @@ def weapons():
             time.sleep(3)
             return weapons()
     elif weaponType == '2':
+        type = 2
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
         if weaponVersion == '1':
@@ -815,28 +818,28 @@ def weapons():
             weapon = input(smgNM)
             if weapon == '1':
                 weaponID = 30
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 17
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 89
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 148
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 8
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '6':
                 weaponID = 11
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '7':
                 weaponID = 24
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '8':
                 weaponID = 160
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '9':
                 weaponID = 19
             else:
@@ -850,28 +853,28 @@ def weapons():
             weapon = input(smgRD)
             if weapon == '1':
                 weaponID = 97
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 94
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 106
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 168
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 103
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '6':
                 weaponID = 87
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '7':
                 weaponID = 113
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '8':
                 weaponID = 180
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '9':
                 weaponID = 105
             else:
@@ -885,28 +888,28 @@ def weapons():
             weapon = input(smgBL)
             if weapon == '1':
                 weaponID = 10097
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 10094
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 10106
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 10168
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 10103
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '6':
                 weaponID = 10087
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '7':
                 weaponID = 10113
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '8':
                 weaponID = 10180
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '9':
                 weaponID = 10105
             else:
@@ -920,6 +923,7 @@ def weapons():
             time.sleep(3)
             return weapons()
     elif weaponType == '3':
+        type = 3
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
         if weaponVersion == '1':
@@ -928,52 +932,52 @@ def weapons():
             weapon = input(assaultNM)
             if weapon == '1':
                 weaponID = 31
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 14
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 72
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 41
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 90
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '6':
                 weaponID = 146
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '7':
                 weaponID = 7
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '8':
                 weaponID = 156
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '9':
                 weaponID = 15
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '10':
                 weaponID = 10
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '11':
                 weaponID = 158
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '12':
                 weaponID = 36
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '13':
                 weaponID = 28
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '14':
                 weaponID = 26
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '15':
                 weaponID = 222
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '16':
                 weaponID = 12
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -985,49 +989,49 @@ def weapons():
             weapon = input(assaultRD)
             if weapon == '1':
                 weaponID = 87
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 79
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 69
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 102
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 88
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '6':
                 weaponID = 166
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '7':
                 weaponID = 109
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '8':
                 weaponID = 176
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '9':
                 weaponID = 115
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '10':
                 weaponID = 100
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '11':
                 weaponID = 178
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '12':
                 weaponID = 71
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '13':
                 weaponID = 99
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '14':
                 weaponID = 76
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '15':
                 weaponID = 93
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1039,49 +1043,49 @@ def weapons():
             weapon = input(assaultBL)
             if weapon == '1':
                 weaponID = 10087
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 10079
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 10069
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 10102
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 10088
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '6':
                 weaponID = 10166
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '7':
                 weaponID = 10109
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '8':
                 weaponID = 10176
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '9':
                 weaponID = 10115
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '10':
                 weaponID = 10100
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '11':
                 weaponID = 10178
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '12':
                 weaponID = 10071
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '13':
                 weaponID = 10099
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '14':
                 weaponID = 10076
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '15':
                 weaponID = 10093
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1093,6 +1097,7 @@ def weapons():
             time.sleep(3)
             return weapons()
     elif weaponType == '4':
+        type = 4
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
         if weaponVersion == '1':
@@ -1101,22 +1106,22 @@ def weapons():
             weapon = input(shotgunNM)
             if weapon == '1':
                 weaponID = 33
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 29
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 13
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 159
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 61
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '6':
                 weaponID = 231
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1128,19 +1133,19 @@ def weapons():
             weapon = input(shotgunRD)
             if weapon == '1':
                 weaponID = 101
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 96
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 85
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 179
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 66
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1152,19 +1157,19 @@ def weapons():
             weapon = input(shotgunBL)
             if weapon == '1':
                 weaponID = 10101
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 10096
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 10085
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 10179
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 10066
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1176,6 +1181,7 @@ def weapons():
             time.sleep(3)
             return weapons()
     elif weaponType == '5':
+        type = 5
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
         if weaponVersion == '1':
@@ -1184,16 +1190,16 @@ def weapons():
             weapon = input(sniperNM)
             if weapon == '1':
                 weaponID = 43
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 149
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 39
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 83
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1205,16 +1211,16 @@ def weapons():
             weapon = input(sniperRD)
             if weapon == '1':
                 weaponID = 107
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 169
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 82
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 81
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1226,16 +1232,16 @@ def weapons():
             weapon = input(sniperBL)
             if weapon == '1':
                 weaponID = 10107
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 10169
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 10082
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 10081
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1247,6 +1253,7 @@ def weapons():
             time.sleep(3)
             return weapons()
     elif weaponType == '6':
+        type = 6
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
         if weaponVersion == '1':
@@ -1255,31 +1262,31 @@ def weapons():
             weapon = input(rocketNM)
             if weapon == '1':
                 weaponID = 34
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 40
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 151
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 228
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 33
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '6':
                 weaponID = 44
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '7':
                 weaponID = 154
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '8':
                 weaponID = 153
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '9':
                 weaponID = 224
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1291,25 +1298,25 @@ def weapons():
             weapon = input(rocketRD)
             if weapon == '1':
                 weaponID = 73
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 108
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 171
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 91
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 92
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '6':
                 weaponID = 174
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '7':
                 weaponID = 173
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1321,25 +1328,25 @@ def weapons():
             weapon = input(rocketBL)
             if weapon == '1':
                 weaponID = 10073
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 10108
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 10171
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 10091
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 10092
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '6':
                 weaponID = 10174
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '7':
                 weaponID = 10173
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1351,6 +1358,7 @@ def weapons():
             time.sleep(3)
             return weapons()
     elif weaponType == '7':
+        type = 8
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
         if weaponVersion == '1':
@@ -1359,13 +1367,13 @@ def weapons():
             weapon = input(flameNM)
             if weapon == '1':
                 weaponID = 18
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 223
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 227
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1377,7 +1385,7 @@ def weapons():
             weapon = input(flameRD)
             if weapon == '1':
                 weaponID = 74
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1389,7 +1397,7 @@ def weapons():
             weapon = input(flameRD)
             if weapon == '1':
                 weaponID = 10074
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1401,6 +1409,7 @@ def weapons():
             time.sleep(3)
             return weapons()
     elif weaponType == '8':
+        type = 9
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
         if weaponVersion == '1':
@@ -1409,37 +1418,37 @@ def weapons():
             weapon = input(lmgNM)
             if weapon == '1':
                 weaponID = 38
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 25
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 142
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 144
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 20
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '6':
                 weaponID = 147
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '7':
                 weaponID = 150
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '8':
                 weaponID = 152
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '9':
                 weaponID = 143
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '10':
                 weaponID = 114
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '11':
                 weaponID = 225
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1451,34 +1460,34 @@ def weapons():
             weapon = input(lmgRD)
             if weapon == '1':
                 weaponID = 95
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 104
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 162
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 164
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 80
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '6':
                 weaponID = 167
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '7':
                 weaponID = 170
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '8':
                 weaponID = 172
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '9':
                 weaponID = 163
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '10':
                 weaponID = 35
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1490,34 +1499,34 @@ def weapons():
             weapon = input(lmgBL)
             if weapon == '1':
                 weaponID = 10095
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 10104
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '3':
                 weaponID = 10162
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '4':
                 weaponID = 10164
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '5':
                 weaponID = 10080
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '6':
                 weaponID = 10167
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '7':
                 weaponID = 10170
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '8':
                 weaponID = 10172
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '9':
                 weaponID = 10163
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '10':
                 weaponID = 10035
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1529,6 +1538,7 @@ def weapons():
             time.sleep(3)
             return weapons()
     elif weaponType == '9':
+        type = 10
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
         if weaponVersion == '1':
@@ -1537,10 +1547,10 @@ def weapons():
             weapon = input(diskNM)
             if weapon == '1':
                 weaponID = 157
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 226
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1552,7 +1562,7 @@ def weapons():
             weapon = input(diskRD)
             if weapon == '1':
                 weaponID = 177
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1564,7 +1574,7 @@ def weapons():
             weapon = input(diskBL)
             if weapon == '1':
                 weaponID = 10177
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1576,6 +1586,7 @@ def weapons():
             time.sleep(3)
             return weapons()
     elif weaponType == '10':
+        type = 11
         main.title()
         weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
         if weaponVersion == '1':
@@ -1584,10 +1595,10 @@ def weapons():
             weapon = input(laserNM)
             if weapon == '1':
                 weaponID = 155
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             elif weapon == '2':
                 weaponID = 229
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1599,7 +1610,7 @@ def weapons():
             weapon = input(laserRD)
             if weapon == '1':
                 weaponID = 175
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1611,7 +1622,7 @@ def weapons():
             weapon = input(laserBL)
             if weapon == '1':
                 weaponID = 10175
-                weaponCfg(strongbox, weaponID, equipVersion, profile)
+                weaponCfg(strongbox, weaponID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1623,7 +1634,7 @@ def weapons():
             time.sleep(3)
             return weapons()
 
-def equipCfg(strongbox2, equipID, equipVersion, profile):
+def equipCfg(strongbox2, equipID, equipVersion, profile, type):
     main.title()
     try:
         grade = int(input('Set your equipment grade (0-12)\n\n>'))
@@ -1631,12 +1642,12 @@ def equipCfg(strongbox2, equipID, equipVersion, profile):
             main.title()
             print('Please enter a valid value.')
             time.sleep(3)
-            return equipCfg(strongbox2, equipID, equipVersion, profile)
+            return (strongbox2, equipID, equipVersion, profile, type)
     except ValueError as err:
         main.title()
         print('Please enter a valid number.')
         time.sleep(3)
-        return equipCfg(strongbox2, equipID, equipVersion, profile)
+        return (strongbox2, equipID, equipVersion, profile, type)
     main.title()
     try:
         augmentSlots = int(input('Set your weapon augment slots (0-3)\n\n>'))
@@ -1644,12 +1655,12 @@ def equipCfg(strongbox2, equipID, equipVersion, profile):
             main.title()
             print('Please enter a valid value.')
             time.sleep(3)
-            return equipCfg(strongbox2, equipID, equipVersion, profile)
+            return (strongbox2, equipID, equipVersion, profile, type)
     except ValueError as err:
         main.title()
         print('Please enter a valid number.')
         time.sleep(3)
-        return equipCfg(strongbox2, equipID, equipVersion, profile)
+        return (strongbox2, equipID, equipVersion, profile, type)
     main.title()
     try:
         bonusGrade = int(input('Set your weapon bonus stats (0-10)\n\n>'))
@@ -1657,12 +1668,12 @@ def equipCfg(strongbox2, equipID, equipVersion, profile):
             main.title()
             print('Please enter a valid value.')
             time.sleep(3)
-            return equipCfg(strongbox2, equipID, equipVersion, profile)
+            return (strongbox2, equipID, equipVersion, profile, type)
     except ValueError as err:
         main.title()
         print('Please enter a valid number.')
         time.sleep(3)
-        return equipCfg(strongbox2, equipID, equipVersion, profile)
+        return (strongbox2, equipID, equipVersion, profile, type)
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
@@ -1674,11 +1685,12 @@ def equipCfg(strongbox2, equipID, equipVersion, profile):
         box['ID'] = int(equipID)
         box['EquipVersion'] = int(equipVersion)
         box['Grade'] = int(grade)
+        box['EquippedSlot'] = int(type)
         box['AugmentSlots'] = int(augmentSlots)
         box['BonusStatsLevel'] = int(bonusGrade)
         data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(1))
         data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(box)
-        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(1))
+        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(8))
         data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(0))
         json.dump(data, f, indent=4, sort_keys=False)
     if os.path.exists('Profile.save'):
@@ -1696,7 +1708,7 @@ def equipment():
         "ID": 0,
         "EquipVersion": 0,
         "Grade": 0,
-        "EquippedSlot": 1,
+        "EquippedSlot": 0,
         "AugmentSlots": 1,
         "InventoryIndex": 4,
         "Seen": false,
@@ -1729,6 +1741,7 @@ def equipment():
     main.title()
     equipType = input('[1] Helmet\n[2] Vest\n[3] Gloves\n[4] Pants\n[5] Boots\n\n>')
     if equipType == '1':
+        type = 1
         main.title()
         equipmentVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
         if equipmentVersion == '1':
@@ -1737,52 +1750,52 @@ def equipment():
             equip = input(helmetNM)
             if equip == '1':
                 equipID = 125
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '2':
                 equipID = 110
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '3':
                 equipID = 184
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '4':
                 equipID = 165
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '5':
                 equipID = 232
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '6':
                 equipID = 107
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '7':
                 equipID = 106
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '8':
                 equipID = 173
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '9':
                 equipID = 194
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '10':
                 equipID = 99
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '11':
                 equipID = 206
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '12':
                 equipID = 227
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '13':
                 equipID = 119
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '14':
                 equipID = 237
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '15':
                 equipID = 217
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '16':
                 equipID = 222
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1794,34 +1807,34 @@ def equipment():
             equip = input(helmetRD)
             if equip == '1':
                 equipID = 155
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '2':
                 equipID = 162
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '3':
                 equipID = 185
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '4':
                 equipID = 158
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '5':
                 equipID = 143
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '6':
                 equipID = 136
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '7':
                 equipID = 175
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '8':
                 equipID = 195
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '9':
                 equipID = 139
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '10':
                 equipID = 207
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '11':
                 equipID = 130
             else:
@@ -1835,37 +1848,37 @@ def equipment():
             equip = input(helmetBL)
             if equip == '1':
                 equipID = 10155
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '2':
                 equipID = 10162
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '3':
                 equipID = 10185
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '4':
                 equipID = 10158
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '5':
                 equipID = 10143
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '6':
                 equipID = 10136
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '7':
                 equipID = 10175
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '8':
                 equipID = 10195
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '9':
                 equipID = 10139
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '10':
                 equipID = 10207
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '11':
                 equipID = 10130
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1877,6 +1890,7 @@ def equipment():
             time.sleep(3)
             return equipment()
     elif equipType == '2':
+        type = 2
         main.title()
         equipmentVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
         if equipmentVersion == '1':
@@ -1885,58 +1899,58 @@ def equipment():
             equip = input(vestNM)
             if equip == '1':
                 equipID = 101
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '2':
                 equipID = 104
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '3':
                 equipID = 186
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '4':
                 equipID = 168
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '5':
                 equipID = 233
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '6':
                 equipID = 100
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '7':
                 equipID = 118
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '8':
                 equipID = 105
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '9':
                 equipID = 112
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '10':
                 equipID = 196
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '11':
                 equipID = 176
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '12':
                 equipID = 208
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '13':
                 equipID = 115
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '14':
                 equipID = 123
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '15':
                 equipID = 228
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '16':
                 equipID = 238
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '17':
                 equipID = 223
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '18':
                 equipID = 218
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1948,43 +1962,43 @@ def equipment():
             equip = input(vestRD)
             if equip == '1':
                 equipID = 142
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '2':
                 equipID = 148
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '3':
                 equipID = 187
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '4':
                 equipID = 156
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '5':
                 equipID = 154
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '6':
                 equipID = 141
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '7':
                 equipID = 137
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '8':
                 equipID = 164
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '9':
                 equipID = 197
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '10':
                 equipID = 177
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '11':
                 equipID = 209
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '12':
                 equipID = 161
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '13':
                 equipID = 157
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -1996,43 +2010,43 @@ def equipment():
             equip = input(vestBL)
             if equip == '1':
                 equipID = 142
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '2':
                 equipID = 10148
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '3':
                 equipID = 10187
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '4':
                 equipID = 10156
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '5':
                 equipID = 10154
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '6':
                 equipID = 10141
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '7':
                 equipID = 10137
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '8':
                 equipID = 10164
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '9':
                 equipID = 10197
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '10':
                 equipID = 10177
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '11':
                 equipID = 10209
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '12':
                 equipID = 10161
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '13':
                 equipID = 10157
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -2044,6 +2058,7 @@ def equipment():
             time.sleep(3)
             return equipment()
     elif equipType == '3':
+        type = 3
         main.title()
         equipmentVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
         if equipmentVersion == '1':
@@ -2052,52 +2067,52 @@ def equipment():
             equip = input(glovesNM)
             if equip == '1':
                 equipID = 98
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '2':
                 equipID = 102
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '3':
                 equipID = 190
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '4':
                 equipID = 151
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '5':
                 equipID = 235
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '6':
                 equipID = 128
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '7':
                 equipID = 117
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '8':
                 equipID = 212
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '9':
                 equipID = 180
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '10':
                 equipID = 200
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '11':
                 equipID = 113
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '12':
                 equipID = 230
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '13':
                 equipID = 111
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '14':
                 equipID = 240
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '15':
                 equipID = 225
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '16':
                 equipID = 220
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -2109,37 +2124,37 @@ def equipment():
             equip = input(glovesRD)
             if equip == '1':
                 equipID = 146
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '2':
                 equipID = 133
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '3':
                 equipID = 191
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '4':
                 equipID = 145
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '5':
                 equipID = 132
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '6':
                 equipID = 181
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '7':
                 equipID = 159
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '8':
                 equipID = 213
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '9':
                 equipID = 201
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '10':
                 equipID = 134
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '11':
                 equipID = 135
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -2151,37 +2166,37 @@ def equipment():
             equip = input(glovesBL)
             if equip == '1':
                 equipID = 10146
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '2':
                 equipID = 10133
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '3':
                 equipID = 10191
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '4':
                 equipID = 10145
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '5':
                 equipID = 10132
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '6':
                 equipID = 10181
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '7':
                 equipID = 10159
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '8':
                 equipID = 10213
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '9':
                 equipID = 10201
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '10':
                 equipID = 10134
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '11':
                 equipID = 10135
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -2193,6 +2208,7 @@ def equipment():
             time.sleep(3)
             return equipment()
     elif equipType == '4':
+        type = 5
         main.title()
         equipmentVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
         if equipmentVersion == '1':
@@ -2201,52 +2217,52 @@ def equipment():
             equip = input(pantsNM)
             if equip == '1':
                 equipID = 108
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '2':
                 equipID = 129
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '3':
                 equipID = 188
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '4':
                 equipID = 169
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '5':
                 equipID = 234
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '6':
                 equipID = 126
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '7':
                 equipID = 120
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '8':
                 equipID = 178
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '9':
                 equipID = 198
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '10':
                 equipID = 210
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '11':
                 equipID = 117
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '12':
                 equipID = 121
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '13':
                 equipID = 229
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '14':
                 equipID = 239
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '15':
                 equipID = 224
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '16':
                 equipID = 219
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -2258,37 +2274,37 @@ def equipment():
             equip = input(pantsRD)
             if equip == '1':
                 equipID = 147
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '2':
                 equipID = 166
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '3':
                 equipID = 153
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '4':
                 equipID = 152
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '5':
                 equipID = 189
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '6':
                 equipID = 138
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '7':
                 equipID = 179
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '8':
                 equipID = 211
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '9':
                 equipID = 199
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '10':
                 equipID = 163
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '11':
                 equipID = 171
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -2300,37 +2316,37 @@ def equipment():
             equip = input(pantsBL)
             if equip == '1':
                 equipID = 10147
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '2':
                 equipID = 10166
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '3':
                 equipID = 10153
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '4':
                 equipID = 10152
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '5':
                 equipID = 10189
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '6':
                 equipID = 10138
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '7':
                 equipID = 10179
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '8':
                 equipID = 10211
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '9':
                 equipID = 10199
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '10':
                 equipID = 10163
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '11':
                 equipID = 10171
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -2342,6 +2358,7 @@ def equipment():
             time.sleep(3)
             return equipment()
     elif equipType == '5':
+        type = 4
         main.title()
         equipmentVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
         if equipmentVersion == '1':
@@ -2350,52 +2367,52 @@ def equipment():
             equip = input(bootsNM)
             if equip == '1':
                 equipID = 114
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '2':
                 equipID = 109
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '3':
                 equipID = 116
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '4':
                 equipID = 144
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '5':
                 equipID = 236
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '6':
                 equipID = 192
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '7':
                 equipID = 122
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '8':
                 equipID = 182
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '9':
                 equipID = 202
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '10':
                 equipID = 214
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '11':
                 equipID = 103
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '12':
                 equipID = 124
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '13':
                 equipID = 231
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '14':
                 equipID = 221
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '15':
                 equipID = 241
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '16':
                 equipID = 226
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -2407,37 +2424,37 @@ def equipment():
             equip = input(bootsRD)
             if equip == '1':
                 equipID = 131
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '2':
                 equipID = 160
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '3':
                 equipID = 149
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '4':
                 equipID = 152
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '5':
                 equipID = 193
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '6':
                 equipID = 140
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '7':
                 equipID = 205
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '8':
                 equipID = 183
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '9':
                 equipID = 215
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '10':
                 equipID = 170
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '11':
                 equipID = 167
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')
@@ -2449,37 +2466,37 @@ def equipment():
             equip = input(bootsBL)
             if equip == '1':
                 equipID = 10131
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '2':
                 equipID = 10160
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '3':
                 equipID = 10149
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '4':
                 equipID = 10152
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '5':
                 equipID = 10193
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '6':
                 equipID = 10140
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '7':
                 equipID = 10205
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '8':
                 equipID = 10183
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '9':
                 equipID = 10215
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '10':
                 equipID = 10170
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             elif equip == '11':
                 equipID = 10167
-                equipCfg(strongbox2, equipID, equipVersion, profile)
+                (strongbox2, equipID, equipVersion, profile, type)
             else:
                 main.title()
                 print('Invalid Option.')

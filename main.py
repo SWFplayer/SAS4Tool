@@ -71,7 +71,7 @@ def o2():
     elif o2options == '9':
         opt.setSupport()
     elif o2options == '10':
-        opt.setSupport()
+        opt.mastery()
     else:
         title()
         print('Invalid option.')
