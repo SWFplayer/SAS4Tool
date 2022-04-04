@@ -51,6 +51,7 @@ def o2():
 [8] Add 2 pay to unlock profiles
 [9] Set support items
 [10] Set mastery to max level
+[11] Set free skill reset
 \n>''')
     if o2options == '1':
         opt.reviveTokens()
@@ -72,6 +73,8 @@ def o2():
         opt.setSupport()
     elif o2options == '10':
         opt.mastery()
+    elif o2options == '11':
+        opt.skillReset()
     else:
         title()
         print('Invalid option.')
