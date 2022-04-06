@@ -1,7 +1,7 @@
 from colorama import Fore, init
 from encodingDecoding import *
 import time
-from os import system, name
+from os import system, name, _exit
 import options as opt
 init(autoreset=True)
 
@@ -52,6 +52,8 @@ def o2():
 [9] Set support items
 [10] Set mastery to max level
 [11] Set free skill reset
+[12] Change profile username
+[13] Set player level
 \n>''')
     if o2options == '1':
         opt.reviveTokens()
@@ -75,6 +77,10 @@ def o2():
         opt.mastery()
     elif o2options == '11':
         opt.skillReset()
+    elif o2options == '12':
+        opt.changeProfileName()
+    elif o2options == '13':
+        opt.setLVL()
     else:
         title()
         print('Invalid option.')
@@ -108,6 +114,8 @@ def mainMenu():
 [3] Set premium guns
 [4] Unlock all collections
 [5] Add Weapon/Armor to the inventory
+[6] Decode/Encode Profile.save to a json file
+[7] Exit
 \n>''')
     if mainMenuOptions == '1':
         o1()
@@ -119,6 +127,13 @@ def mainMenu():
         o4()
     elif mainMenuOptions == '5':
         o5()
+    elif mainMenuOptions == '6':
+        opt.decodeEnc()
+    elif mainMenuOptions == '7':
+        title()
+        print('Exiting...')
+        time.sleep(1)
+        _exit(0)
     else:
         title()
         print('Invalid option.')

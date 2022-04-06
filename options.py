@@ -3466,3 +3466,343 @@ def skillReset():
         print('Invalid Option.')
         time.sleep(3)
         return skillReset()
+
+def changeProfileName():
+    main.title()
+    profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
+    if profile == '1':
+        profile = 'Profile0'
+    elif profile == '2':
+        profile = 'Profile1'
+    elif profile == '3':
+        profile = 'Profile2'
+    elif profile == '4':
+        profile = 'rofile3'
+    elif profile == '5':
+        profile = 'Profile4'
+    elif profile == '6':
+        profile = 'Profile5'
+    else:
+        main.title()
+        print('This profile does not exist.')
+        time.sleep(3)
+        return changeProfileName()
+    main.title()
+    username = input('Set your new profile username:\n\n>')
+    main.title()
+    print('Loading, please wait...')
+    d.decodeProfileSave()
+    with open('Profile_unpacked.json', 'r+') as f:
+        data = json.load(f)
+        f.seek( 0 )
+        f.truncate()
+        data['Inventory'][f'{profile}']['Name'] = f'{username}'
+        json.dump( data, f )
+    if os.path.exists('Profile.save'):
+        os.remove('Profile.save')
+    d.encodeProfileSave()
+    os.remove('Profile_unpacked.json')
+    main.title()
+    print('Profile.save has been successfuly updated.')
+    time.sleep(3)
+    return main.mainMenu()
+
+def decodeEnc():
+    main.title()
+    option1 = input('[1] Encode\n[2] Decode\n\n>')
+    if option1 == '1':
+        main.title()
+        encode = input('Do you want to encode Profile.save?\n\n[1] Yes\n[2] No\n\n>')
+        if encode == '1':
+            main.title()
+            print('Loading, please wait...')
+            d.encodeProfileSave()
+            main.mainMenu()
+            print('Profile.save succesfully encoded.')
+            time.sleep(3)
+            return decodeEnc()
+        elif encode == '2':
+            return main.mainMenu()
+        else:
+            main.title()
+            print('Invalid option.')
+            time.sleep(3)
+            return decodeEnc()
+    elif option1 == '2':
+        main.title()
+        decode = input('Do you want to decode Profile.save and make changes by your own?\n\n[1] Yes\n[2] No\n\n>')
+        if decode == '1':
+            main.title()
+            print('Loading, please wait...')
+            d.decodeProfileSave()
+            main.mainMenu()
+            print('Profile.save succesfully decoded.')
+            time.sleep(3)
+            return decodeEnc()
+        elif decode == '2':
+            return main.mainMenu()
+        else:
+            main.title()
+            print('Invalid option.')
+            time.sleep(3)
+            return decodeEnc()
+    else:
+        main.title()
+        print('Invalid option.')
+        time.sleep(3)
+        return decodeEnc()
+
+def setLVL():
+    xp = [0, 1071, 1288, 1655, 2176, 2855, 3696, 4704, 5883, 7237, 8770, 10486, 12390, 14486, 16778, 19270, 21966, 24871, 27989, 31324, 34880, 38661, 42672, 46917, 51400, 56125, 91145, 98978, 107193, 115797, 124795, 134195, 144002, 154222, 164863, 175930, 187430, 199368, 211752, 224587, 237880, 251637, 265865, 280569, 295756, 311433, 327605, 344279, 361461, 379158, 397375, 416120, 435398, 455215, 475579, 496495, 517970, 540009, 562620, 585808, 609580, 844923, 878201, 912282, 947176, 982890, 1019433, 1056813, 1095038, 1134118, 1174060, 1214873, 1256565, 1299144, 1342620, 1387000, 1432293, 1478507, 1525650, 1573732, 1622760, 1672743, 1723689, 1775606, 1828504, 1882390, 1937273, 1993161, 2050062, 2107986, 2166940, 3339899, 3431459, 3524603, 3619342, 3715690, 3813659, 3913262, 4014512, 4117420]
+    main.title()
+    profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
+    if profile == '1':
+        profile = 'Profile0'
+    elif profile == '2':
+        profile = 'Profile1'
+    elif profile == '3':
+        profile = 'Profile2'
+    elif profile == '4':
+        profile = 'rofile3'
+    elif profile == '5':
+        profile = 'Profile4'
+    elif profile == '6':
+        profile = 'Profile5'
+    else:
+        main.title()
+        print('This profile does not exist.')
+        time.sleep(3)
+        return setLVL()
+    main.title()
+    try:
+        level = int(input('Set your level: '))
+    except ValueError:
+        main.title()
+        print('Invalid input.')
+        time.sleep(3)
+        return setLVL()
+    main.title()
+    if level < 1 or level > 100:
+        main.title()
+        print('Invalid level.')
+        time.sleep(3)
+        return setLVL()
+    elif level == 1:
+        totalXp = xp[0]
+    elif level == 2:
+        totalXp = xp[0] + xp[1]
+    elif level == 3:
+        totalXp = xp[0] + xp[1] + xp[2]
+    elif level == 4:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3]
+    elif level == 5:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4]
+    elif level == 6:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5]
+    elif level == 7:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6]
+    elif level == 8:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7]
+    elif level == 9:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8]
+    elif level == 10:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9]
+    elif level == 11:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10]
+    elif level == 12:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11]
+    elif level == 13:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12]
+    elif level == 14:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13]
+    elif level == 15:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14]
+    elif level == 16:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15]
+    elif level == 17:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16]
+    elif level == 18:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17]
+    elif level == 19:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18]
+    elif level == 20:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19]
+    elif level == 21:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20]
+    elif level == 22:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21]
+    elif level == 23:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22]
+    elif level == 24:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23]
+    elif level == 25:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24]
+    elif level == 26:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25]
+    elif level == 27:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26]
+    elif level == 28:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27]
+    elif level == 29:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28]
+    elif level == 30:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29]
+    elif level == 31:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30]
+    elif level == 32:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31]
+    elif level == 33:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32]
+    elif level == 34:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33]
+    elif level == 35:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34]
+    elif level == 36:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35]
+    elif level == 37:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36]
+    elif level == 38:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37]
+    elif level == 39:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38]
+    elif level == 40:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39]
+    elif level == 41:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40]
+    elif level == 42:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41]
+    elif level == 43:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42]
+    elif level == 44:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43]
+    elif level == 45:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44]
+    elif level == 46:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45]
+    elif level == 47:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46]
+    elif level == 48:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47]
+    elif level == 49:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48]
+    elif level == 50:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49]
+    elif level == 51:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50]
+    elif level == 52:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51]
+    elif level == 53:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52]
+    elif level == 54:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53]
+    elif level == 55:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54]
+    elif level == 56:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55]
+    elif level == 57:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56]
+    elif level == 58:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57]
+    elif level == 59:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58]
+    elif level == 60:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59]
+    elif level == 61:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60]
+    elif level == 62:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61]
+    elif level == 63:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62]
+    elif level == 64:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63]
+    elif level == 65:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64]
+    elif level == 66:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65]
+    elif level == 67:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66]
+    elif level == 68:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67]
+    elif level == 69:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68]
+    elif level == 70:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69]
+    elif level == 71:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70]
+    elif level == 72:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71]
+    elif level == 73:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72]
+    elif level == 74:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73]
+    elif level == 75:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74]
+    elif level == 76:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75]
+    elif level == 77:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76]
+    elif level == 78:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77]
+    elif level == 79:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78]
+    elif level == 80:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79]
+    elif level == 81:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80]
+    elif level == 82:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81]
+    elif level == 83:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82]
+    elif level == 84:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83]
+    elif level == 85:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84]
+    elif level == 86:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85]
+    elif level == 87:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86]
+    elif level == 88:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87]
+    elif level == 89:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88]
+    elif level == 90:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89]
+    elif level == 91:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90]
+    elif level == 92:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91]
+    elif level == 93:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92]
+    elif level == 94:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92] + xp[93]
+    elif level == 95:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92] + xp[93] + xp[94]
+    elif level == 96:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92] + xp[93] + xp[94] + xp[95]
+    elif level == 97:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92] + xp[93] + xp[94] + xp[95] + xp[96]
+    elif level == 98:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92] + xp[93] + xp[94] + xp[95] + xp[96] + xp[97]
+    elif level == 99:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92] + xp[93] + xp[94] + xp[95] + xp[96] + xp[97] + xp[98]
+    elif level == 100:
+        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92] + xp[93] + xp[94] + xp[95] + xp[96] + xp[97] + xp[98] + xp[99]
+    main.title()
+    print("Loading, please wait...")
+    print(totalXp)
+    d.decodeProfileSave()
+    with open('Profile_unpacked.json', 'r+') as f:
+        data = json.load(f)
+        f.seek( 0 )
+        f.truncate()
+        data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] = level
+        data['Inventory'][f'{profile}']['Skills']['PlayerTotalXp'] = totalXp
+        json.dump(data, f)
+    if os.path.exists('Profile.save'):
+        os.remove('Profile.save')
+    d.encodeProfileSave()
+    os.remove('Profile_unpacked.json')
+    main.title()
+    print('Profile.save has been successfuly updated.')
+    time.sleep(3)
+    return main.mainMenu()
