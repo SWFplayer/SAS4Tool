@@ -14,7 +14,7 @@ def decodeProfileSave():
 
         with open('Profile_unpacked.json', 'w') as f:
             f.write(fixed)
-    except FileNotFoundError as err:
+    except FileNotFoundError:
         main.title()
         print("Profile.save does not exist in the current directory, please try again.")
         time.sleep(3)
@@ -27,7 +27,7 @@ def encodeProfileSave():
 
         with open('Profile.save', 'wb') as f:
             f.write(encode_bytes)
-    except FileNotFoundError as err:
+    except FileNotFoundError:
         main.title()
         print("Profile_unpacked.json does not exist in the current directory, please try again.")
         time.sleep(3)

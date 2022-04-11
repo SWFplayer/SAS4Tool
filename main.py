@@ -109,8 +109,8 @@ def o5():
 def mainMenu():
     title()
     mainMenuOptions = input('''
-[1] Factions
-[2] Profiles
+[1] Factions Options
+[2] Profile Options
 [3] Set premium guns
 [4] Unlock all collections
 [5] Add Weapon/Armor to the inventory

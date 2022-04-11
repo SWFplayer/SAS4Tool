@@ -4,7 +4,8 @@ import main
 import json
 
 NUMS = '123456789'
-
+TURRETSNM = [54, 56, 58, 62, 63, 60, 55]
+TURRETSRD = [133, 134, 135, 136, 137, 138]
 # WEAPONS
 
 pistolNM = '[1] HVM 001\n[2] CM 202\n[3] RIA 313\n[4] Sabre\n[5] RIA 1010\n[6] Poison Claw\n[7] CM 205\n[8] Trailblazer\n[9] CM 225\n[10] Ronson 45\n[11] Mustang\n[12] GG17 (Faction war exclusive)\n\n>'
@@ -439,6 +440,7 @@ def premProfile():
 
 
 def premGuns():
+    VAL1 = 1
     main.title()
     gun = input('''
 [1] Ahab                            [17] HIKS S4000
@@ -458,63 +460,63 @@ def premGuns():
 [15] HIKS 888 CAW
 [16] HIKS A10\n\n>''')
     if gun == '1':
-        gun == 2
+        gun = 2
     elif gun == '2':
-        gun == 3
+        gun = 3
     elif gun == '3':
-        gun == 4
+        gun = 4
     elif gun == '4':
-        gun == 5
+        gun = 5
     elif gun == '5':
-        gun == 6
+        gun = 6
     elif gun == '6':
-        gun == 7
+        gun = 7
     elif gun == '7':
-        gun == 8
+        gun = 8
     elif gun == '8':
-        gun == 9
+        gun = 9
     elif gun == '9':
-        gun == 10
+        gun = 10
     elif gun == '10':
-        gun == 11
+        gun = 11
     elif gun == '11':
-        gun == 12
+        gun = 12
     elif gun == '12':
-        gun == 13
+        gun = 13
     elif gun == '13':
-        gun == 14
+        gun = 14
     elif gun == '14':
-        gun == 15
+        gun = 15
     elif gun == '15':
-        gun == 16
+        gun = 16
     elif gun == '16':
-        gun == 17
+        gun = 17
     elif gun == '17':
-        gun == 18
+        gun = 18
     elif gun == '18':
-        gun == 19
+        gun = 19
     elif gun == '19':
-        gun == 20
+        gun = 20
     elif gun == '20':
-        gun == 21
+        gun = 21
     elif gun == '21':
-        gun == 22
+        gun = 22
     elif gun == '22':
-        gun == 23
+        gun = 23
     elif gun == '23':
-        gun == 24
+        gun = 24
     elif gun == '24':
-        gun == 25
+        gun = 25
     elif gun == '25':
-        gun == 26
+        gun = 26
     elif gun == '26':
-        gun == 27
+        gun = 27
     elif gun == '27':
-        gun == 28
+        gun = 28
     elif gun == '28':
-        gun == 29
+        gun = 29
     elif gun == '29':
-        gun == 30
+        gun = 30
     elif gun == '30':
         main.title()
         print('Loading, please wait...')
@@ -523,35 +525,9 @@ def premGuns():
             data = json.load(f)
             f.seek( 0 )
             f.truncate()
-            data['PurchasedIAP']['PurchasedIAPArray'][2]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][3]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][4]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][5]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][6]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][7]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][8]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][9]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][10]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][11]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][12]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][13]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][14]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][15]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][16]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][17]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][18]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][19]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][20]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][21]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][22]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][23]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][24]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][25]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][26]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][27]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][28]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][29]['Value'] = True
-            data['PurchasedIAP']['PurchasedIAPArray'][30]['Value'] = True
+            for i in range(28):
+                VAL1 += 1
+                data['PurchasedIAP']['PurchasedIAPArray'][VAL1]['Value'] = True
             json.dump( data, f )
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
@@ -566,7 +542,6 @@ def premGuns():
         print('Invalid option.')
         time.sleep(3)
         return premGuns()
-    r = int(gun)
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
@@ -574,8 +549,8 @@ def premGuns():
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
-        data['PurchasedIAP']['PurchasedIAPArray'][r]['Value'] = True
-        json.dump( data, f, indent=4, sort_keys=False )
+        data['PurchasedIAP']['PurchasedIAPArray'][gun]['Value'] = True
+        json.dump( data, f )
     if os.path.exists('Profile.save'):
         os.remove('Profile.save')
     d.encodeProfileSave()
@@ -1663,7 +1638,7 @@ def equipCfg(strongbox2, equipID, equipVersion, profile, tp):
         return (strongbox2, equipID, equipVersion, profile, tp)
     main.title()
     try:
-        bonusGrade = int(input('Set your weapon bonus stats (0-10)\n\n>'))
+        bonusGrade = int(input('Set your equipment bonus stats (0-10)\n\n>'))
         if bonusGrade > 10:
             main.title()
             print('Please enter a valid value.')
@@ -2605,17 +2580,28 @@ def setSupport():
             p = json.loads(turretjson)
             f.seek( 0 )
             f.truncate()
-            turretID = 133
-            try:
-                data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = 133
-                data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-                json.dump( data, f )
-            except IndexError:
-                p['TurretsId'] = turretID
-                p['TurretsCount'] = int(a)
-                data['Inventory'][f'{profile}']['Turrets'].append(p)
-                json.dump( data, f )
-                pass
+            if data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] > 30:
+                try:
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSRD[0]
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
+                    json.dump( data, f )
+                except IndexError:
+                    p['TurretsId'] = TURRETSRD[0]
+                    p['TurretsCount'] = int(a)
+                    data['Inventory'][f'{profile}']['Turrets'].append(p)
+                    json.dump( data, f )
+                    pass
+            elif data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] < 30:
+                try:
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSNM[0]
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
+                    json.dump( data, f )
+                except IndexError:
+                    p['TurretsId'] = TURRETSNM[0]
+                    p['TurretsCount'] = int(a)
+                    data['Inventory'][f'{profile}']['Turrets'].append(p)
+                    json.dump( data, f )
+                    pass
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
         d.encodeProfileSave()
@@ -2641,17 +2627,28 @@ def setSupport():
             p = json.loads(turretjson)
             f.seek( 0 )
             f.truncate()
-            turretID = 134
-            try:
-                data['Inventory'][f'{profile}']['Turrets'][1]['TurretId'] = 134
-                data['Inventory'][f'{profile}']['Turrets'][1]['TurretCount'] = int(a)
-                json.dump( data, f )
-            except IndexError:
-                p['TurretsId'] = turretID
-                p['TurretsCount'] = int(a)
-                data['Inventory'][f'{profile}']['Turrets'].append(p)
-                json.dump( data, f )
-                pass
+            if data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] > 30:
+                try:
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSRD[1]
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
+                    json.dump( data, f )
+                except IndexError:
+                    p['TurretsId'] = TURRETSRD[1]
+                    p['TurretsCount'] = int(a)
+                    data['Inventory'][f'{profile}']['Turrets'].append(p)
+                    json.dump( data, f )
+                    pass
+            elif data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] < 30:
+                try:
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSNM[1]
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
+                    json.dump( data, f )
+                except IndexError:
+                    p['TurretsId'] = TURRETSNM[1]
+                    p['TurretsCount'] = int(a)
+                    data['Inventory'][f'{profile}']['Turrets'].append(p)
+                    json.dump( data, f )
+                    pass
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
         d.encodeProfileSave()
@@ -2677,17 +2674,28 @@ def setSupport():
             p = json.loads(turretjson)
             f.seek( 0 )
             f.truncate()
-            turretID = 135
-            try:
-                data['Inventory'][f'{profile}']['Turrets'][2]['TurretId'] = 135
-                data['Inventory'][f'{profile}']['Turrets'][2]['TurretCount'] = int(a)
-                json.dump( data, f )
-            except IndexError:
-                p['TurretsId'] = turretID
-                p['TurretsCount'] = int(a)
-                data['Inventory'][f'{profile}']['Turrets'].append(p)
-                json.dump( data, f )
-                pass
+            if data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] > 30:
+                try:
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSRD[2]
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
+                    json.dump( data, f )
+                except IndexError:
+                    p['TurretsId'] = TURRETSRD[2]
+                    p['TurretsCount'] = int(a)
+                    data['Inventory'][f'{profile}']['Turrets'].append(p)
+                    json.dump( data, f )
+                    pass
+            elif data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] < 30:
+                try:
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSNM[2]
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
+                    json.dump( data, f )
+                except IndexError:
+                    p['TurretsId'] = TURRETSNM[2]
+                    p['TurretsCount'] = int(a)
+                    data['Inventory'][f'{profile}']['Turrets'].append(p)
+                    json.dump( data, f )
+                    pass
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
         d.encodeProfileSave()
@@ -2713,17 +2721,28 @@ def setSupport():
             p = json.loads(turretjson)
             f.seek( 0 )
             f.truncate()
-            turretID = 136
-            try:
-                data['Inventory'][f'{profile}']['Turrets'][3]['TurretId'] = 136
-                data['Inventory'][f'{profile}']['Turrets'][3]['TurretCount'] = int(a)
-                json.dump( data, f )
-            except IndexError:
-                p['TurretsId'] = turretID
-                p['TurretsCount'] = int(a)
-                data['Inventory'][f'{profile}']['Turrets'].append(p)
-                json.dump( data, f )
-                pass
+            if data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] > 30:
+                try:
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSRD[3]
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
+                    json.dump( data, f )
+                except IndexError:
+                    p['TurretsId'] = TURRETSRD[3]
+                    p['TurretsCount'] = int(a)
+                    data['Inventory'][f'{profile}']['Turrets'].append(p)
+                    json.dump( data, f )
+                    pass
+            elif data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] < 30:
+                try:
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSNM[3]
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
+                    json.dump( data, f )
+                except IndexError:
+                    p['TurretsId'] = TURRETSNM[3]
+                    p['TurretsCount'] = int(a)
+                    data['Inventory'][f'{profile}']['Turrets'].append(p)
+                    json.dump( data, f )
+                    pass
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
         d.encodeProfileSave()
@@ -2749,17 +2768,28 @@ def setSupport():
             p = json.loads(turretjson)
             f.seek( 0 )
             f.truncate()
-            turretID = 137
-            try:
-                data['Inventory'][f'{profile}']['Turrets'][4]['TurretId'] = 137
-                data['Inventory'][f'{profile}']['Turrets'][4]['TurretCount'] = int(a)
-                json.dump( data, f )
-            except IndexError:
-                p['TurretsId'] = turretID
-                p['TurretsCount'] = int(a)
-                data['Inventory'][f'{profile}']['Turrets'].append(p)
-                json.dump( data, f )
-                pass
+            if data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] > 30:
+                try:
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSRD[4]
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
+                    json.dump( data, f )
+                except IndexError:
+                    p['TurretsId'] = TURRETSRD[4]
+                    p['TurretsCount'] = int(a)
+                    data['Inventory'][f'{profile}']['Turrets'].append(p)
+                    json.dump( data, f )
+                    pass
+            elif data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] < 30:
+                try:
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSNM[4]
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
+                    json.dump( data, f )
+                except IndexError:
+                    p['TurretsId'] = TURRETSNM[4]
+                    p['TurretsCount'] = int(a)
+                    data['Inventory'][f'{profile}']['Turrets'].append(p)
+                    json.dump( data, f )
+                    pass
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
         d.encodeProfileSave()
@@ -2785,17 +2815,28 @@ def setSupport():
             p = json.loads(turretjson)
             f.seek( 0 )
             f.truncate()
-            turretID = 138
-            try:
-                data['Inventory'][f'{profile}']['Turrets'][5]['TurretId'] = 138
-                data['Inventory'][f'{profile}']['Turrets'][5]['TurretCount'] = int(a)
-                json.dump( data, f )
-            except IndexError:
-                p['TurretsId'] = turretID
-                p['TurretsCount'] = int(a)
-                data['Inventory'][f'{profile}']['Turrets'].append(p)
-                json.dump( data, f )
-                pass
+            if data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] > 30:
+                try:
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSRD[5]
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
+                    json.dump( data, f )
+                except IndexError:
+                    p['TurretsId'] = TURRETSRD[5]
+                    p['TurretsCount'] = int(a)
+                    data['Inventory'][f'{profile}']['Turrets'].append(p)
+                    json.dump( data, f )
+                    pass
+            elif data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] < 30:
+                try:
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSNM[5]
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
+                    json.dump( data, f )
+                except IndexError:
+                    p['TurretsId'] = TURRETSNM[5]
+                    p['TurretsCount'] = int(a)
+                    data['Inventory'][f'{profile}']['Turrets'].append(p)
+                    json.dump( data, f )
+                    pass
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
         d.encodeProfileSave()
@@ -2821,17 +2862,28 @@ def setSupport():
             p = json.loads(turretjson)
             f.seek( 0 )
             f.truncate()
-            turretID = 139
-            try:
-                data['Inventory'][f'{profile}']['Turrets'][6]['TurretId'] = 139
-                data['Inventory'][f'{profile}']['Turrets'][6]['TurretCount'] = int(a)
-                json.dump( data, f )
-            except IndexError:
-                p['TurretsId'] = turretID
-                p['TurretsCount'] = int(a)
-                data['Inventory'][f'{profile}']['Turrets'].append(p)
-                json.dump( data, f )
-                pass
+            if data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] > 30:
+                try:
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSRD[6]
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
+                    json.dump( data, f )
+                except IndexError:
+                    p['TurretsId'] = TURRETSRD[6]
+                    p['TurretsCount'] = int(a)
+                    data['Inventory'][f'{profile}']['Turrets'].append(p)
+                    json.dump( data, f )
+                    pass
+            elif data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] < 30:
+                try:
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSNM[6]
+                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
+                    json.dump( data, f )
+                except IndexError:
+                    p['TurretsId'] = TURRETSNM[6]
+                    p['TurretsCount'] = int(a)
+                    data['Inventory'][f'{profile}']['Turrets'].append(p)
+                    json.dump( data, f )
+                    pass
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
         d.encodeProfileSave()
@@ -2847,6 +2899,8 @@ def setSupport():
         return setSupport()
 
 def collection():
+    VAL1 = -1
+    VAL2 = -1
     main.title()
     status = input('Do you want to get all collections?\n\n[1] Yes, unlock all collections\n[2] No, lock all collections\n\n>')
     if status == '1':
@@ -2860,458 +2914,13 @@ def collection():
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
-        data['CollectionArrayWeapon'][0]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][1]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][2]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][3]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][4]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][5]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][6]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][7]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][8]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][9]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][10]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][11]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][12]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][13]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][14]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][15]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][16]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][17]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][18]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][19]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][20]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][21]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][22]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][23]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][24]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][25]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][26]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][27]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][28]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][29]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][30]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][31]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][32]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][33]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][34]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][35]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][36]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][37]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][38]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][39]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][40]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][41]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][42]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][43]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][44]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][45]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][46]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][47]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][48]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][49]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][50]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][51]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][52]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][53]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][54]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][55]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][56]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][57]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][58]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][59]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][60]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][61]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][62]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][63]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][64]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][65]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][66]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][67]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][68]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][69]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][70]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][71]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][72]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][73]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][74]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][75]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][76]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][77]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][78]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][79]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][80]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][81]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][82]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][83]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][84]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][85]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][86]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][87]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][88]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][89]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][90]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][91]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][92]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][93]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][94]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][95]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][96]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][97]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][98]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][99]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][100]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][101]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][102]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][103]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][104]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][105]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][106]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][107]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][108]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][109]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][110]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][111]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][112]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][113]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][114]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][115]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][116]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][117]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][118]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][119]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][120]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][121]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][122]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][123]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][124]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][125]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][126]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][127]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][128]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][129]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][130]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][131]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][132]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][133]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][134]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][135]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][136]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][137]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][138]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][139]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][140]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][141]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][142]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][143]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][144]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][145]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][146]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][147]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][148]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][149]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][150]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][151]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][152]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][153]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][154]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][155]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][156]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][157]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][158]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][159]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][160]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][161]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][162]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][163]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][164]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][165]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][166]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][167]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][168]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][169]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][170]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][171]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][172]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][173]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][174]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][175]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][176]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][177]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][178]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][179]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][180]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][181]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][182]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][183]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][184]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][185]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][186]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][187]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][188]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][189]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][190]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][191]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][192]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][193]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][194]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][195]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][196]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][197]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][198]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][199]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][200]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][201]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][202]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][203]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][204]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][205]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][206]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][207]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][208]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][209]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][210]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][211]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][212]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][213]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][214]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][215]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][216]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][217]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][218]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][219]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][220]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][221]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][222]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][223]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][224]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][225]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][226]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][227]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][228]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][229]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][230]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][231]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][232]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][233]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][234]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][235]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][236]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][237]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][238]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][239]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][240]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][241]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][242]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][243]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][244]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][245]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][246]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][247]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][248]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][249]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][250]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][251]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][252]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][253]['CollectionUnlocked'] = st
-        data['CollectionArrayWeapon'][254]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][0]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][1]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][2]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][3]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][4]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][5]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][6]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][7]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][8]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][9]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][10]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][11]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][12]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][13]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][14]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][15]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][16]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][17]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][18]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][19]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][20]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][21]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][22]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][23]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][24]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][25]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][26]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][27]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][28]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][29]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][30]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][31]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][32]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][33]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][34]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][35]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][36]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][37]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][38]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][39]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][40]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][41]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][42]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][43]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][44]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][45]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][46]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][47]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][48]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][49]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][50]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][51]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][52]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][53]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][54]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][55]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][56]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][57]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][58]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][59]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][60]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][61]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][62]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][63]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][64]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][65]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][66]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][67]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][68]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][69]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][70]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][71]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][72]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][73]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][74]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][75]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][76]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][77]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][78]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][79]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][80]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][81]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][82]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][83]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][84]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][85]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][86]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][87]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][88]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][89]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][90]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][91]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][92]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][93]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][94]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][95]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][96]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][97]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][98]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][99]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][100]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][101]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][102]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][103]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][104]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][105]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][106]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][107]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][108]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][109]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][110]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][111]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][112]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][113]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][114]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][115]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][116]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][117]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][118]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][119]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][120]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][121]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][122]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][123]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][124]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][125]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][126]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][127]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][128]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][129]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][130]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][131]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][132]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][133]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][134]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][135]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][136]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][137]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][138]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][139]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][140]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][141]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][142]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][143]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][144]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][145]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][146]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][147]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][148]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][149]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][150]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][151]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][152]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][153]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][154]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][155]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][156]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][157]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][158]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][159]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][160]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][161]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][162]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][163]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][164]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][165]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][166]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][167]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][168]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][169]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][170]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][171]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][172]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][173]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][174]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][175]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][176]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][177]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][178]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][179]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][180]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][181]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][182]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][183]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][184]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][185]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][186]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][187]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][188]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][189]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][190]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][191]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][192]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][193]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][194]['CollectionUnlocked'] = st
-        data['CollectionArrayArmour'][195]['CollectionUnlocked'] = st
-        json.dump( data, f, indent=4, sort_keys=False )
+        for i in range(255):
+            VAL1 += 1
+            data['CollectionArrayWeapon'][VAL1]['CollectionUnlocked'] = st
+        for i in range(196):
+            VAL2 += 1
+            data['CollectionArrayArmour'][VAL2]['CollectionUnlocked'] = st
+        json.dump( data, f )
     if os.path.exists('Profile.save'):
         os.remove('Profile.save')
     d.encodeProfileSave()
@@ -3340,9 +2949,10 @@ def mastery():
         main.title()
         print('This profile does not exist.')
         time.sleep(3)
-        return setSupport()
+        return mastery()
     lvl = 5
     xp = 540000
+    VAL = -1
     main.title()
     mast = input('Do you want to set you mastery skills to max level?\n\n[1] Yes\n[2] No\n\n>')
     if mast == '1':
@@ -3353,60 +2963,10 @@ def mastery():
             data = json.load(f)
             f.seek( 0 )
             f.truncate()
-            data['MasteryProgress'][f'{profile}'][0]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][1]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][2]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][3]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][4]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][5]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][6]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][7]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][8]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][9]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][10]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][11]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][12]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][13]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][14]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][15]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][16]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][17]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][18]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][19]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][20]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][21]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][22]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][23]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][24]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][25]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][26]['MasteryXp'] = xp
-            data['MasteryProgress'][f'{profile}'][0]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][1]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][2]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][3]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][4]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][5]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][6]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][7]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][8]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][9]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][10]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][11]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][12]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][13]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][14]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][15]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][16]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][17]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][18]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][19]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][20]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][21]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][22]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][23]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][24]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][25]['MasteryLvl'] = lvl
-            data['MasteryProgress'][f'{profile}'][26]['MasteryLvl'] = lvl
+            for i in range(27):
+                VAL += 1
+                data['MasteryProgress'][f'{profile}'][VAL]['MasteryXp'] = xp
+                data['MasteryProgress'][f'{profile}'][VAL]['MasteryLvl'] = lvl
             json.dump( data, f )
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
@@ -3553,6 +3113,7 @@ def decodeEnc():
         return decodeEnc()
 
 def setLVL():
+    totalXp = 0
     xp = [0, 1071, 1288, 1655, 2176, 2855, 3696, 4704, 5883, 7237, 8770, 10486, 12390, 14486, 16778, 19270, 21966, 24871, 27989, 31324, 34880, 38661, 42672, 46917, 51400, 56125, 91145, 98978, 107193, 115797, 124795, 134195, 144002, 154222, 164863, 175930, 187430, 199368, 211752, 224587, 237880, 251637, 265865, 280569, 295756, 311433, 327605, 344279, 361461, 379158, 397375, 416120, 435398, 455215, 475579, 496495, 517970, 540009, 562620, 585808, 609580, 844923, 878201, 912282, 947176, 982890, 1019433, 1056813, 1095038, 1134118, 1174060, 1214873, 1256565, 1299144, 1342620, 1387000, 1432293, 1478507, 1525650, 1573732, 1622760, 1672743, 1723689, 1775606, 1828504, 1882390, 1937273, 1993161, 2050062, 2107986, 2166940, 3339899, 3431459, 3524603, 3619342, 3715690, 3813659, 3913262, 4014512, 4117420]
     main.title()
     profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
@@ -3587,209 +3148,10 @@ def setLVL():
         print('Invalid level.')
         time.sleep(3)
         return setLVL()
-    elif level == 1:
-        totalXp = xp[0]
-    elif level == 2:
-        totalXp = xp[0] + xp[1]
-    elif level == 3:
-        totalXp = xp[0] + xp[1] + xp[2]
-    elif level == 4:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3]
-    elif level == 5:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4]
-    elif level == 6:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5]
-    elif level == 7:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6]
-    elif level == 8:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7]
-    elif level == 9:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8]
-    elif level == 10:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9]
-    elif level == 11:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10]
-    elif level == 12:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11]
-    elif level == 13:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12]
-    elif level == 14:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13]
-    elif level == 15:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14]
-    elif level == 16:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15]
-    elif level == 17:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16]
-    elif level == 18:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17]
-    elif level == 19:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18]
-    elif level == 20:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19]
-    elif level == 21:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20]
-    elif level == 22:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21]
-    elif level == 23:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22]
-    elif level == 24:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23]
-    elif level == 25:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24]
-    elif level == 26:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25]
-    elif level == 27:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26]
-    elif level == 28:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27]
-    elif level == 29:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28]
-    elif level == 30:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29]
-    elif level == 31:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30]
-    elif level == 32:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31]
-    elif level == 33:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32]
-    elif level == 34:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33]
-    elif level == 35:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34]
-    elif level == 36:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35]
-    elif level == 37:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36]
-    elif level == 38:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37]
-    elif level == 39:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38]
-    elif level == 40:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39]
-    elif level == 41:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40]
-    elif level == 42:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41]
-    elif level == 43:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42]
-    elif level == 44:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43]
-    elif level == 45:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44]
-    elif level == 46:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45]
-    elif level == 47:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46]
-    elif level == 48:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47]
-    elif level == 49:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48]
-    elif level == 50:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49]
-    elif level == 51:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50]
-    elif level == 52:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51]
-    elif level == 53:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52]
-    elif level == 54:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53]
-    elif level == 55:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54]
-    elif level == 56:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55]
-    elif level == 57:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56]
-    elif level == 58:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57]
-    elif level == 59:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58]
-    elif level == 60:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59]
-    elif level == 61:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60]
-    elif level == 62:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61]
-    elif level == 63:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62]
-    elif level == 64:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63]
-    elif level == 65:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64]
-    elif level == 66:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65]
-    elif level == 67:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66]
-    elif level == 68:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67]
-    elif level == 69:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68]
-    elif level == 70:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69]
-    elif level == 71:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70]
-    elif level == 72:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71]
-    elif level == 73:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72]
-    elif level == 74:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73]
-    elif level == 75:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74]
-    elif level == 76:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75]
-    elif level == 77:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76]
-    elif level == 78:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77]
-    elif level == 79:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78]
-    elif level == 80:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79]
-    elif level == 81:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80]
-    elif level == 82:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81]
-    elif level == 83:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82]
-    elif level == 84:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83]
-    elif level == 85:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84]
-    elif level == 86:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85]
-    elif level == 87:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86]
-    elif level == 88:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87]
-    elif level == 89:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88]
-    elif level == 90:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89]
-    elif level == 91:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90]
-    elif level == 92:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91]
-    elif level == 93:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92]
-    elif level == 94:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92] + xp[93]
-    elif level == 95:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92] + xp[93] + xp[94]
-    elif level == 96:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92] + xp[93] + xp[94] + xp[95]
-    elif level == 97:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92] + xp[93] + xp[94] + xp[95] + xp[96]
-    elif level == 98:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92] + xp[93] + xp[94] + xp[95] + xp[96] + xp[97]
-    elif level == 99:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92] + xp[93] + xp[94] + xp[95] + xp[96] + xp[97] + xp[98]
-    elif level == 100:
-        totalXp = xp[0] + xp[1] + xp[2] + xp[3] + xp[4] + xp[5] + xp[6] + xp[7] + xp[8] + xp[9] + xp[10] + xp[11] + xp[12] + xp[13] + xp[14] + xp[15] + xp[16] + xp[17] + xp[18] + xp[19] + xp[20] + xp[21] + xp[22] + xp[23] + xp[24] + xp[25] + xp[26] + xp[27] + xp[28] + xp[29] + xp[30] + xp[31] + xp[32] + xp[33] + xp[34] + xp[35] + xp[36] + xp[37] + xp[38] + xp[39] + xp[40] + xp[41] + xp[42] + xp[43] + xp[44] + xp[45] + xp[46] + xp[47] + xp[48] + xp[49] + xp[50] + xp[51] + xp[52] + xp[53] + xp[54] + xp[55] + xp[56] + xp[57] + xp[58] + xp[59] + xp[60] + xp[61] + xp[62] + xp[63] + xp[64] + xp[65] + xp[66] + xp[67] + xp[68] + xp[69] + xp[70] + xp[71] + xp[72] + xp[73] + xp[74] + xp[75] + xp[76] + xp[77] + xp[78] + xp[79] + xp[80] + xp[81] + xp[82] + xp[83] + xp[84] + xp[85] + xp[86] + xp[87] + xp[88] + xp[89] + xp[90] + xp[91] + xp[92] + xp[93] + xp[94] + xp[95] + xp[96] + xp[97] + xp[98] + xp[99]
+    for i in range(level):
+        totalXp += xp[i]
     main.title()
     print("Loading, please wait...")
-    print(totalXp)
     d.decodeProfileSave()
     with open('Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
