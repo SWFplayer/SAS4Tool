@@ -19,8 +19,8 @@ def hash1 (buf) -> np.uint32:
         loc2 = buf[loc6]
         loc3 = (loc7 ^ loc2) & 255
         loc7 = np.uint32( ((loc7 >> 8) & 16777215) ^ hash2(loc3) )
-    #if (loc7 < 0):
-    #    loc7 = np.uint32( 4294967295 + loc7 + 1 )
+    if (loc7 < 0):
+        loc7 = np.uint32( 4294967295 + loc7 + 1 )
     return loc7
 
 

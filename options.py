@@ -2,73 +2,14 @@ import encodingDecoding as d
 import time, os, random
 import main
 import json
+import createFile as c
 
 NUMS = '123456789'
+
+# TURRETS
+
 TURRETSNM = [54, 56, 58, 62, 63, 60, 55]
 TURRETSRD = [133, 134, 135, 136, 137, 138]
-# WEAPONS
-
-pistolNM = '[1] HVM 001\n[2] CM 202\n[3] RIA 313\n[4] Sabre\n[5] RIA 1010\n[6] Poison Claw\n[7] CM 205\n[8] Trailblazer\n[9] CM 225\n[10] Ronson 45\n[11] Mustang\n[12] GG17 (Faction war exclusive)\n\n>'
-pistolRD = '[1] HVM 001\n[2] CM 202\n[3] RIA 313\n[4] Sabre\n[5] RIA 1010\n[6] Poison Claw\n[7] CM 205\n[8] Trailblazer\n[9] CM 225\n[10] Ronson 45\n[11] Mustang\n\n>'
-pistolBL = '[1] Poison Claw\n[2] Ronson 45\n[3] Trailblazer\n[4] Mustang\n\n>'
-
-smgNM = '[1] RIA 7\n[2] HVM 002\n[3] Phantom\n[4] CM 330\n[5] RIA T7\n[6] CM 307\n[7] CM 351\n[8] Ronson 50\n[9] Ronson 55\n\n>'
-smgRD = '[1] RIA 7\n[2] HVM 002\n[3] Phantom\n[4] CM 330\n[5] RIA T7\n[6] CM 307\n[7] CM 351\n[8] Ronson 50\n[9] Ronson 55\n\n>'
-smgBL = '[1] RIA 7\n[2] HVM 002\n[3] Phantom\n[4] CM 330\n[5] RIA T7\n[6] CM 307\n[7] CM 351\n[8] Ronson 50\n[9] Ronson 55\n\n>'
-
-assaultNM = '[1] HVM 005 G-Class\n[2] RIA 20 Para\n[3] RIA 20 DSC\n[4] RIA 20 Striker\n[5] Raptor\n[6] CM 440 Titan\n[7] CM 401 Planet Stormer\n[8] Heartburn\n[9] CM Gigavolt\n[10] Ronson 65-a\n[11] Ronson 70\n[12] CM 451 Starburst\n[13] Hard Thorn\n[14] Mixmaster\n[15] Festungsbrecher (Faction war exclusive)\n[16] Sub-Light COM2\n\n>'
-assaultRD = '[1] HVM 005 G-Class\n[2] RIA 20 Para\n[3] RIA 20 DSC\n[4] RIA 20 Striker\n[5] Raptor\n[6] CM 440 Titan\n[7] CM 401 Planet Stormer\n[8] Heartburn\n[9] CM Gigavolt\n[10] Ronson 65-a\n[11] Ronson 70\n[12] CM 451 Starburst\n[13] Hard Thorn\n[14] Mixmaster\n[15] Sub-Light COM2\n\n>'
-assaultBL = '[1] HVM 005 G-Class\n[2] RIA 20 Para\n[3] RIA 20 DSC\n[4] RIA 20 Striker\n[5] Raptor\n[6] CM 440 Titan\n[7] CM 401 Planet Stormer\n[8] Heartburn\n[9] CM Gigavolt\n[10] Ronson 65-a\n[11] Ronson 70\n[12] CM 451 Starburst\n[13] Hard Thorn\n[14] Mixmaster\n[15] Sub-Light COM2\n\n>'
-
-shotgunNM = '[1] HVM 004\n[2] RIA 30 Strikeforce\n[3] Stripper\n[4] Shotlite Tempest\n[5] 1887 Shockfield\n[6] Thundershock (Faction war exclusive)\n\n>'
-shotgunRD = '[1] HVM 004\n[2] RIA 30 Strikeforce\n[3] Stripper\n[4] Shotlite Tempest\n[5] 1887 Shockfield\n\n>'
-shotgunBL = '[1] HVM 004\n[2] RIA 30 Strikeforce\n[3] Stripper\n[4] Shotlite Tempest\n[5] 1887 Shockfield\n\n>'
-
-sniperNM = '[1] RIA 50\n[2] CM 800 Jupiter\n[3] HIKS S300\n[4] Hornet\n\n>'
-sniperRD = '[1] RIA 50\n[2] CM 800 Jupiter\n[3] HIKS S300\n[4] Hornet\n\n>'
-sniperBL = '[1] RIA 50\n[2] CM 800 Jupiter\n[3] HIKS S300\n[4] Hornet\n\n>'
-
-rocketNM = '[1] HVM MPG\n[2] T-101 Feldhaubitz\n[3] Lone Star\n[4] Depth Charge (Faction war exclusive)\n[5] Gebirgskanone\n[6] T-102 Jagdfaust\n[7] Luftplatzen\n[8] HIKS 3100\n[9] Havoc (Faction war exclusive)\n\n>'
-rocketRD = '[1] HVM MPG\n[2] T-101 Feldhaubitz\n[3] Lone Star\n[4] Gebirgskanone\n[5] T-102 Jagdfaust\n[6] Luftplatzen\n[7] HIKS 3100\n\n>'
-rocketBL = '[1] HVM MPG\n[2] T-101 Feldhaubitz\n[3] Lone Star\n[4] Gebirgskanone\n[5] T-102 Jagdfaust\n[6] Luftplatzen\n[7] HIKS 3100\n\n>'
-
-flameNM = '[1] Ronson WP Flamethrower\n[2] Phoenix (Faction war exclusive)\n[3] Avalanche (Faction war exclusive)\n\n>'
-flameRD = '[1] Ronson WP Flamethrower\n\n>'
-flameBL = '[1] Ronson WP Flamethrower\n\n>'
-
-lmgNM = '[1] HVM 008\n[2] Ronson LBM\n[3] RIA 40\n[4] RIA 45 Para\n[5] CM 505\n[6] RIA 530 BabyCOM\n[7] Tombstone\n[8] Proposition\n[9] RIA T40\n[10] Supermarine\n[11] Kraken (Faction war exclusive)\n\n>'
-lmgRD = '[1] HVM 008\n[2] Ronson LBM\n[3] RIA 40\n[4] RIA 45 Para\n[5] CM 505\n[6] RIA 530 BabyCOM\n[7] Tombstone\n[8] Proposition\n[9] RIA T40\n[10] Supermarine\n\n>'
-lmgBL = '[1] HVM 008\n[2] Ronson LBM\n[3] RIA 40\n[4] RIA 45 Para\n[5] CM 505\n[6] RIA 530 BabyCOM\n[7] Tombstone\n[8] Proposition\n[9] RIA T40\n[10] Supermarine\n\n>'
-
-diskNM = '[1] Shredder\n[2] Exterminator (Faction war exclusive)\n\n>'
-diskRD = '[1] Shredder\n\n>'
-diskBL = '[1] Shredder\n\n>'
-
-laserNM = '[1] Hotspot\n[2] Krakatoa\n\n>'
-laserRD = '[1] Hotspot\n\n>'
-laserBL = '[1] Hotspot\n\n>'
-
-# EQUIPMENT
-
-helmetNM = '[1] HVM Kevlar Helmet\n[2] Trooper Helmet\n[3] HVM Carbon Fibre Helmet\n[4] Shotlite Hummingbird H1\n[5] Dynamo Helmet (Faction war exclusive)\n[6] Special Forces Helmet\n[7] R1 Interceptor Helm\n[8] Hardplate Helm\n[9] Medusa Helmet\n[10] Graphene Combat Hood\n[11] Dragonfly Helmet\n[12] Overwatch Helmet (Faction war exclusive)\n[13] Titan IRN HUD\n[14] Mastodon Helm (Faction war exclusive)\n[15] Vulkan Helmet (Faction war exclusive)\n[16] Mako Helmet (Faction war exclusive)\n\n>'
-helmetRD = '[1] HVM Kevlar Helmet\n[2] Trooper Helmet\n[3] HVM Carbon Fibre Helmet\n[4] Shotlite Hummingbird H1\n[5] Special Forces Helmet\n[6] R1 Interceptor Helm\n[7] Hardplate Helm\n[8] Medusa Helmet\n[9] Graphene Combat Hood\n[10] Dragonfly Helmet\n[11] Titan IRN HUD\n\n>'
-helmetBL = '[1] HVM Kevlar Helmet\n[2] Trooper Helmet\n[3] HVM Carbon Fibre Helmet\n[4] Shotlite Hummingbird H1\n[5] Special Forces Helmet\n[6] R1 Interceptor Helm\n[7] Hardplate Helm\n[8] Medusa Helmet\n[9] Graphene Combat Hood\n[10] Dragonfly Helmet\n[11] Titan IRN HUD\n\n>'
-
-vestNM = '[1] HVM Kevlar Vest\n[2] Trooper Vest\n[3] HVM Carbon Fibre Vest\n[4] Shotlite Hummingbird V1\n[5] Dynamo Chest (Faction war exclusive)\n[6] Special Forces Vest\n[7] R4 Guardian Vest\n[8] Rubicon Power Assist\n[9] Heavy Trooper Vest\n[10] Medusa Vest\n[11] Hardplate Chest\n[12] Dragonfly Vest\n[13] Graphene Body Suit Top\n[14] Titan Teslashock\n[15] Overwatch Chest (Faction war exclusive)\n[16] Mastodon Chest (Faction war exclusive)\n[17] Mako Vest (Faction war exclusive)\n[18] Vulkan Vest (Faction war exclusive)\n\n>'
-vestRD = '[1] HVM Kevlar Vest\n[2] Trooper Vest\n[3] HVM Carbon Fibre Vest\n[4] Shotlite Hummingbird V1\n[5] Special Forces Vest\n[6] R4 Guardian Vest\n[7] Rubicon Power Assist\n[8] Heavy Trooper Vest\n[9] Medusa Vest\n[10] Hardplate Chest\n[11] Dragonfly Vest\n[12] Graphene Body Suit Top\n[13] Titan Teslashock\n\n>'
-vestBL = '[1] HVM Kevlar Vest\n[2] Trooper Vest\n[3] HVM Carbon Fibre Vest\n[4] Shotlite Hummingbird V1\n[5] Special Forces Vest\n[6] R4 Guardian Vest\n[7] Rubicon Power Assist\n[8] Heavy Trooper Vest\n[9] Medusa Vest\n[10] Hardplate Chest\n[11] Dragonfly Vest\n[12] Graphene Body Suit Top\n[13] Titan Teslashock\n\n>'
-
-glovesNM = '[1] HVM Kevlar Gloves\n[2] Trooper Gloves\n[3] HVM Carbon Fibre Gloves\n[4] Shotlite Hummingbird G1\n[5] Dynamo Gloves (Faction war exclusive)\n[6] Special Forces Gloves\n[7] R6 Flamejuggler Gloves\n[8] Dragonfly Gloves\n[9] Hardplate Gauntlets\n[10] Medusa Gloves\n[11] Graphene Gloves\n[12] Overwatch Gloves (Faction war exclusive)\n[13] Titan IDS 01\n[14] Mastodon Gauntlets (Faction war exclusive)\n[15] Mako Gloves (Faction war exclusive)\n[16] Vulkan Gloves (Faction war exclusive)\n\n>'
-glovesRD = '[1] HVM Kevlar Gloves\n[2] Trooper Gloves\n[3] HVM Carbon Fibre Gloves\n[4] Shotlite Hummingbird G1\n[5] Special Forces Gloves\n[6] R6 Flamejuggler Gloves\n[7] Dragonfly Gloves\n[8] Hardplate Gauntlets\n[9] Medusa Gloves\n[10] Graphene Gloves\n[11] Titan IDS 01\n[14]\n\n>'
-glovesBL = '[1] HVM Kevlar Gloves\n[2] Trooper Gloves\n[3] HVM Carbon Fibre Gloves\n[4] Shotlite Hummingbird G1\n[5] Special Forces Gloves\n[6] R6 Flamejuggler Gloves\n[7] Dragonfly Gloves\n[8] Hardplate Gauntlets\n[9] Medusa Gloves\n[10] Graphene Gloves\n[11] Titan IDS 01\n[14]\n\n>'
-
-pantsNM = '[1] HVM Kevlar Pants\n[2] Trooper Pants\n[3] HVM Carbon Fibre Pants\n[4] Shotlite Hummingbird P1\n[5] Dynamo Pants (Faction war exclusive)\n[6] Special Forces Pants\n[7] R7 Guardian Pants\n[8] Hardplate Pants\n[9] Medusa Pants\n[10] Dragonfly Pants\n[11] Graphene Body Suit Bottom\n[12] Titan MEM Trooper\n[13] Overwatch Pants (Faction war exclusive)\n[14] Mastodon Legs (Faction war exclusive)\n[15] Mako Pants (Faction war exclusive)\n[16] Vulkan Pants (Faction war exclusive)\n\n>'
-pantsRD = '[1] HVM Kevlar Pants\n[2] Trooper Pants\n[3] HVM Carbon Fibre Pants\n[4] Shotlite Hummingbird P1\n[5] Special Forces Pants\n[6] R7 Guardian Pants\n[7] Hardplate Pants\n[8] Medusa Pants\n[9] Dragonfly Pants\n[10] Graphene Body Suit Bottom\n[11] Titan MEM Trooper\n\n>'
-pantsBL = '[1] HVM Kevlar Pants\n[2] Trooper Pants\n[3] HVM Carbon Fibre Pants\n[4] Shotlite Hummingbird P1\n[5] Special Forces Pants\n[6] R7 Guardian Pants\n[7] Hardplate Pants\n[8] Medusa Pants\n[9] Dragonfly Pants\n[10] Graphene Body Suit Bottom\n[11] Titan MEM Trooper\n\n>'
-
-bootsNM = '[1] HVM Combat Boots\n[2] Trooper Boots\n[3] Special Forces Boots\n[4] Shotlite Starwalk Boots\n[5] Dynamo Boots (Faction war exclusive)\n[6] HVM Carbon Fibre Boots\n[7] R8 Huntsman Boots\n[8] Hardplate Boots\n[9] Medusa Boots\n[10] Dragonfly Boots\n[11] Graphene Boots\n[12] Titan MEM Sprint\n[13] Overwatch Boots (Faction war exclusive)\n[14] Vulkan Boots (Faction war exclusive)\n[15] Mastodon Boots (Faction war exclusive)\n[16] Mako Boots (Faction war exclusive)\n\n>'
-bootsRD = '[1] HVM Combat Boots\n[2] Trooper Boots\n[3] Special Forces Boots\n[4] Shotlite Starwalk Boots\n[5] HVM Carbon Fibre Boots\n[6] R8 Huntsman Boots\n[7] Hardplate Boots\n[8] Medusa Boots\n[9] Dragonfly Boots\n[10] Graphene Boots\n[11] Titan MEM Sprint\n\n>'
-bootsBL = '[1] HVM Combat Boots\n[2] Trooper Boots\n[3] Special Forces Boots\n[4] Shotlite Starwalk Boots\n[5] HVM Carbon Fibre Boots\n[6] R8 Huntsman Boots\n[7] Hardplate Boots\n[8] Medusa Boots\n[9] Dragonfly Boots\n[10] Graphene Boots\n[11] Titan MEM Sprint\n\n>'
 
 def factionGuild():
     main.title()
@@ -229,6 +170,7 @@ def blackBox():
         return blackBox()
     main.title()
     try:
+        print('Large values will slow down the function.\n\n')
         blackbox = int(input('Set your black strongboxes ammount\n\n>'))
     except ValueError as err:
         main.title()
@@ -238,17 +180,19 @@ def blackBox():
     main.title()
     print("Loading, please wait...")
     d.decodeProfileSave()
+    l = []
     for x in range(0, blackbox): # Ammount of black boxes to generate
         genBox = ''
         for x in range(0, 10):
             chars = random.choice(NUMS)
             genBox = genBox + chars
-        with open('Profile_unpacked.json', 'r+') as f:
-            data = json.load(f)
-            f.seek( 0 )
-            f.truncate()
-            data['Inventory'][f'{profile}']['Skills']['AvailableBlackStrongboxes'].append(int(genBox))
-            json.dump(data, f, indent=4, sort_keys=False)
+        l.append(int(genBox))
+    with open('Profile_unpacked.json', 'r+') as f:
+        data = json.load(f)
+        f.seek( 0 )
+        f.truncate()
+        data['Inventory'][f'{profile}']['Skills']['AvailableBlackStrongboxes'] = l
+        json.dump(data, f)
     if os.path.exists('Profile.save'):
         os.remove('Profile.save')
     d.encodeProfileSave()
@@ -560,91 +504,150 @@ def premGuns():
     time.sleep(3)
     return main.mainMenu()
 
-def weaponCfg(strongbox, weaponID, equipVersion, profile, tp):
+def weaponConfig(weaponType, weaponCategory, weaponVersion, profile):
     main.title()
-    try:
-        grade = int(input('Set your weapon grade (0-12)\n\n>'))
-        if grade > 12:
-            main.title()
-            print('Please enter a valid value.')
-            time.sleep(3)
-            return weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-    except ValueError as err:
+    with open('IDs.json', 'r') as idf:
+        IDs = json.load(idf)
+        for i in range(len(IDs['weaponIDs'][f'{weaponType}'][f'{weaponCategory}'])):
+            prnWeap = f'[{i+1}] ' + f'{IDs["weaponIDs"][f"{weaponType}"][f"{weaponCategory}"][i]["Name"]}'
+            print(prnWeap)
+        weapon = input('\n>')
+        strongbox = '''
+        {
+            "ID": 0,
+            "EquipVersion": 0,
+            "Grade": 0,
+            "EquippedSlot": -1,
+            "AugmentSlots": 0,
+            "InventoryIndex": 1,
+            "Seen": false,
+            "BonusStatsLevel": 0,
+            "Equipped": false,
+            "ContainsKey": false,
+            "ContainsAugmentCore": false,
+            "BlackStrongboxSeed": 0,
+            "UseDefaultOpenLogic": true
+        }'''
         main.title()
-        print('Please enter a valid number.')
-        time.sleep(3)
-        return weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-    main.title()
-    try:
-        augmentSlots = int(input('Set your weapon augment slots (0-4)\n\n>'))
-        if augmentSlots > 4:
+        try:
+            grade = int(input('Set your weapon grade (0-12)\n\n>'))
+            if grade > 12:
+                main.title()
+                print('Please enter a valid value.')
+                time.sleep(3)
+                return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+        except ValueError:
             main.title()
-            print('Please enter a valid value.')
+            print('Please enter a valid number.')
             time.sleep(3)
-            return weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-    except ValueError as err:
+            return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
         main.title()
-        print('Please enter a valid number.')
-        time.sleep(3)
-        return weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-    main.title()
-    try:
-        bonusGrade = int(input('Set your weapon bonus stats (0-10)\n\n>'))
-        if bonusGrade > 10:
+        try:
+            augmentSlots = int(input('Set your weapon augment slots (0-4)\n\n>'))
+            if augmentSlots > 4:
+                main.title()
+                print('Please enter a valid value.')
+                time.sleep(3)
+                return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+        except ValueError:
             main.title()
-            print('Please enter a valid value.')
+            print('Please enter a valid number.')
             time.sleep(3)
-            return weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-    except ValueError as err:
+            return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
         main.title()
-        print('Please enter a valid number.')
+        try:
+            bonusGrade = int(input('Set your weapon bonus stats (0-10)\n\n>'))
+            if bonusGrade > 10:
+                main.title()
+                print('Please enter a valid value.')
+                time.sleep(3)
+                return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+        except ValueError:
+            main.title()
+            print('Please enter a valid number.')
+            time.sleep(3)
+            return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+        main.title()
+        print('Loading, please wait...')
+        d.decodeProfileSave()
+        with open('Profile_unpacked.json', 'r+') as f:
+            data = json.load(f)
+            strongBox = json.loads(strongbox)
+            f.seek( 0 )
+            f.truncate()
+            strongBox['ID'] = IDs['weaponIDs'][f'{weaponType}'][f'{weaponCategory}'][int(weapon)-1]['ID']
+            strongBox['equipVersion'] = weaponVersion
+            strongBox['Grade'] = int(grade)
+            strongBox['AugmentSlots'] = int(augmentSlots)
+            strongBox['BonusStatsLevel'] = int(bonusGrade)
+            strongBox['EquippedSlot'] = IDs['weaponIDs'][f'{weaponType}']['Extra'][0]['Type']
+            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(1))
+            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(strongBox)
+            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(8))
+            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(0))
+            json.dump( data, f )
+        c.deleteFile()
+        if os.path.exists('Profile.save'):
+            os.remove('Profile.save')
+        d.encodeProfileSave()
+        os.remove('Profile_unpacked.json')
+        main.title()
+        print('Profile.save has been successfuly updated.')
         time.sleep(3)
-        return weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
+        return main.mainMenu()
+
+def weaponCat(weaponType, profile):
     main.title()
-    print('Loading, please wait...')
-    d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
-        box = json.loads(strongbox)
+    c.createFile()
+    with open('IDs.json', 'r') as f:
         data = json.load(f)
-        f.seek( 0 )
-        f.truncate()
-        box['ID'] = int(weaponID)
-        box['EquipVersion'] = int(equipVersion)
-        box['EquipSlot'] = int(tp)
-        box['Grade'] = int(grade)
-        box['AugmentSlots'] = int(augmentSlots)
-        box['BonusStatsLevel'] = int(bonusGrade)
-        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(0))
-        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(box)
-        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(8))
-        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(0))
-        json.dump(data, f, indent=4, sort_keys=False)
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
+        try:
+            data['weaponIDs'][f'{weaponType}']['Factions']
+        except:
+            main.title()
+            weaponCategory = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
+            if weaponCategory == '1':
+                weaponCategory = 'Normal'
+                weaponVersion = 0
+                weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+            elif weaponCategory == '2':
+                weaponCategory = 'Red'
+                weaponVersion = 1
+                weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+            elif weaponCategory == '3':
+                weaponCategory = 'Black'
+                weaponVersion = 2
+                weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+            else:
+                main.title()
+                print('Invalid option.')
+                time.sleep(3)
+                return weaponCat(weaponType)
     main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    weaponCategory = input('[1] Normal\n[2] Red\n[3] Black\n[4] Factions\n\n>')
+    if weaponCategory == '1':
+        weaponCategory = 'Normal'
+        weaponVersion = 0
+        weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+    elif weaponCategory == '2':
+        weaponCategory = 'Red'
+        weaponVersion = 1
+        weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+    elif weaponCategory == '3':
+        weaponCategory = 'Black'
+        weaponVersion = 2
+        weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+    elif weaponCategory == '4':
+        weaponCategory = 'Factions'
+        weaponVersion = 1
+        weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+    else:
+        main.title()
+        print('Invalid option.')
+        time.sleep(3)
+        return weaponCat()
 
 def weapons():
-    strongbox = '''
-    {
-        "ID": 0,
-        "EquipVersion": 0,
-        "Grade": 0,
-        "EquippedSlot": -1,
-        "AugmentSlots": 0,
-        "InventoryIndex": 1,
-        "Seen": false,
-        "BonusStatsLevel": 0,
-        "Equipped": false,
-        "ContainsKey": false,
-        "ContainsAugmentCore": false,
-        "BlackStrongboxSeed": 0,
-        "UseDefaultOpenLogic": true
-    }'''
     main.title()
     profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
     if profile == '1':
@@ -665,1035 +668,182 @@ def weapons():
         time.sleep(3)
         return weapons()
     main.title()
-    weapontype = input('[1] Pistols\n[2] SMG\n[3] Assault Rifle\n[4] Shotgun\n[5] Sniper\n[6] Rocket Launcher\n[7] Flame Thrower\n[8] LMG\n[9] Disk Thrower\n[10] Laser\n\n>')
-    if weapontype == '1':
-        tp = 1
-        main.title()
-        weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
-        if weaponVersion == '1':
-            main.title()
-            equipVersion = 0
-            weapon = input(pistolNM)
-            if weapon == '1':
-                weaponID = 22
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 23
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 9
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 84
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 141
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '6':
-                weaponID = 16
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '7':
-                weaponID = 21
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '8':
-                weaponID = 6
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '9':
-                weaponID = 145
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '10':
-                weaponID = 37
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '11':
-                weaponID = 98
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '12':
-                weaponID = 221
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '2':
-            main.title()
-            equipVersion = 1
-            weapon = input(pistolRD)
-            if weapon == '1':
-                weaponID = 78
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 75
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 110
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 67
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 161
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '6':
-                weaponID = 111
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '7':
-                weaponID = 70
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '8':
-                weaponID = 116
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '9':
-                weaponID = 165
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '10':
-                weaponID = 77
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '11':
-                weaponID = 68
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '3':
-            main.title()
-            equipVersion = 2
-            weapon = input(pistolBL)
-            if weapon == '1':
-                weaponID = 10111
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 10077
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 10116
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 10068
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        else:
-            main.title()
-            print('Invalid Option.')
-            time.sleep(3)
-            return weapons()
-    elif weapontype == '2':
-        tp = 2
-        main.title()
-        weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
-        if weaponVersion == '1':
-            main.title()
-            equipVersion = 0
-            weapon = input(smgNM)
-            if weapon == '1':
-                weaponID = 30
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 17
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 89
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 148
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 8
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '6':
-                weaponID = 11
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '7':
-                weaponID = 24
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '8':
-                weaponID = 160
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '9':
-                weaponID = 19
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '2':
-            main.title()
-            equipVersion = 1
-            weapon = input(smgRD)
-            if weapon == '1':
-                weaponID = 97
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 94
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 106
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 168
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 103
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '6':
-                weaponID = 87
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '7':
-                weaponID = 113
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '8':
-                weaponID = 180
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '9':
-                weaponID = 105
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '3':
-            main.title()
-            equipVersion = 2
-            weapon = input(smgBL)
-            if weapon == '1':
-                weaponID = 10097
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 10094
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 10106
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 10168
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 10103
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '6':
-                weaponID = 10087
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '7':
-                weaponID = 10113
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '8':
-                weaponID = 10180
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '9':
-                weaponID = 10105
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        else:
-            main.title()
-            print('Invalid Option.')
-            time.sleep(3)
-            return weapons()
-    elif weapontype == '3':
-        tp = 3
-        main.title()
-        weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
-        if weaponVersion == '1':
-            main.title()
-            equipVersion = 0
-            weapon = input(assaultNM)
-            if weapon == '1':
-                weaponID = 31
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 14
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 72
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 41
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 90
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '6':
-                weaponID = 146
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '7':
-                weaponID = 7
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '8':
-                weaponID = 156
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '9':
-                weaponID = 15
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '10':
-                weaponID = 10
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '11':
-                weaponID = 158
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '12':
-                weaponID = 36
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '13':
-                weaponID = 28
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '14':
-                weaponID = 26
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '15':
-                weaponID = 222
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '16':
-                weaponID = 12
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '2':
-            main.title()
-            equipVersion = 1
-            weapon = input(assaultRD)
-            if weapon == '1':
-                weaponID = 87
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 79
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 69
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 102
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 88
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '6':
-                weaponID = 166
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '7':
-                weaponID = 109
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '8':
-                weaponID = 176
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '9':
-                weaponID = 115
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '10':
-                weaponID = 100
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '11':
-                weaponID = 178
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '12':
-                weaponID = 71
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '13':
-                weaponID = 99
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '14':
-                weaponID = 76
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '15':
-                weaponID = 93
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '3':
-            main.title()
-            equipVersion = 2
-            weapon = input(assaultBL)
-            if weapon == '1':
-                weaponID = 10087
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 10079
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 10069
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 10102
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 10088
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '6':
-                weaponID = 10166
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '7':
-                weaponID = 10109
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '8':
-                weaponID = 10176
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '9':
-                weaponID = 10115
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '10':
-                weaponID = 10100
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '11':
-                weaponID = 10178
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '12':
-                weaponID = 10071
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '13':
-                weaponID = 10099
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '14':
-                weaponID = 10076
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '15':
-                weaponID = 10093
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        else:
-            main.title()
-            print('Invalid Option.')
-            time.sleep(3)
-            return weapons()
-    elif weapontype == '4':
-        tp = 4
-        main.title()
-        weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
-        if weaponVersion == '1':
-            main.title()
-            equipVersion = 0
-            weapon = input(shotgunNM)
-            if weapon == '1':
-                weaponID = 33
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 29
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 13
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 159
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 61
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '6':
-                weaponID = 231
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '2':
-            main.title()
-            equipVersion = 1
-            weapon = input(shotgunRD)
-            if weapon == '1':
-                weaponID = 101
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 96
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 85
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 179
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 66
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '3':
-            main.title()
-            equipVersion = 2
-            weapon = input(shotgunBL)
-            if weapon == '1':
-                weaponID = 10101
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 10096
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 10085
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 10179
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 10066
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        else:
-            main.title()
-            print('Invalid Option.')
-            time.sleep(3)
-            return weapons()
-    elif weapontype == '5':
-        tp = 5
-        main.title()
-        weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
-        if weaponVersion == '1':
-            main.title()
-            equipVersion = 0
-            weapon = input(sniperNM)
-            if weapon == '1':
-                weaponID = 43
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 149
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 39
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 83
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '2':
-            main.title()
-            equipVersion = 1
-            weapon = input(sniperRD)
-            if weapon == '1':
-                weaponID = 107
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 169
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 82
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 81
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '3':
-            main.title()
-            equipVersion = 2
-            weapon = input(sniperBL)
-            if weapon == '1':
-                weaponID = 10107
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 10169
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 10082
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 10081
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        else:
-            main.title()
-            print('Invalid Option.')
-            time.sleep(3)
-            return weapons()
-    elif weapontype == '6':
-        tp = 6
-        main.title()
-        weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
-        if weaponVersion == '1':
-            main.title()
-            equipVersion = 0
-            weapon = input(rocketNM)
-            if weapon == '1':
-                weaponID = 34
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 40
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 151
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 228
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 33
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '6':
-                weaponID = 44
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '7':
-                weaponID = 154
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '8':
-                weaponID = 153
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '9':
-                weaponID = 224
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '2':
-            main.title()
-            equipVersion = 1
-            weapon = input(rocketRD)
-            if weapon == '1':
-                weaponID = 73
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 108
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 171
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 91
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 92
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '6':
-                weaponID = 174
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '7':
-                weaponID = 173
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '3':
-            main.title()
-            equipVersion = 2
-            weapon = input(rocketBL)
-            if weapon == '1':
-                weaponID = 10073
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 10108
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 10171
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 10091
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 10092
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '6':
-                weaponID = 10174
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '7':
-                weaponID = 10173
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        else:
-            main.title()
-            print('Invalid Option.')
-            time.sleep(3)
-            return weapons()
-    elif weapontype == '7':
-        tp = 8
-        main.title()
-        weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
-        if weaponVersion == '1':
-            main.title()
-            equipVersion = 0
-            weapon = input(flameNM)
-            if weapon == '1':
-                weaponID = 18
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 223
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 227
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '2':
-            main.title()
-            equipVersion = 1
-            weapon = input(flameRD)
-            if weapon == '1':
-                weaponID = 74
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '3':
-            main.title()
-            equipVersion = 2
-            weapon = input(flameRD)
-            if weapon == '1':
-                weaponID = 10074
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        else:
-            main.title()
-            print('Invalid Option.')
-            time.sleep(3)
-            return weapons()
-    elif weapontype == '8':
-        tp = 9
-        main.title()
-        weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
-        if weaponVersion == '1':
-            main.title()
-            equipVersion = 0
-            weapon = input(lmgNM)
-            if weapon == '1':
-                weaponID = 38
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 25
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 142
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 144
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 20
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '6':
-                weaponID = 147
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '7':
-                weaponID = 150
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '8':
-                weaponID = 152
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '9':
-                weaponID = 143
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '10':
-                weaponID = 114
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '11':
-                weaponID = 225
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '2':
-            main.title()
-            equipVersion = 1
-            weapon = input(lmgRD)
-            if weapon == '1':
-                weaponID = 95
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 104
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 162
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 164
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 80
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '6':
-                weaponID = 167
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '7':
-                weaponID = 170
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '8':
-                weaponID = 172
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '9':
-                weaponID = 163
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '10':
-                weaponID = 35
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '3':
-            main.title()
-            equipVersion = 2
-            weapon = input(lmgBL)
-            if weapon == '1':
-                weaponID = 10095
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 10104
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '3':
-                weaponID = 10162
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '4':
-                weaponID = 10164
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '5':
-                weaponID = 10080
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '6':
-                weaponID = 10167
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '7':
-                weaponID = 10170
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '8':
-                weaponID = 10172
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '9':
-                weaponID = 10163
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '10':
-                weaponID = 10035
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        else:
-            main.title()
-            print('Invalid Option.')
-            time.sleep(3)
-            return weapons()
-    elif weapontype == '9':
-        tp = 10
-        main.title()
-        weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
-        if weaponVersion == '1':
-            main.title()
-            equipVersion = 0
-            weapon = input(diskNM)
-            if weapon == '1':
-                weaponID = 157
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 226
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '2':
-            main.title()
-            equipVersion = 1
-            weapon = input(diskRD)
-            if weapon == '1':
-                weaponID = 177
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '3':
-            main.title()
-            equipVersion = 2
-            weapon = input(diskBL)
-            if weapon == '1':
-                weaponID = 10177
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        else:
-            main.title()
-            print('Invalid Option.')
-            time.sleep(3)
-            return weapons()
-    elif weapontype == '10':
-        tp = 11
-        main.title()
-        weaponVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
-        if weaponVersion == '1':
-            main.title()
-            equipVersion = 0
-            weapon = input(laserNM)
-            if weapon == '1':
-                weaponID = 155
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            elif weapon == '2':
-                weaponID = 229
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '2':
-            main.title()
-            equipVersion = 1
-            weapon = input(laserRD)
-            if weapon == '1':
-                weaponID = 175
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        elif weaponVersion == '3':
-            main.title()
-            equipVersion = 2
-            weapon = input(laserBL)
-            if weapon == '1':
-                weaponID = 10175
-                weaponCfg(strongbox, weaponID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return weapons()
-        else:
-            main.title()
-            print('Invalid Option.')
-            time.sleep(3)
-            return weapons()
+    weaponType = input('[1] Pistols\n[2] SMG\n[3] Assault Rifle\n[4] Shotgun\n[5] Sniper\n[6] Rocket Launcher\n[7] Flame Thrower\n[8] LMG\n[9] Disk Thrower\n[10] Laser\n\n>')
+    if weaponType == '1':
+        weaponType = 'Pistol'
+        weaponCat(weaponType, profile)
+    elif weaponType == '2':
+        weaponType = 'SMG'
+        weaponCat(weaponType, profile)
+    elif weaponType == '3':
+        weaponType = 'Assault Rifle'
+        weaponCat(weaponType, profile)
+    elif weaponType == '4':
+        weaponType = 'Shotgun'
+        weaponCat(weaponType, profile)
+    elif weaponType == '5':
+        weaponType = 'Sniper'
+        weaponCat(weaponType, profile)
+    elif weaponType == '6':
+        weaponType = 'Rocket Launcher'
+        weaponCat(weaponType, profile)
+    elif weaponType == '7':
+        weaponType = 'Flame Thrower'
+        weaponCat(weaponType, profile)
+    elif weaponType == '8':
+        weaponType = 'LMG'
+        weaponCat(weaponType, profile)
+    elif weaponType == '9':
+        weaponType = 'Disk Thrower'
+        weaponCat(weaponType, profile)
+    elif weaponType == '10':
+        weaponType = 'Laser'
+        weaponCat(weaponType, profile)
 
-def equipCfg(strongbox2, equipID, equipVersion, profile, tp):
+def equipConfig(equipType, equipCategory, equipVersion, profile):
     main.title()
-    try:
-        grade = int(input('Set your equipment grade (0-12)\n\n>'))
-        if grade > 12:
-            main.title()
-            print('Please enter a valid value.')
-            time.sleep(3)
-            return (strongbox2, equipID, equipVersion, profile, tp)
-    except ValueError as err:
+    with open('IDs.json', 'r') as idf:
+        IDs = json.load(idf)
+        for i in range(len(IDs['equipmentIDs'][f'{equipType}'][f'{equipCategory}'])):
+            prnEquip = f'[{i+1}] ' + f'{IDs["equipmentIDs"][f"{equipType}"][f"{equipCategory}"][i]["Name"]}'
+            print(prnEquip)
+        equip = input('\n>')
+        strongbox2 = '''
+        {
+            "ID": 0,
+            "EquipVersion": 0,
+            "Grade": 0,
+            "EquippedSlot": 0,
+            "AugmentSlots": 1,
+            "InventoryIndex": 4,
+            "Seen": false,
+            "BonusStatsLevel": 0,
+            "Equipped": false,
+            "ContainsKey": false,
+            "ContainsAugmentCore": false,
+            "BlackStrongboxSeed": 0,
+            "UseDefaultOpenLogic": true
+        }'''
         main.title()
-        print('Please enter a valid number.')
-        time.sleep(3)
-        return (strongbox2, equipID, equipVersion, profile, tp)
-    main.title()
-    try:
-        augmentSlots = int(input('Set your weapon augment slots (0-3)\n\n>'))
-        if augmentSlots > 3:
+        try:
+            grade = int(input('Set your equipment grade (0-12)\n\n>'))
+            if grade > 12:
+                main.title()
+                print('Please enter a valid value.')
+                time.sleep(3)
+                return equipConfig(equipType, equipCategory, equipVersion, profile)
+        except ValueError:
             main.title()
-            print('Please enter a valid value.')
+            print('Please enter a valid number.')
             time.sleep(3)
-            return (strongbox2, equipID, equipVersion, profile, tp)
-    except ValueError as err:
+            return equipConfig(equipType, equipCategory, equipVersion, profile)
         main.title()
-        print('Please enter a valid number.')
-        time.sleep(3)
-        return (strongbox2, equipID, equipVersion, profile, tp)
-    main.title()
-    try:
-        bonusGrade = int(input('Set your equipment bonus stats (0-10)\n\n>'))
-        if bonusGrade > 10:
+        try:
+            augmentSlots = int(input('Set your equipment augment slots (0-3)\n\n>'))
+            if augmentSlots > 3:
+                main.title()
+                print('Please enter a valid value.')
+                time.sleep(3)
+                return equipConfig(equipType, equipCategory, equipVersion, profile)
+        except ValueError:
             main.title()
-            print('Please enter a valid value.')
+            print('Please enter a valid number.')
             time.sleep(3)
-            return (strongbox2, equipID, equipVersion, profile, tp)
-    except ValueError as err:
+            return equipConfig(equipType, equipCategory, equipVersion, profile)
         main.title()
-        print('Please enter a valid number.')
+        try:
+            bonusGrade = int(input('Set your equipment bonus stats (0-10)\n\n>'))
+            if bonusGrade > 10:
+                main.title()
+                print('Please enter a valid value.')
+                time.sleep(3)
+                return equipConfig(equipType, equipCategory, equipVersion, profile)
+        except ValueError:
+            main.title()
+            print('Please enter a valid number.')
+            time.sleep(3)
+            return equipConfig(equipType, equipCategory, equipVersion, profile)
+        main.title()
+        print('Loading, please wait...')
+        d.decodeProfileSave()
+        with open('Profile_unpacked.json', 'r+') as f:
+            data = json.load(f)
+            strongBox2 = json.loads(strongbox2)
+            f.seek( 0 )
+            f.truncate()
+            strongBox2['ID'] = IDs['equipmentIDs'][f'{equipType}'][f'{equipCategory}'][int(equip)-1]['ID']
+            strongBox2['equipVersion'] = equipVersion
+            strongBox2['Grade'] = int(grade)
+            strongBox2['AugmentSlots'] = int(augmentSlots)
+            strongBox2['BonusStatsLevel'] = int(bonusGrade)
+            strongBox2['EquippedSlot'] = IDs['equipmentIDs'][f'{equipType}']['Extra'][0]['Type']
+            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(1))
+            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(strongBox2)
+            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(8))
+            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(0))
+            json.dump( data, f )
+        c.deleteFile()
+        if os.path.exists('Profile.save'):
+            os.remove('Profile.save')
+        d.encodeProfileSave()
+        os.remove('Profile_unpacked.json')
+        main.title()
+        print('Profile.save has been successfuly updated.')
         time.sleep(3)
-        return (strongbox2, equipID, equipVersion, profile, tp)
+        return main.mainMenu()
+
+def equipCat(equipType, profile):
     main.title()
-    print('Loading, please wait...')
-    d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
-        box = json.loads(strongbox2)
+    c.createFile()
+    with open('IDs.json', 'r') as f:
         data = json.load(f)
-        f.seek( 0 )
-        f.truncate()
-        box['ID'] = int(equipID)
-        box['EquipVersion'] = int(equipVersion)
-        box['Grade'] = int(grade)
-        box['EquippedSlot'] = int(tp)
-        box['AugmentSlots'] = int(augmentSlots)
-        box['BonusStatsLevel'] = int(bonusGrade)
-        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(1))
-        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(box)
-        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(8))
-        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(0))
-        json.dump(data, f, indent=4, sort_keys=False)
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
+        try:
+            data['equipmentIDs'][f'{equipType}']['Factions']
+        except:
+            main.title()
+            equipCategory = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
+            if equipCategory == '1':
+                equipCategory = 'Normal'
+                equipVersion = 0
+                equipConfig(equipType, equipCategory, equipVersion, profile)
+            elif equipCategory == '2':
+                equipCategory = 'Red'
+                equipVersion = 1
+                equipConfig(equipType, equipCategory, equipVersion, profile)
+            elif equipCategory == '3':
+                equipCategory = 'Black'
+                equipVersion = 2
+                equipConfig(equipType, equipCategory, equipVersion, profile)
+            else:
+                main.title()
+                print('Invalid option.')
+                time.sleep(3)
+                return equipCat(equipType)
     main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    equipCategory = input('[1] Normal\n[2] Red\n[3] Black\n[4] Factions\n\n>')
+    if equipCategory == '1':
+        equipCategory = 'Normal'
+        equipVersion = 0
+        equipConfig(equipType, equipCategory, equipVersion, profile)
+    elif equipCategory == '2':
+        equipCategory = 'Red'
+        equipVersion = 1
+        equipConfig(equipType, equipCategory, equipVersion, profile)
+    elif equipCategory == '3':
+        equipCategory = 'Black'
+        equipVersion = 2
+        equipConfig(equipType, equipCategory, equipVersion, profile)
+    elif equipCategory == '4':
+        equipCategory = 'Factions'
+        equipVersion = 1
+        equipConfig(equipType, equipCategory, equipVersion, profile)
+    else:
+        main.title()
+        print('Invalid option.')
+        time.sleep(3)
+        return equipCat()
 
 def equipment():
-    strongbox2 = '''
-    {
-        "ID": 0,
-        "EquipVersion": 0,
-        "Grade": 0,
-        "EquippedSlot": 0,
-        "AugmentSlots": 1,
-        "InventoryIndex": 4,
-        "Seen": false,
-        "BonusStatsLevel": 0,
-        "Equipped": false,
-        "ContainsKey": false,
-        "ContainsAugmentCore": false,
-        "BlackStrongboxSeed": 0,
-        "UseDefaultOpenLogic": true
-    }'''
     main.title()
     profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
     if profile == '1':
@@ -1714,774 +864,27 @@ def equipment():
         time.sleep(3)
         return equipment()
     main.title()
-    equiptype = input('[1] Helmet\n[2] Vest\n[3] Gloves\n[4] Pants\n[5] Boots\n\n>')
-    if equiptype == '1':
-        tp = 1
-        main.title()
-        equipmentVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
-        if equipmentVersion == '1':
-            main.title()
-            equipVersion = 0
-            equip = input(helmetNM)
-            if equip == '1':
-                equipID = 125
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '2':
-                equipID = 110
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '3':
-                equipID = 184
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '4':
-                equipID = 165
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '5':
-                equipID = 232
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '6':
-                equipID = 107
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '7':
-                equipID = 106
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '8':
-                equipID = 173
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '9':
-                equipID = 194
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '10':
-                equipID = 99
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '11':
-                equipID = 206
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '12':
-                equipID = 227
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '13':
-                equipID = 119
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '14':
-                equipID = 237
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '15':
-                equipID = 217
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '16':
-                equipID = 222
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return equipment()
-        elif equipmentVersion == '2':
-            main.title()
-            equipVersion = 1
-            equip = input(helmetRD)
-            if equip == '1':
-                equipID = 155
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '2':
-                equipID = 162
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '3':
-                equipID = 185
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '4':
-                equipID = 158
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '5':
-                equipID = 143
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '6':
-                equipID = 136
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '7':
-                equipID = 175
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '8':
-                equipID = 195
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '9':
-                equipID = 139
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '10':
-                equipID = 207
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '11':
-                equipID = 130
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return equipment()
-        elif equipmentVersion == '3':
-            main.title()
-            equipVersion = 2
-            equip = input(helmetBL)
-            if equip == '1':
-                equipID = 10155
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '2':
-                equipID = 10162
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '3':
-                equipID = 10185
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '4':
-                equipID = 10158
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '5':
-                equipID = 10143
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '6':
-                equipID = 10136
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '7':
-                equipID = 10175
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '8':
-                equipID = 10195
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '9':
-                equipID = 10139
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '10':
-                equipID = 10207
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '11':
-                equipID = 10130
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return equipment()
-        else:
-            main.title()
-            print('Invalid Option.')
-            time.sleep(3)
-            return equipment()
-    elif equiptype == '2':
-        tp = 2
-        main.title()
-        equipmentVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
-        if equipmentVersion == '1':
-            main.title()
-            equipVersion = 0
-            equip = input(vestNM)
-            if equip == '1':
-                equipID = 101
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '2':
-                equipID = 104
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '3':
-                equipID = 186
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '4':
-                equipID = 168
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '5':
-                equipID = 233
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '6':
-                equipID = 100
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '7':
-                equipID = 118
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '8':
-                equipID = 105
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '9':
-                equipID = 112
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '10':
-                equipID = 196
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '11':
-                equipID = 176
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '12':
-                equipID = 208
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '13':
-                equipID = 115
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '14':
-                equipID = 123
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '15':
-                equipID = 228
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '16':
-                equipID = 238
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '17':
-                equipID = 223
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '18':
-                equipID = 218
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return equipment()
-        elif equipmentVersion == '2':
-            main.title()
-            equipVersion = 1
-            equip = input(vestRD)
-            if equip == '1':
-                equipID = 142
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '2':
-                equipID = 148
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '3':
-                equipID = 187
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '4':
-                equipID = 156
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '5':
-                equipID = 154
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '6':
-                equipID = 141
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '7':
-                equipID = 137
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '8':
-                equipID = 164
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '9':
-                equipID = 197
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '10':
-                equipID = 177
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '11':
-                equipID = 209
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '12':
-                equipID = 161
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '13':
-                equipID = 157
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return equipment()
-        elif equipmentVersion == '3':
-            main.title()
-            equipVersion = 2
-            equip = input(vestBL)
-            if equip == '1':
-                equipID = 142
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '2':
-                equipID = 10148
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '3':
-                equipID = 10187
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '4':
-                equipID = 10156
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '5':
-                equipID = 10154
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '6':
-                equipID = 10141
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '7':
-                equipID = 10137
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '8':
-                equipID = 10164
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '9':
-                equipID = 10197
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '10':
-                equipID = 10177
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '11':
-                equipID = 10209
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '12':
-                equipID = 10161
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '13':
-                equipID = 10157
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return equipment()
-        else:
-            main.title()
-            print('Invalid Option.')
-            time.sleep(3)
-            return equipment()
-    elif equiptype == '3':
-        tp = 3
-        main.title()
-        equipmentVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
-        if equipmentVersion == '1':
-            main.title()
-            equipVersion = 0
-            equip = input(glovesNM)
-            if equip == '1':
-                equipID = 98
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '2':
-                equipID = 102
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '3':
-                equipID = 190
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '4':
-                equipID = 151
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '5':
-                equipID = 235
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '6':
-                equipID = 128
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '7':
-                equipID = 117
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '8':
-                equipID = 212
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '9':
-                equipID = 180
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '10':
-                equipID = 200
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '11':
-                equipID = 113
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '12':
-                equipID = 230
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '13':
-                equipID = 111
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '14':
-                equipID = 240
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '15':
-                equipID = 225
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '16':
-                equipID = 220
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return equipment()
-        elif equipmentVersion == '2':
-            main.title()
-            equipVersion = 1
-            equip = input(glovesRD)
-            if equip == '1':
-                equipID = 146
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '2':
-                equipID = 133
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '3':
-                equipID = 191
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '4':
-                equipID = 145
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '5':
-                equipID = 132
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '6':
-                equipID = 181
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '7':
-                equipID = 159
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '8':
-                equipID = 213
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '9':
-                equipID = 201
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '10':
-                equipID = 134
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '11':
-                equipID = 135
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return equipment()
-        elif equipmentVersion == '3':
-            main.title()
-            equipVersion = 2
-            equip = input(glovesBL)
-            if equip == '1':
-                equipID = 10146
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '2':
-                equipID = 10133
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '3':
-                equipID = 10191
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '4':
-                equipID = 10145
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '5':
-                equipID = 10132
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '6':
-                equipID = 10181
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '7':
-                equipID = 10159
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '8':
-                equipID = 10213
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '9':
-                equipID = 10201
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '10':
-                equipID = 10134
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '11':
-                equipID = 10135
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return equipment()
-        else:
-            main.title()
-            print('Invalid Option.')
-            time.sleep(3)
-            return equipment()
-    elif equiptype == '4':
-        tp = 5
-        main.title()
-        equipmentVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
-        if equipmentVersion == '1':
-            main.title()
-            equipVersion = 0
-            equip = input(pantsNM)
-            if equip == '1':
-                equipID = 108
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '2':
-                equipID = 129
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '3':
-                equipID = 188
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '4':
-                equipID = 169
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '5':
-                equipID = 234
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '6':
-                equipID = 126
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '7':
-                equipID = 120
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '8':
-                equipID = 178
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '9':
-                equipID = 198
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '10':
-                equipID = 210
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '11':
-                equipID = 117
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '12':
-                equipID = 121
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '13':
-                equipID = 229
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '14':
-                equipID = 239
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '15':
-                equipID = 224
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '16':
-                equipID = 219
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return equipment()
-        elif equipmentVersion == '2':
-            main.title()
-            equipVersion = 1
-            equip = input(pantsRD)
-            if equip == '1':
-                equipID = 147
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '2':
-                equipID = 166
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '3':
-                equipID = 153
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '4':
-                equipID = 152
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '5':
-                equipID = 189
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '6':
-                equipID = 138
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '7':
-                equipID = 179
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '8':
-                equipID = 211
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '9':
-                equipID = 199
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '10':
-                equipID = 163
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '11':
-                equipID = 171
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return equipment()
-        elif equipmentVersion == '3':
-            main.title()
-            equipVersion = 2
-            equip = input(pantsBL)
-            if equip == '1':
-                equipID = 10147
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '2':
-                equipID = 10166
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '3':
-                equipID = 10153
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '4':
-                equipID = 10152
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '5':
-                equipID = 10189
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '6':
-                equipID = 10138
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '7':
-                equipID = 10179
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '8':
-                equipID = 10211
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '9':
-                equipID = 10199
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '10':
-                equipID = 10163
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '11':
-                equipID = 10171
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return equipment()
-        else:
-            main.title()
-            print('Invalid Option.')
-            time.sleep(3)
-            return equipment()
-    elif equiptype == '5':
-        tp = 4
-        main.title()
-        equipmentVersion = input('[1] Normal\n[2] Red\n[3] Black\n\n>')
-        if equipmentVersion == '1':
-            main.title()
-            equipVersion = 0
-            equip = input(bootsNM)
-            if equip == '1':
-                equipID = 114
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '2':
-                equipID = 109
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '3':
-                equipID = 116
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '4':
-                equipID = 144
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '5':
-                equipID = 236
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '6':
-                equipID = 192
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '7':
-                equipID = 122
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '8':
-                equipID = 182
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '9':
-                equipID = 202
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '10':
-                equipID = 214
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '11':
-                equipID = 103
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '12':
-                equipID = 124
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '13':
-                equipID = 231
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '14':
-                equipID = 221
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '15':
-                equipID = 241
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '16':
-                equipID = 226
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return equipment()
-        elif equipmentVersion == '2':
-            main.title()
-            equipVersion = 1
-            equip = input(bootsRD)
-            if equip == '1':
-                equipID = 131
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '2':
-                equipID = 160
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '3':
-                equipID = 149
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '4':
-                equipID = 152
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '5':
-                equipID = 193
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '6':
-                equipID = 140
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '7':
-                equipID = 205
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '8':
-                equipID = 183
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '9':
-                equipID = 215
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '10':
-                equipID = 170
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '11':
-                equipID = 167
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return equipment()
-        elif equipmentVersion == '3':
-            main.title()
-            equipVersion = 2
-            equip = input(bootsBL)
-            if equip == '1':
-                equipID = 10131
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '2':
-                equipID = 10160
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '3':
-                equipID = 10149
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '4':
-                equipID = 10152
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '5':
-                equipID = 10193
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '6':
-                equipID = 10140
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '7':
-                equipID = 10205
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '8':
-                equipID = 10183
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '9':
-                equipID = 10215
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '10':
-                equipID = 10170
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            elif equip == '11':
-                equipID = 10167
-                equipCfg(strongbox2, equipID, equipVersion, profile, tp)
-            else:
-                main.title()
-                print('Invalid Option.')
-                time.sleep(3)
-                return equipment()
-        else:
-            main.title()
-            print('Invalid Option.')
-            time.sleep(3)
-            return equipment()
+    equipType = input('[1] Helmet\n[2] Vest\n[3] Gloves\n[4] Pants\n[5] Boots\n\n>')
+    if equipType == '1':
+        equipType = 'Helmet'
+        equipCat(equipType, profile)
+    elif equipType == '2':
+        equipType = 'Vest'
+        equipCat(equipType, profile)
+    elif equipType == '3':
+        equipType = 'Gloves'
+        equipCat(equipType, profile)
+    elif equipType == '4':
+        equipType = 'Pants'
+        equipCat(equipType, profile)
+    elif equipType == '5':
+        equipType = 'Boots'
+        equipCat(equipType, profile)
+    else:
+        main.menu()
+        print('Invalid option.')
+        time.sleep(3)
+        return equipment()
 
 def setSupport():
     turretjson = '''
@@ -3168,3 +1571,76 @@ def setLVL():
     print('Profile.save has been successfuly updated.')
     time.sleep(3)
     return main.mainMenu()
+
+def setMulti(key, profile):
+    main.title()
+    try:
+        ammount = int(input('Set your stat value\n\n>'))
+    except ValueError:
+        main.title()
+        print('Invalid value.')
+        time.sleep(3)
+        return setMulti(key)
+    main.title()
+    print('Loading, please wait...')
+    d.decodeProfileSave()
+    with open('Profile_unpacked.json', 'r+') as f:
+        data = json.load(f)
+        f.seek( 0 )
+        f.truncate()
+        for i in data['Inventory'][f'{profile}']['StatsData']:
+            if i['key'] == key:
+                indx = data['Inventory'][f'{profile}']['StatsData'].index(i)
+        try:
+            data['Inventory'][f'{profile}']['StatsData'][indx]['val'] = ammount
+        except:
+            data['Inventory'][f'{profile}']['StatsData'].append({'key': key, 'val': ammount})
+        json.dump(data, f, indent=4)
+    if os.path.exists('Profile.save'):
+        os.remove('Profile.save')
+    d.encodeProfileSave()
+    os.remove('Profile_unpacked.json')
+    main.title()
+    print('Profile.save has been successfuly updated.')
+    time.sleep(3)
+    return main.mainMenu()
+
+def setMultiStats():
+    main.title()
+    profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
+    if profile == '1':
+        profile = 'Profile0'
+    elif profile == '2':
+        profile = 'Profile1'
+    elif profile == '3':
+        profile = 'Profile2'
+    elif profile == '4':
+        profile = 'rofile3'
+    elif profile == '5':
+        profile = 'Profile4'
+    elif profile == '6':
+        profile = 'Profile5'
+    else:
+        main.title()
+        print('This profile does not exist.')
+        time.sleep(3)
+        return setMultiStats()
+    main.title()
+    stat = input('[1] Multiplayer Kills\n[2] Multiplayer Deaths\n[3] Multiplayer Wins\n[4] Multiplayer Losses\n\n>')
+    if stat == '1':
+        key = 'multi_kills'
+        setMulti(key, profile)
+    elif stat == '2':
+        key = 'multi_deaths'
+        setMulti(key, profile)
+    elif stat == '3':
+        key = 'multi_games_won'
+        setMulti(key, profile)
+    elif stat == '4':
+        key = 'multi_games_lost'
+        setMulti(key, profile)
+    else:
+        main.title()
+        print('This option does not exist.')
+        time.sleep(3)
+        return setMultiStats()

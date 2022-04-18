@@ -41,19 +41,14 @@ def o1():
 def o2():
     title()
     o2options = input('''
-[1] Set revive tokens
-[2] Set black keys
-[3] Set black strongboxes
-[4] Set augment cores
-[5] Set sas cash
-[6] Remove ads
-[7] Set nightmare premium tickets
+[1] Set revive tokens               [9] Set support items
+[2] Set black keys                  [10] Set mastery to max level
+[3] Set black strongboxes           [11] Set free skill reset
+[4] Set augment cores               [12] Change profile username
+[5] Set sas cash                    [13] Set player level
+[6] Remove ads                      [14] Set multiplayer stats
+[7] Set nightmare premium tickets   [15] Add items (Weapons and equipment)
 [8] Add 2 pay to unlock profiles
-[9] Set support items
-[10] Set mastery to max level
-[11] Set free skill reset
-[12] Change profile username
-[13] Set player level
 \n>''')
     if o2options == '1':
         opt.reviveTokens()
@@ -81,6 +76,10 @@ def o2():
         opt.changeProfileName()
     elif o2options == '13':
         opt.setLVL()
+    elif o2options == '14':
+        opt.setMultiStats()
+    elif o2options == '15':
+        o5()
     else:
         title()
         print('Invalid option.')
@@ -113,9 +112,8 @@ def mainMenu():
 [2] Profile Options
 [3] Set premium guns
 [4] Unlock all collections
-[5] Add Weapon/Armor to the inventory
-[6] Decode/Encode Profile.save to a json file
-[7] Exit
+[5] Decode/Encode Profile.save to a json file
+[6] Exit
 \n>''')
     if mainMenuOptions == '1':
         o1()
@@ -126,10 +124,8 @@ def mainMenu():
     elif mainMenuOptions == '4':
         o4()
     elif mainMenuOptions == '5':
-        o5()
-    elif mainMenuOptions == '6':
         opt.decodeEnc()
-    elif mainMenuOptions == '7':
+    elif mainMenuOptions == '6':
         title()
         print('Exiting...')
         time.sleep(1)
