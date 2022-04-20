@@ -9,7 +9,7 @@ NUMS = '123456789'
 # TURRETS
 
 TURRETSNM = [54, 56, 58, 62, 63, 60, 55]
-TURRETSRD = [133, 134, 135, 136, 137, 138]
+TURRETSRD = [133, 134, 135, 136, 137, 138, 139]
 
 def factionGuild():
     main.title()
@@ -49,7 +49,7 @@ def factionCredits():
         planetXCurrency = int(input('Set your planet Xi credits\n\n>'))
         main.title()
         planetOCurrency = int(input('Set your planet Omicron credits\n\n>'))
-    except ValueError as err:
+    except ValueError:
         main.title()
         print("Please, enter a valid number.")
         time.sleep(3)
@@ -81,7 +81,7 @@ def reviveTokens():
     main.title()
     try:
         tokens = int(input('Set your revive tokens ammount\n\n>'))
-    except ValueError as err:
+    except ValueError:
         main.title()
         print("Please, enter a valid number.")
         time.sleep(3)
@@ -125,7 +125,7 @@ def blackKeys():
     main.title()
     try:
         blackkeys = int(input('Set your black keys ammount\n\n>'))
-    except ValueError as err:
+    except ValueError:
         main.title()
         print("Please, enter a valid number.")
         time.sleep(3)
@@ -172,7 +172,7 @@ def blackBox():
     try:
         print('Large values will slow down the function.\n\n')
         blackbox = int(input('Set your black strongboxes ammount\n\n>'))
-    except ValueError as err:
+    except ValueError:
         main.title()
         print("Please, enter a valid number.")
         time.sleep(3)
@@ -225,7 +225,7 @@ def augCores():
     main.title()
     try:
         augcores = int(input('Set your augment cores ammount\n\n>'))
-    except ValueError as err:
+    except ValueError:
         main.title()
         print("Please, enter a valid number.")
         time.sleep(3)
@@ -271,7 +271,7 @@ def sasCash():
     main.title()
     try:
         money = int(input('Set your SAS cash ammount\n\n>'))
-    except ValueError as err:
+    except ValueError:
         main.title()
         print("Please, enter a valid number.")
         time.sleep(3)
@@ -328,7 +328,7 @@ def premiumTickets():
     main.title()
     try:
         tickets = int(input('Set your premium tickets ammount\n\n>'))
-    except ValueError as err:
+    except ValueError:
         main.title()
         print("Please, enter a valid number.")
         time.sleep(3)
@@ -508,93 +508,94 @@ def weaponConfig(weaponType, weaponCategory, weaponVersion, profile):
     main.title()
     with open('IDs.json', 'r') as idf:
         IDs = json.load(idf)
-        for i in range(len(IDs['weaponIDs'][f'{weaponType}'][f'{weaponCategory}'])):
-            prnWeap = f'[{i+1}] ' + f'{IDs["weaponIDs"][f"{weaponType}"][f"{weaponCategory}"][i]["Name"]}'
-            print(prnWeap)
-        weapon = input('\n>')
-        strongbox = '''
-        {
-            "ID": 0,
-            "EquipVersion": 0,
-            "Grade": 0,
-            "EquippedSlot": -1,
-            "AugmentSlots": 0,
-            "InventoryIndex": 1,
-            "Seen": false,
-            "BonusStatsLevel": 0,
-            "Equipped": false,
-            "ContainsKey": false,
-            "ContainsAugmentCore": false,
-            "BlackStrongboxSeed": 0,
-            "UseDefaultOpenLogic": true
-        }'''
-        main.title()
-        try:
-            grade = int(input('Set your weapon grade (0-12)\n\n>'))
-            if grade > 12:
-                main.title()
-                print('Please enter a valid value.')
-                time.sleep(3)
-                return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
-        except ValueError:
+    for i in range(len(IDs['weaponIDs'][f'{weaponType}'][f'{weaponCategory}'])):
+        prnWeap = f'[{i+1}] ' + f'{IDs["weaponIDs"][f"{weaponType}"][f"{weaponCategory}"][i]["Name"]}'
+        print(prnWeap)
+    weapon = input('\n>')
+    strongbox = '''
+    {
+        "ID": 0,
+        "EquipVersion": 0,
+        "Grade": 0,
+        "EquippedSlot": -1,
+        "AugmentSlots": 0,
+        "InventoryIndex": 0,
+        "Seen": false,
+        "BonusStatsLevel": 0,
+        "Equipped": false,
+        "ContainsKey": false,
+        "ContainsAugmentCore": false,
+        "BlackStrongboxSeed": 0,
+        "UseDefaultOpenLogic": true
+    }'''
+    main.title()
+    try:
+        grade = int(input('Set your weapon grade (0-12)\n\n>'))
+        if grade > 12:
             main.title()
-            print('Please enter a valid number.')
+            print('Please enter a valid value.')
             time.sleep(3)
             return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+    except ValueError:
         main.title()
-        try:
-            augmentSlots = int(input('Set your weapon augment slots (0-4)\n\n>'))
-            if augmentSlots > 4:
-                main.title()
-                print('Please enter a valid value.')
-                time.sleep(3)
-                return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
-        except ValueError:
-            main.title()
-            print('Please enter a valid number.')
-            time.sleep(3)
-            return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
-        main.title()
-        try:
-            bonusGrade = int(input('Set your weapon bonus stats (0-10)\n\n>'))
-            if bonusGrade > 10:
-                main.title()
-                print('Please enter a valid value.')
-                time.sleep(3)
-                return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
-        except ValueError:
-            main.title()
-            print('Please enter a valid number.')
-            time.sleep(3)
-            return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
-        main.title()
-        print('Loading, please wait...')
-        d.decodeProfileSave()
-        with open('Profile_unpacked.json', 'r+') as f:
-            data = json.load(f)
-            strongBox = json.loads(strongbox)
-            f.seek( 0 )
-            f.truncate()
-            strongBox['ID'] = IDs['weaponIDs'][f'{weaponType}'][f'{weaponCategory}'][int(weapon)-1]['ID']
-            strongBox['equipVersion'] = weaponVersion
-            strongBox['Grade'] = int(grade)
-            strongBox['AugmentSlots'] = int(augmentSlots)
-            strongBox['BonusStatsLevel'] = int(bonusGrade)
-            strongBox['EquippedSlot'] = IDs['weaponIDs'][f'{weaponType}']['Extra'][0]['Type']
-            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(1))
-            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(strongBox)
-            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(8))
-            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(0))
-            json.dump( data, f )
-        c.deleteFile()
-        if os.path.exists('Profile.save'):
-            os.remove('Profile.save')
-        d.encodeProfileSave()
-        os.remove('Profile_unpacked.json')
-        main.title()
-        print('Profile.save has been successfuly updated.')
+        print('Please enter a valid number.')
         time.sleep(3)
-        return main.mainMenu()
+        return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+    main.title()
+    try:
+        augmentSlots = int(input('Set your weapon augment slots (0-4)\n\n>'))
+        if augmentSlots > 4:
+            main.title()
+            print('Please enter a valid value.')
+            time.sleep(3)
+            return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+    except ValueError:
+        main.title()
+        print('Please enter a valid number.')
+        time.sleep(3)
+        return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+    main.title()
+    try:
+        bonusGrade = int(input('Set your weapon bonus stats (0-10)\n\n>'))
+        if bonusGrade > 10:
+            main.title()
+            print('Please enter a valid value.')
+            time.sleep(3)
+            return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+    except ValueError:
+        main.title()
+        print('Please enter a valid number.')
+        time.sleep(3)
+        return weaponConfig(weaponType, weaponCategory, weaponVersion, profile)
+    main.title()
+    print('Loading, please wait...')
+    d.decodeProfileSave()
+    with open('Profile_unpacked.json', 'r+') as f:
+        data = json.load(f)
+        strongBox = json.loads(strongbox)
+        f.seek( 0 )
+        f.truncate()
+        strongBox['ID'] = IDs['weaponIDs'][f'{weaponType}'][f'{weaponCategory}'][int(weapon)-1]['ID']
+        strongBox['EquipVersion'] = weaponVersion
+        strongBox['Grade'] = int(grade)
+        strongBox['AugmentSlots'] = int(augmentSlots)
+        strongBox['BonusStatsLevel'] = int(bonusGrade)
+        strongBox['InventoryIndex'] = IDs['weaponIDs'][f'{weaponType}']['Extra'][0]['Type']
+        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(0))
+        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(strongBox)
+        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(8))
+        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(0))
+        json.dump( data, f )
+    if os.path.exists('Profile.save'):
+        os.remove('Profile.save')
+    if os.path.exists('IDs.json'):
+        os.remove('IDs.json')
+    d.encodeProfileSave()
+    os.remove('Profile_unpacked.json')
+    main.title()
+    print('Profile.save has been successfuly updated.')
+    time.sleep(3)
+    return main.mainMenu()
 
 def weaponCat(weaponType, profile):
     main.title()
@@ -704,93 +705,94 @@ def equipConfig(equipType, equipCategory, equipVersion, profile):
     main.title()
     with open('IDs.json', 'r') as idf:
         IDs = json.load(idf)
-        for i in range(len(IDs['equipmentIDs'][f'{equipType}'][f'{equipCategory}'])):
-            prnEquip = f'[{i+1}] ' + f'{IDs["equipmentIDs"][f"{equipType}"][f"{equipCategory}"][i]["Name"]}'
-            print(prnEquip)
-        equip = input('\n>')
-        strongbox2 = '''
-        {
-            "ID": 0,
-            "EquipVersion": 0,
-            "Grade": 0,
-            "EquippedSlot": 0,
-            "AugmentSlots": 1,
-            "InventoryIndex": 4,
-            "Seen": false,
-            "BonusStatsLevel": 0,
-            "Equipped": false,
-            "ContainsKey": false,
-            "ContainsAugmentCore": false,
-            "BlackStrongboxSeed": 0,
-            "UseDefaultOpenLogic": true
-        }'''
-        main.title()
-        try:
-            grade = int(input('Set your equipment grade (0-12)\n\n>'))
-            if grade > 12:
-                main.title()
-                print('Please enter a valid value.')
-                time.sleep(3)
-                return equipConfig(equipType, equipCategory, equipVersion, profile)
-        except ValueError:
+    for i in range(len(IDs['equipmentIDs'][f'{equipType}'][f'{equipCategory}'])):
+        prnEquip = f'[{i+1}] ' + f'{IDs["equipmentIDs"][f"{equipType}"][f"{equipCategory}"][i]["Name"]}'
+        print(prnEquip)
+    equip = input('\n>')
+    strongbox2 = '''
+    {
+        "ID": 0,
+        "EquipVersion": 0,
+        "Grade": 0,
+        "EquippedSlot": -1,
+        "AugmentSlots": 1,
+        "InventoryIndex": 0,
+        "Seen": false,
+        "BonusStatsLevel": 0,
+        "Equipped": false,
+        "ContainsKey": false,
+        "ContainsAugmentCore": false,
+        "BlackStrongboxSeed": 0,
+        "UseDefaultOpenLogic": true
+    }'''
+    main.title()
+    try:
+        grade = int(input('Set your equipment grade (0-12)\n\n>'))
+        if grade > 12:
             main.title()
-            print('Please enter a valid number.')
+            print('Please enter a valid value.')
             time.sleep(3)
             return equipConfig(equipType, equipCategory, equipVersion, profile)
+    except ValueError:
         main.title()
-        try:
-            augmentSlots = int(input('Set your equipment augment slots (0-3)\n\n>'))
-            if augmentSlots > 3:
-                main.title()
-                print('Please enter a valid value.')
-                time.sleep(3)
-                return equipConfig(equipType, equipCategory, equipVersion, profile)
-        except ValueError:
-            main.title()
-            print('Please enter a valid number.')
-            time.sleep(3)
-            return equipConfig(equipType, equipCategory, equipVersion, profile)
-        main.title()
-        try:
-            bonusGrade = int(input('Set your equipment bonus stats (0-10)\n\n>'))
-            if bonusGrade > 10:
-                main.title()
-                print('Please enter a valid value.')
-                time.sleep(3)
-                return equipConfig(equipType, equipCategory, equipVersion, profile)
-        except ValueError:
-            main.title()
-            print('Please enter a valid number.')
-            time.sleep(3)
-            return equipConfig(equipType, equipCategory, equipVersion, profile)
-        main.title()
-        print('Loading, please wait...')
-        d.decodeProfileSave()
-        with open('Profile_unpacked.json', 'r+') as f:
-            data = json.load(f)
-            strongBox2 = json.loads(strongbox2)
-            f.seek( 0 )
-            f.truncate()
-            strongBox2['ID'] = IDs['equipmentIDs'][f'{equipType}'][f'{equipCategory}'][int(equip)-1]['ID']
-            strongBox2['equipVersion'] = equipVersion
-            strongBox2['Grade'] = int(grade)
-            strongBox2['AugmentSlots'] = int(augmentSlots)
-            strongBox2['BonusStatsLevel'] = int(bonusGrade)
-            strongBox2['EquippedSlot'] = IDs['equipmentIDs'][f'{equipType}']['Extra'][0]['Type']
-            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(1))
-            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(strongBox2)
-            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(8))
-            data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(0))
-            json.dump( data, f )
-        c.deleteFile()
-        if os.path.exists('Profile.save'):
-            os.remove('Profile.save')
-        d.encodeProfileSave()
-        os.remove('Profile_unpacked.json')
-        main.title()
-        print('Profile.save has been successfuly updated.')
+        print('Please enter a valid number.')
         time.sleep(3)
-        return main.mainMenu()
+        return equipConfig(equipType, equipCategory, equipVersion, profile)
+    main.title()
+    try:
+        augmentSlots = int(input('Set your equipment augment slots (0-3)\n\n>'))
+        if augmentSlots > 3:
+            main.title()
+            print('Please enter a valid value.')
+            time.sleep(3)
+            return equipConfig(equipType, equipCategory, equipVersion, profile)
+    except ValueError:
+        main.title()
+        print('Please enter a valid number.')
+        time.sleep(3)
+        return equipConfig(equipType, equipCategory, equipVersion, profile)
+    main.title()
+    try:
+        bonusGrade = int(input('Set your equipment bonus stats (0-10)\n\n>'))
+        if bonusGrade > 10:
+            main.title()
+            print('Please enter a valid value.')
+            time.sleep(3)
+            return equipConfig(equipType, equipCategory, equipVersion, profile)
+    except ValueError:
+        main.title()
+        print('Please enter a valid number.')
+        time.sleep(3)
+        return equipConfig(equipType, equipCategory, equipVersion, profile)
+    main.title()
+    print('Loading, please wait...')
+    d.decodeProfileSave()
+    with open('Profile_unpacked.json', 'r+') as f:
+        data = json.load(f)
+        strongBox2 = json.loads(strongbox2)
+        f.seek( 0 )
+        f.truncate()
+        strongBox2['ID'] = IDs['equipmentIDs'][f'{equipType}'][f'{equipCategory}'][int(equip)-1]['ID']
+        strongBox2['EquipVersion'] = equipVersion
+        strongBox2['Grade'] = int(grade)
+        strongBox2['AugmentSlots'] = int(augmentSlots)
+        strongBox2['BonusStatsLevel'] = int(bonusGrade)
+        strongBox2['InventoryIndex'] = IDs['equipmentIDs'][f'{equipType}']['Extra'][0]['Type']
+        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(1))
+        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(strongBox2)
+        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(8))
+        data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(0))
+        json.dump( data, f )
+    if os.path.exists('Profile.save'):
+        os.remove('Profile.save')
+    if os.path.exists('IDs.json'):
+        os.remove('IDs.json')
+    d.encodeProfileSave()
+    os.remove('Profile_unpacked.json')
+    main.title()
+    print('Profile.save has been successfuly updated.')
+    time.sleep(3)
+    return main.mainMenu()
 
 def equipCat(equipType, profile):
     main.title()
@@ -881,18 +883,12 @@ def equipment():
         equipType = 'Boots'
         equipCat(equipType, profile)
     else:
-        main.menu()
+        main.title()
         print('Invalid option.')
         time.sleep(3)
         return equipment()
 
 def setSupport():
-    turretjson = '''
-    {
-        "TurretId": 0,
-        "TurretCount": 0
-    }'''
-    
     main.title()
     profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
     if profile == '1':
@@ -913,388 +909,122 @@ def setSupport():
         time.sleep(3)
         return setSupport()
     main.title()
-    supply = input('[1] Frag grenades\n[2] Cryo grenades\n[3] HVM turrets\n[4] Cryo turrets\n[5] Heavyshot\n[6] Flugkorper\n[7] Flame turret\n[8] CM Supernova\n[9] CM Zeus\n\n>')
-    if supply == '1':
+    sType = input('[1] Grenades\n[2] Turrets\n\n>')
+    if sType == '1':
         main.title()
-        try:
-            a = int(input('Set your supply ammount\n\n>'))
-        except ValueError as err:
+        grenadeType = input('[1] Frag grenades\n[2] Cryo grenades\n\n>')
+        if grenadeType == '1':
             main.title()
-            print('Invalid value')
+            try:
+                a = int(input('Set your supply ammount\n\n>'))
+            except ValueError:
+                main.title()
+                print('Invalid value')
+                time.sleep(3)
+                return setSupport()
+            main.title()
+            print('Loading, please wait...')
+            d.decodeProfileSave()
+            with open('Profile_unpacked.json', 'r+') as f:
+                data = json.load(f)
+                f.seek( 0 )
+                f.truncate()
+                data['Inventory'][f'{profile}']['Ammo']['grenades_frag'] = int(a)
+                json.dump( data, f )
+            if os.path.exists('Profile.save'):
+                os.remove('Profile.save')
+            d.encodeProfileSave()
+            os.remove('Profile_unpacked.json')
+            main.title()
+            print('Profile.save has been successfuly updated.')
+            time.sleep(3)
+            return main.mainMenu()
+        elif grenadeType == '2':
+            main.title()
+            try:
+                a = int(input('Set your supply ammount\n\n>'))
+            except ValueError:
+                main.title()
+                print('Invalid value')
+                time.sleep(3)
+                return setSupport()
+            main.title()
+            print('Loading, please wait...')
+            d.decodeProfileSave()
+            with open('Profile_unpacked.json', 'r+') as f:
+                data = json.load(f)
+                f.seek( 0 )
+                f.truncate()
+                data['Inventory'][f'{profile}']['Ammo']['grenades_cryo'] = int(a)
+                json.dump( data, f )
+            if os.path.exists('Profile.save'):
+                os.remove('Profile.save')
+            d.encodeProfileSave()
+            os.remove('Profile_unpacked.json')
+            main.title()
+            print('Profile.save has been successfuly updated.')
+            time.sleep(3)
+            return main.mainMenu()
+        else:
+            main.title()
+            print('Invalid Option.')
             time.sleep(3)
             return setSupport()
+    elif sType == '2':
         main.title()
-        print('Loading, please wait...')
+        c.createFile()
         d.decodeProfileSave()
+        with open('IDs.json', 'r') as idf:
+            IDs = json.load(idf)
         with open('Profile_unpacked.json', 'r+') as f:
             data = json.load(f)
-            f.seek( 0 )
+            f.seek(0)
             f.truncate()
-            data['Inventory'][f'{profile}']['Ammo']['grenades_frag'] = int(a)
-            json.dump( data, f )
+            try:
+                if data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] < 30:
+                    for i in range(len(IDs['TurretsIDs']['Normal'])):
+                        print(f'[{i+1}] ' + IDs['TurretsIDs']['Normal'][i]['Name'])
+                    tID = int(input('\n>')) - 1
+                    turretID = IDs['TurretsIDs']['Normal'][tID]['ID']
+                elif data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] > 30:
+                    for i in range(len(IDs['TurretsIDs']['Red'])):
+                        print(f'[{i+1}] ' + IDs['TurretsIDs']['Red'][i]['Name'])
+                    tID = int(input('\n>')) - 1
+                    turretID = IDs['TurretsIDs']['Red'][tID]['ID']
+                try:
+                    main.title()
+                    turretAmmount = int(input('Set your turret ammount\n\n>'))
+                except ValueError:
+                    main.title()
+                    print('Invalid value.')
+                    time.sleep(3)
+                    return setSupport()
+                main.title()
+                print('Loading, please wait...')
+                try:
+                    for i in data['Inventory'][f'{profile}']['Turrets']:
+                        if i['TurretId'] == turretID:
+                            tIndx = data['Inventory'][f'{profile}']['Turrets'].index(i)
+                    data['Inventory'][f'{profile}']['Turrets'][tIndx]['TurretCount'] = turretAmmount
+                except NameError:
+                    data['Inventory'][f'{profile}']['Turrets'].append({'TurretId': turretID, 'TurretCount': turretAmmount})
+            except IndexError:
+                main.title()
+                print('Invalid Option.')
+                time.sleep(3)
+                return setSupport()
+            json.dump(data, f)
         if os.path.exists('Profile.save'):
             os.remove('Profile.save')
+        if os.path.exists('IDs.json'):
+            os.remove('IDs.json')
         d.encodeProfileSave()
         os.remove('Profile_unpacked.json')
         main.title()
         print('Profile.save has been successfuly updated.')
         time.sleep(3)
         return main.mainMenu()
-    elif supply == '2':
-        main.title()
-        try:
-            a = int(input('Set your supply ammount\n\n>'))
-        except ValueError as err:
-            main.title()
-            print('Invalid value')
-            time.sleep(3)
-            return setSupport()
-        main.title()
-        print('Loading, please wait...')
-        d.decodeProfileSave()
-        with open('Profile_unpacked.json', 'r+') as f:
-            data = json.load(f)
-            f.seek( 0 )
-            f.truncate()
-            data['Inventory'][f'{profile}']['Ammo']['grenades_cryo'] = int(a)
-            json.dump( data, f )
-        if os.path.exists('Profile.save'):
-            os.remove('Profile.save')
-        d.encodeProfileSave()
-        os.remove('Profile_unpacked.json')
-        main.title()
-        print('Profile.save has been successfuly updated.')
-        time.sleep(3)
-        return main.mainMenu()
-    elif supply == '3':
-        main.title()
-        try:
-            a = int(input('Set your supply ammount\n\n>'))
-        except ValueError as err:
-            main.title()
-            print('Invalid value')
-            time.sleep(3)
-            return setSupport()
-        main.title()
-        print('Loading, please wait...')
-        d.decodeProfileSave()
-        with open('Profile_unpacked.json', 'r+') as f:
-            data = json.load(f)
-            p = json.loads(turretjson)
-            f.seek( 0 )
-            f.truncate()
-            if data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] > 30:
-                try:
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSRD[0]
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-                    json.dump( data, f )
-                except IndexError:
-                    p['TurretsId'] = TURRETSRD[0]
-                    p['TurretsCount'] = int(a)
-                    data['Inventory'][f'{profile}']['Turrets'].append(p)
-                    json.dump( data, f )
-                    pass
-            elif data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] < 30:
-                try:
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSNM[0]
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-                    json.dump( data, f )
-                except IndexError:
-                    p['TurretsId'] = TURRETSNM[0]
-                    p['TurretsCount'] = int(a)
-                    data['Inventory'][f'{profile}']['Turrets'].append(p)
-                    json.dump( data, f )
-                    pass
-        if os.path.exists('Profile.save'):
-            os.remove('Profile.save')
-        d.encodeProfileSave()
-        os.remove('Profile_unpacked.json')
-        main.title()
-        print('Profile.save has been successfuly updated.')
-        time.sleep(3)
-        return main.mainMenu()
-    elif supply == '4':
-        main.title()
-        try:
-            a = int(input('Set your supply ammount\n\n>'))
-        except ValueError as err:
-            main.title()
-            print('Invalid value')
-            time.sleep(3)
-            return setSupport()
-        main.title()
-        print('Loading, please wait...')
-        d.decodeProfileSave()
-        with open('Profile_unpacked.json', 'r+') as f:
-            data = json.load(f)
-            p = json.loads(turretjson)
-            f.seek( 0 )
-            f.truncate()
-            if data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] > 30:
-                try:
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSRD[1]
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-                    json.dump( data, f )
-                except IndexError:
-                    p['TurretsId'] = TURRETSRD[1]
-                    p['TurretsCount'] = int(a)
-                    data['Inventory'][f'{profile}']['Turrets'].append(p)
-                    json.dump( data, f )
-                    pass
-            elif data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] < 30:
-                try:
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSNM[1]
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-                    json.dump( data, f )
-                except IndexError:
-                    p['TurretsId'] = TURRETSNM[1]
-                    p['TurretsCount'] = int(a)
-                    data['Inventory'][f'{profile}']['Turrets'].append(p)
-                    json.dump( data, f )
-                    pass
-        if os.path.exists('Profile.save'):
-            os.remove('Profile.save')
-        d.encodeProfileSave()
-        os.remove('Profile_unpacked.json')
-        main.title()
-        print('Profile.save has been successfuly updated.')
-        time.sleep(3)
-        return main.mainMenu()
-    elif supply == '5':
-        main.title()
-        try:
-            a = int(input('Set your supply ammount\n\n>'))
-        except ValueError as err:
-            main.title()
-            print('Invalid value')
-            time.sleep(3)
-            return setSupport()
-        main.title()
-        print('Loading, please wait...')
-        d.decodeProfileSave()
-        with open('Profile_unpacked.json', 'r+') as f:
-            data = json.load(f)
-            p = json.loads(turretjson)
-            f.seek( 0 )
-            f.truncate()
-            if data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] > 30:
-                try:
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSRD[2]
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-                    json.dump( data, f )
-                except IndexError:
-                    p['TurretsId'] = TURRETSRD[2]
-                    p['TurretsCount'] = int(a)
-                    data['Inventory'][f'{profile}']['Turrets'].append(p)
-                    json.dump( data, f )
-                    pass
-            elif data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] < 30:
-                try:
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSNM[2]
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-                    json.dump( data, f )
-                except IndexError:
-                    p['TurretsId'] = TURRETSNM[2]
-                    p['TurretsCount'] = int(a)
-                    data['Inventory'][f'{profile}']['Turrets'].append(p)
-                    json.dump( data, f )
-                    pass
-        if os.path.exists('Profile.save'):
-            os.remove('Profile.save')
-        d.encodeProfileSave()
-        os.remove('Profile_unpacked.json')
-        main.title()
-        print('Profile.save has been successfuly updated.')
-        time.sleep(3)
-        return main.mainMenu()
-    elif supply == '6':
-        main.title()
-        try:
-            a = int(input('Set your supply ammount\n\n>'))
-        except ValueError as err:
-            main.title()
-            print('Invalid value')
-            time.sleep(3)
-            return setSupport()
-        main.title()
-        print('Loading, please wait...')
-        d.decodeProfileSave()
-        with open('Profile_unpacked.json', 'r+') as f:
-            data = json.load(f)
-            p = json.loads(turretjson)
-            f.seek( 0 )
-            f.truncate()
-            if data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] > 30:
-                try:
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSRD[3]
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-                    json.dump( data, f )
-                except IndexError:
-                    p['TurretsId'] = TURRETSRD[3]
-                    p['TurretsCount'] = int(a)
-                    data['Inventory'][f'{profile}']['Turrets'].append(p)
-                    json.dump( data, f )
-                    pass
-            elif data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] < 30:
-                try:
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSNM[3]
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-                    json.dump( data, f )
-                except IndexError:
-                    p['TurretsId'] = TURRETSNM[3]
-                    p['TurretsCount'] = int(a)
-                    data['Inventory'][f'{profile}']['Turrets'].append(p)
-                    json.dump( data, f )
-                    pass
-        if os.path.exists('Profile.save'):
-            os.remove('Profile.save')
-        d.encodeProfileSave()
-        os.remove('Profile_unpacked.json')
-        main.title()
-        print('Profile.save has been successfuly updated.')
-        time.sleep(3)
-        return main.mainMenu()
-    elif supply == '7':
-        main.title()
-        try:
-            a = int(input('Set your supply ammount\n\n>'))
-        except ValueError as err:
-            main.title()
-            print('Invalid value')
-            time.sleep(3)
-            return setSupport()
-        main.title()
-        print('Loading, please wait...')
-        d.decodeProfileSave()
-        with open('Profile_unpacked.json', 'r+') as f:
-            data = json.load(f)
-            p = json.loads(turretjson)
-            f.seek( 0 )
-            f.truncate()
-            if data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] > 30:
-                try:
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSRD[4]
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-                    json.dump( data, f )
-                except IndexError:
-                    p['TurretsId'] = TURRETSRD[4]
-                    p['TurretsCount'] = int(a)
-                    data['Inventory'][f'{profile}']['Turrets'].append(p)
-                    json.dump( data, f )
-                    pass
-            elif data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] < 30:
-                try:
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSNM[4]
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-                    json.dump( data, f )
-                except IndexError:
-                    p['TurretsId'] = TURRETSNM[4]
-                    p['TurretsCount'] = int(a)
-                    data['Inventory'][f'{profile}']['Turrets'].append(p)
-                    json.dump( data, f )
-                    pass
-        if os.path.exists('Profile.save'):
-            os.remove('Profile.save')
-        d.encodeProfileSave()
-        os.remove('Profile_unpacked.json')
-        main.title()
-        print('Profile.save has been successfuly updated.')
-        time.sleep(3)
-        return main.mainMenu()
-    elif supply == '8':
-        main.title()
-        try:
-            a = int(input('Set your supply ammount\n\n>'))
-        except ValueError as err:
-            main.title()
-            print('Invalid value')
-            time.sleep(3)
-            return setSupport()
-        main.title()
-        print('Loading, please wait...')
-        d.decodeProfileSave()
-        with open('Profile_unpacked.json', 'r+') as f:
-            data = json.load(f)
-            p = json.loads(turretjson)
-            f.seek( 0 )
-            f.truncate()
-            if data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] > 30:
-                try:
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSRD[5]
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-                    json.dump( data, f )
-                except IndexError:
-                    p['TurretsId'] = TURRETSRD[5]
-                    p['TurretsCount'] = int(a)
-                    data['Inventory'][f'{profile}']['Turrets'].append(p)
-                    json.dump( data, f )
-                    pass
-            elif data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] < 30:
-                try:
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSNM[5]
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-                    json.dump( data, f )
-                except IndexError:
-                    p['TurretsId'] = TURRETSNM[5]
-                    p['TurretsCount'] = int(a)
-                    data['Inventory'][f'{profile}']['Turrets'].append(p)
-                    json.dump( data, f )
-                    pass
-        if os.path.exists('Profile.save'):
-            os.remove('Profile.save')
-        d.encodeProfileSave()
-        os.remove('Profile_unpacked.json')
-        main.title()
-        print('Profile.save has been successfuly updated.')
-        time.sleep(3)
-        return main.mainMenu()
-    elif supply == '9':
-        main.title()
-        try:
-            a = int(input('Set your supply ammount\n\n>'))
-        except ValueError as err:
-            main.title()
-            print('Invalid value')
-            time.sleep(3)
-            return setSupport()
-        main.title()
-        print('Loading, please wait...')
-        d.decodeProfileSave()
-        with open('Profile_unpacked.json', 'r+') as f:
-            data = json.load(f)
-            p = json.loads(turretjson)
-            f.seek( 0 )
-            f.truncate()
-            if data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] > 30:
-                try:
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSRD[6]
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-                    json.dump( data, f )
-                except IndexError:
-                    p['TurretsId'] = TURRETSRD[6]
-                    p['TurretsCount'] = int(a)
-                    data['Inventory'][f'{profile}']['Turrets'].append(p)
-                    json.dump( data, f )
-                    pass
-            elif data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] < 30:
-                try:
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretId'] = TURRETSNM[6]
-                    data['Inventory'][f'{profile}']['Turrets'][0]['TurretCount'] = int(a)
-                    json.dump( data, f )
-                except IndexError:
-                    p['TurretsId'] = TURRETSNM[6]
-                    p['TurretsCount'] = int(a)
-                    data['Inventory'][f'{profile}']['Turrets'].append(p)
-                    json.dump( data, f )
-                    pass
-        if os.path.exists('Profile.save'):
-            os.remove('Profile.save')
-        d.encodeProfileSave()
-        os.remove('Profile_unpacked.json')
-        main.title()
-        print('Profile.save has been successfuly updated.')
-        time.sleep(3)
-        return main.mainMenu()
+
     else:
         main.title()
         print('Invalid Option.')

@@ -1,4 +1,4 @@
-import io, json
+import io, json, os
 from dgdata import *
 import main
 import time
@@ -17,7 +17,8 @@ def decodeProfileSave():
             f.write(fixed)
     except FileNotFoundError:
         main.title()
-        c.deleteFile()
+        if os.path.exists('IDs.json'):
+            os.remove('IDs.json')
         print("Profile.save does not exist in the current directory, please try again.")
         time.sleep(3)
         return main.mainMenu()
@@ -30,8 +31,10 @@ def encodeProfileSave():
         with open('Profile.save', 'wb') as f:
             f.write(encode_bytes)
     except FileNotFoundError:
-        c.deleteFile()
+        if os.path.exists('IDs.json'):
+            os.remove('IDs.json')
         main.title()
         print("Profile_unpacked.json does not exist in the current directory, please try again.")
         time.sleep(3)
         return main.mainMenu()
+decodeProfileSave()

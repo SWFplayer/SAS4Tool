@@ -1790,18 +1790,76 @@ IDs = '''
                 }
             ]
         }
+    },
+    "TurretsIDs": {
+        "Normal": [
+            {
+                "Name": "HVM Heavy Machine Gun Sentry",
+                "ID": 54
+            },
+            {
+                "Name": "Ronson Cryogenic Turret",
+                "ID": 56
+            },
+            {
+                "Name": "HIK Heavyshot Protector",
+                "ID": 58
+            },
+            {
+                "Name": "Teknoboom Flugkorper",
+                "ID": 62
+            },
+            {
+                "Name": "Ronson MK V Flame Turret",
+                "ID": 63
+            },
+            {
+                "Name": "CM Supernova",
+                "ID": 60
+            },
+            {
+                "Name": "CM Zeus Exclusion Zone",
+                "ID": 55
+            }
+        ],
+        "Red": [
+            {
+                "Name": "HVM Heavy Machine Gun Sentry",
+                "ID": 133
+            },
+            {
+                "Name": "Ronson Cryogenic Turret",
+                "ID": 134
+            },
+            {
+                "Name": "HIK Heavyshot Protector",
+                "ID": 135
+            },
+            {
+                "Name": "Teknoboom Flugkorper",
+                "ID": 136
+            },
+            {
+                "Name": "Ronson MK V Flame Turret",
+                "ID": 137
+            },
+            {
+                "Name": "CM Supernova",
+                "ID": 138
+            },
+            {
+                "Name": "CM Zeus Exclusion Zone",
+                "ID": 139
+            }
+        ]
     }
 }
 '''
 
 def createFile():
-    if os.path.exists('IDs.json'):
-        os.remove('IDs.json')
-    with open('IDs.json', 'w') as f:
+    open('IDs.json', 'w').close()
+    with open('IDs.json', 'r+') as f:
         data = json.loads(IDs)
         f.seek(0)
         f.truncate()
         json.dump(data, f, indent=4)
-
-def deleteFile():
-    os.remove('IDs.json')
