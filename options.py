@@ -714,9 +714,9 @@ def equipConfig(equipType, equipCategory, equipVersion, profile):
         "ID": 0,
         "EquipVersion": 0,
         "Grade": 0,
-        "EquippedSlot": -1,
+        "EquippedSlot": 0,
         "AugmentSlots": 1,
-        "InventoryIndex": 0,
+        "InventoryIndex": -1,
         "Seen": false,
         "BonusStatsLevel": 0,
         "Equipped": false,
@@ -777,7 +777,7 @@ def equipConfig(equipType, equipCategory, equipVersion, profile):
         strongBox2['Grade'] = int(grade)
         strongBox2['AugmentSlots'] = int(augmentSlots)
         strongBox2['BonusStatsLevel'] = int(bonusGrade)
-        strongBox2['InventoryIndex'] = IDs['equipmentIDs'][f'{equipType}']['Extra'][0]['Type']
+        strongBox2['EquippedSlot'] = IDs['equipmentIDs'][f'{equipType}']['Extra'][0]['Type']
         data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(1))
         data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(strongBox2)
         data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(8))
