@@ -37,4 +37,3 @@ def encodeProfileSave():
         print("Profile_unpacked.json does not exist in the current directory, please try again.")
         time.sleep(3)
         return main.mainMenu()
-decodeProfileSave()
