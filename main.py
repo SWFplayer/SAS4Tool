@@ -1,11 +1,21 @@
 from colorama import Fore, init
 from encodingDecoding import *
 import time
-from os import system, name, _exit
+from os import *
+from os import _exit
 import options as opt
 init(autoreset=True)
 
 GREEN = Fore.GREEN
+
+def getFolder(dir):
+    for root, dirs, files in walk(dir):
+        for file in files:
+            if file == 'Profile.save' or file == 'Profile_unpacked.json':
+                if '\\Data\\Docs\\' in root:
+                    return root
+
+mainDir = getFolder('C:\\Program Files (x86)\\Steam\\userdata\\')
 
 def clear():
     system('cls' if name == 'nt' else 'clear')

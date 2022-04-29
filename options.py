@@ -3,6 +3,7 @@ import time, os, random
 import main
 import json
 import createFile as c
+from os import walk
 
 NUMS = '123456789'
 
@@ -10,6 +11,25 @@ NUMS = '123456789'
 
 TURRETSNM = [54, 56, 58, 62, 63, 60, 55]
 TURRETSRD = [133, 134, 135, 136, 137, 138, 139]
+
+def getFolder(dir):
+    for root, dirs, files in walk(dir):
+        for file in files:
+            if file == 'Profile.save' or file == 'Profile_unpacked.json':
+                if '\\Data\\Docs\\' in root:
+                    return root
+
+mainDir = getFolder('C:\\Program Files (x86)\\Steam\\userdata\\')
+
+def encodeFunct():
+    if os.path.exists(f'{mainDir}\\Profile.save'):
+        os.remove(f'{mainDir}\\Profile.save')
+    d.encodeProfileSave()
+    os.remove(f'{mainDir}\\Profile_unpacked.json')
+    main.title()
+    print('Profile.save has been successfuly updated.')
+    time.sleep(3)
+    return main.mainMenu()
 
 def factionGuild():
     main.title()
@@ -19,21 +39,14 @@ def factionGuild():
     main.title()
     print("Loading, please wait...")
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
         data['CurrentFactionWarMatch'] = factionCode.upper()
         data['CurrentFactionWarFaction'] = factionGuild.upper()
         json.dump(data, f)
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def factionCredits():
     try:
@@ -57,7 +70,7 @@ def factionCredits():
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
@@ -68,14 +81,7 @@ def factionCredits():
         data['FactionWarPlanetArray'][3]['Currency'] = planetXCurrency
         data['FactionWarPlanetArray'][4]['Currency'] = planetOCurrency
         json.dump(data, f)
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def reviveTokens():
     main.title()
@@ -87,20 +93,13 @@ def reviveTokens():
         time.sleep(3)
         return reviveTokens()
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
         data['Global']['ReviveTokens'] = tokens
         json.dump(data, f)
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def blackKeys():
     main.title()
@@ -133,20 +132,13 @@ def blackKeys():
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
         data['Inventory'][f'{profile}']['Skills']['AvailableBlackKeys'] = blackkeys
         json.dump( data, f )
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def blackBox():
     main.title()
@@ -187,20 +179,13 @@ def blackBox():
             chars = random.choice(NUMS)
             genBox = genBox + chars
         l.append(int(genBox))
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
         data['Inventory'][f'{profile}']['Skills']['AvailableBlackStrongboxes'] = l
         json.dump(data, f)
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def augCores():
     main.title()
@@ -233,20 +218,13 @@ def augCores():
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
         data['Inventory'][f'{profile}']['Skills']['AvailableEliteAugmentCores'] = augcores
         json.dump( data, f )
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def sasCash():
     main.title()
@@ -279,20 +257,13 @@ def sasCash():
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
         data['Inventory'][f'{profile}']['Money'] = money
         json.dump( data, f )
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def removeAds():
     main.title()
@@ -309,20 +280,13 @@ def removeAds():
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
         data['Global']['ForceRemoveAds'] = ads
         json.dump( data, f )
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def premiumTickets():
     main.title()
@@ -336,20 +300,13 @@ def premiumTickets():
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
         data['Global']['AvailablePremiumTickets'] = tickets
         json.dump( data, f )
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def premProfile():
     main.title()
@@ -366,21 +323,14 @@ def premProfile():
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
         data['PurchasedIAP']['PurchasedIAPArray'][0]['Value'] = premprofile
         data['PurchasedIAP']['PurchasedIAPArray'][1]['Value'] = premprofile
         json.dump( data, f )
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 
 def premGuns():
@@ -465,7 +415,7 @@ def premGuns():
         main.title()
         print('Loading, please wait...')
         d.decodeProfileSave()
-        with open('Profile_unpacked.json', 'r+') as f:
+        with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
             data = json.load(f)
             f.seek( 0 )
             f.truncate()
@@ -473,14 +423,7 @@ def premGuns():
                 VAL1 += 1
                 data['PurchasedIAP']['PurchasedIAPArray'][VAL1]['Value'] = True
             json.dump( data, f )
-        if os.path.exists('Profile.save'):
-            os.remove('Profile.save')
-        d.encodeProfileSave()
-        os.remove('Profile_unpacked.json')
-        main.title()
-        print('Profile.save has been successfuly updated.')
-        time.sleep(3)
-        return main.mainMenu()
+        encodeFunct()
     else:
         main.title()
         print('Invalid option.')
@@ -489,24 +432,17 @@ def premGuns():
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
         data['PurchasedIAP']['PurchasedIAPArray'][gun]['Value'] = True
         json.dump( data, f )
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def weaponConfig(weaponType, weaponCategory, weaponVersion, profile):
     main.title()
-    with open('IDs.json', 'r') as idf:
+    with open(f'{mainDir}\\IDs.json', 'r') as idf:
         IDs = json.load(idf)
     for i in range(len(IDs['weaponIDs'][f'{weaponType}'][f'{weaponCategory}'])):
         prnWeap = f'[{i+1}] ' + f'{IDs["weaponIDs"][f"{weaponType}"][f"{weaponCategory}"][i]["Name"]}'
@@ -570,7 +506,7 @@ def weaponConfig(weaponType, weaponCategory, weaponVersion, profile):
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         strongBox = json.loads(strongbox)
         f.seek( 0 )
@@ -586,21 +522,12 @@ def weaponConfig(weaponType, weaponCategory, weaponVersion, profile):
         data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(8))
         data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(0))
         json.dump( data, f )
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    if os.path.exists('IDs.json'):
-        os.remove('IDs.json')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def weaponCat(weaponType, profile):
     main.title()
     c.createFile()
-    with open('IDs.json', 'r') as f:
+    with open(f'{mainDir}\\IDs.json', 'r') as f:
         data = json.load(f)
         try:
             data['weaponIDs'][f'{weaponType}']['Factions']
@@ -703,7 +630,7 @@ def weapons():
 
 def equipConfig(equipType, equipCategory, equipVersion, profile):
     main.title()
-    with open('IDs.json', 'r') as idf:
+    with open(f'{mainDir}\\IDs.json', 'r') as idf:
         IDs = json.load(idf)
     for i in range(len(IDs['equipmentIDs'][f'{equipType}'][f'{equipCategory}'])):
         prnEquip = f'[{i+1}] ' + f'{IDs["equipmentIDs"][f"{equipType}"][f"{equipCategory}"][i]["Name"]}'
@@ -767,7 +694,7 @@ def equipConfig(equipType, equipCategory, equipVersion, profile):
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         strongBox2 = json.loads(strongbox2)
         f.seek( 0 )
@@ -784,21 +711,12 @@ def equipConfig(equipType, equipCategory, equipVersion, profile):
         data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(8))
         data['Inventory'][f'{profile}']['Strongboxes']['Claimed'].append(int(0))
         json.dump( data, f )
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    if os.path.exists('IDs.json'):
-        os.remove('IDs.json')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def equipCat(equipType, profile):
     main.title()
     c.createFile()
-    with open('IDs.json', 'r') as f:
+    with open(f'{mainDir}\\IDs.json', 'r') as f:
         data = json.load(f)
         try:
             data['equipmentIDs'][f'{equipType}']['Factions']
@@ -926,20 +844,13 @@ def setSupport():
             main.title()
             print('Loading, please wait...')
             d.decodeProfileSave()
-            with open('Profile_unpacked.json', 'r+') as f:
+            with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
                 data = json.load(f)
                 f.seek( 0 )
                 f.truncate()
                 data['Inventory'][f'{profile}']['Ammo']['grenades_frag'] = int(a)
                 json.dump( data, f )
-            if os.path.exists('Profile.save'):
-                os.remove('Profile.save')
-            d.encodeProfileSave()
-            os.remove('Profile_unpacked.json')
-            main.title()
-            print('Profile.save has been successfuly updated.')
-            time.sleep(3)
-            return main.mainMenu()
+            encodeFunct()
         elif grenadeType == '2':
             main.title()
             try:
@@ -952,20 +863,13 @@ def setSupport():
             main.title()
             print('Loading, please wait...')
             d.decodeProfileSave()
-            with open('Profile_unpacked.json', 'r+') as f:
+            with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
                 data = json.load(f)
                 f.seek( 0 )
                 f.truncate()
                 data['Inventory'][f'{profile}']['Ammo']['grenades_cryo'] = int(a)
                 json.dump( data, f )
-            if os.path.exists('Profile.save'):
-                os.remove('Profile.save')
-            d.encodeProfileSave()
-            os.remove('Profile_unpacked.json')
-            main.title()
-            print('Profile.save has been successfuly updated.')
-            time.sleep(3)
-            return main.mainMenu()
+            encodeFunct()
         else:
             main.title()
             print('Invalid Option.')
@@ -975,9 +879,9 @@ def setSupport():
         main.title()
         c.createFile()
         d.decodeProfileSave()
-        with open('IDs.json', 'r') as idf:
+        with open(f'{mainDir}\\IDs.json', 'r') as idf:
             IDs = json.load(idf)
-        with open('Profile_unpacked.json', 'r+') as f:
+        with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
             data = json.load(f)
             f.seek(0)
             f.truncate()
@@ -1015,16 +919,7 @@ def setSupport():
                 time.sleep(3)
                 return setSupport()
             json.dump(data, f)
-        if os.path.exists('Profile.save'):
-            os.remove('Profile.save')
-        if os.path.exists('IDs.json'):
-            os.remove('IDs.json')
-        d.encodeProfileSave()
-        os.remove('Profile_unpacked.json')
-        main.title()
-        print('Profile.save has been successfuly updated.')
-        time.sleep(3)
-        return main.mainMenu()
+        encodeFunct()
 
     else:
         main.title()
@@ -1044,7 +939,7 @@ def collection():
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
@@ -1055,14 +950,7 @@ def collection():
             VAL2 += 1
             data['CollectionArrayArmour'][VAL2]['CollectionUnlocked'] = st
         json.dump( data, f )
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def mastery():
     main.title()
@@ -1093,7 +981,7 @@ def mastery():
         main.title()
         print('Loading, please wait...')
         d.decodeProfileSave()
-        with open('Profile_unpacked.json', 'r+') as f:
+        with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
             data = json.load(f)
             f.seek( 0 )
             f.truncate()
@@ -1102,14 +990,7 @@ def mastery():
                 data['MasteryProgress'][f'{profile}'][VAL]['MasteryXp'] = xp
                 data['MasteryProgress'][f'{profile}'][VAL]['MasteryLvl'] = lvl
             json.dump( data, f )
-        if os.path.exists('Profile.save'):
-            os.remove('Profile.save')
-        d.encodeProfileSave()
-        os.remove('Profile_unpacked.json')
-        main.title()
-        print('Profile.save has been successfuly updated.')
-        time.sleep(3)
-        return main.mainMenu()
+        encodeFunct()
     elif mast == '2':
         return main.mainMenu()
 
@@ -1139,20 +1020,13 @@ def skillReset():
         main.title()
         print('Loading, please wait...')
         d.decodeProfileSave()
-        with open('Profile_unpacked.json', 'r+') as f:
+        with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
             data = json.load(f)
             f.seek( 0 )
             f.truncate()
             data['Inventory'][f'{profile}']['FreeSkillsReset'] = False
             json.dump( data, f )
-        if os.path.exists('Profile.save'):
-            os.remove('Profile.save')
-        d.encodeProfileSave()
-        os.remove('Profile_unpacked.json')
-        main.title()
-        print('Profile.save has been successfuly updated.')
-        time.sleep(3)
-        return main.mainMenu()
+        encodeFunct()
     elif reset == '2':
         return main.mainMenu()
     else:
@@ -1186,20 +1060,13 @@ def changeProfileName():
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
         data['Inventory'][f'{profile}']['Name'] = f'{username}'
         json.dump( data, f )
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def decodeEnc():
     main.title()
@@ -1287,21 +1154,14 @@ def setLVL():
     main.title()
     print("Loading, please wait...")
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
         data['Inventory'][f'{profile}']['Skills']['PlayerLevel'] = level
         data['Inventory'][f'{profile}']['Skills']['PlayerTotalXp'] = totalXp
         json.dump(data, f)
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def setMulti(key, profile):
     main.title()
@@ -1315,7 +1175,7 @@ def setMulti(key, profile):
     main.title()
     print('Loading, please wait...')
     d.decodeProfileSave()
-    with open('Profile_unpacked.json', 'r+') as f:
+    with open(f'{mainDir}\\Profile_unpacked.json', 'r+') as f:
         data = json.load(f)
         f.seek( 0 )
         f.truncate()
@@ -1327,14 +1187,7 @@ def setMulti(key, profile):
         except:
             data['Inventory'][f'{profile}']['StatsData'].append({'key': key, 'val': ammount})
         json.dump(data, f, indent=4)
-    if os.path.exists('Profile.save'):
-        os.remove('Profile.save')
-    d.encodeProfileSave()
-    os.remove('Profile_unpacked.json')
-    main.title()
-    print('Profile.save has been successfuly updated.')
-    time.sleep(3)
-    return main.mainMenu()
+    encodeFunct()
 
 def setMultiStats():
     main.title()

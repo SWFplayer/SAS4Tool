@@ -1,4 +1,14 @@
 import json, os
+from os import walk
+
+def getFolder(dir):
+    for root, dirs, files in walk(dir):
+        for file in files:
+            if file == 'Profile.save' or file == 'Profile_unpacked.json':
+                if '\\Data\\Docs\\' in root:
+                    return root
+
+mainDir = getFolder('C:\\Program Files (x86)\\Steam\\userdata\\')
 
 IDs = '''
 {
@@ -1857,8 +1867,8 @@ IDs = '''
 '''
 
 def createFile():
-    open('IDs.json', 'w').close()
-    with open('IDs.json', 'r+') as f:
+    open(f'{mainDir}\\IDs.json', 'w').close()
+    with open(f'{mainDir}\\IDs.json', 'r+') as f:
         data = json.loads(IDs)
         f.seek(0)
         f.truncate()
