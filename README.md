@@ -9,3 +9,7 @@ How to use:
 - Open the tool and select your changes. ( Before using, make sure to make a backup in case of errors )
 - "Profile.save" will be replaced for a new one with the same name.
 - Open SAS 4 and enjoy.
+
+# Troublechute
+
+- If your Profile.save does not exist, try opening the game, that will make a new one using your TempProfile.save/OldProfile.save, if it doesnt, just rename TempProfile.save/OldProfile.save to "Profile.save"
