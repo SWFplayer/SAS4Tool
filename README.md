@@ -13,3 +13,8 @@ How to use:
 # Troublechute
 
 - If your Profile.save does not exist, try opening the game, that will make a new one using your TempProfile.save/OldProfile.save, if it doesnt, just rename TempProfile.save/OldProfile.save to "Profile.save"
+
+How to find Profile.save file:
+
+- Open your Explorer
+- Go to this directory -> "C:\Program Files (x86)\Steam\userdata\" and open the folder with the latest modification date, ex: 1024408544 (It should look like this one.), then go to "\678800\local\Data\Docs\" and open the folder with random characters, ex: 6244d08ef3d565a6d36f22d6.
