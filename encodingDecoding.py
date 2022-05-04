@@ -1,22 +1,13 @@
 import io, json, os, time
 from dgdata import *
 import main
-from os import walk
-
-
-def getFolder(dir):
-    for root, dirs, files in walk(dir):
-        for file in files:
-            if file == 'Profile.save' or file == 'Profile_unpacked.json':
-                if '\\Data\\Docs\\' in root:
-                    return root
-
-mainDir = getFolder('C:\\Program Files (x86)\\Steam\\userdata\\')
-
-fileIn = f'{mainDir}\\Profile.save'
-fileOut = f'{mainDir}\\Profile_unpacked.json'
 
 def decodeProfileSave():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
+
+    fileIn = f'{mainDir}\\Profile.save'
+    fileOut = f'{mainDir}\\Profile_unpacked.json'
     try:
         with io.open( f'{fileIn}', 'rb' ) as fd:
             decoded_bytes = dgdata_decode( fd.read() )
@@ -36,6 +27,11 @@ def decodeProfileSave():
         return main.mainMenu()
 
 def encodeProfileSave():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
+
+    fileIn = f'{mainDir}\\Profile.save'
+    fileOut = f'{mainDir}\\Profile_unpacked.json'
     try:
         with io.open( f'{fileOut}', 'rb' ) as fd:
             encode_bytes = dgdata_encode( fd.read() )

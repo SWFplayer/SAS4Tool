@@ -3,25 +3,22 @@ import time, os, random
 import main
 import json
 import createFile as c
-from os import walk
 
 NUMS = '123456789'
 
 # TURRETS
 
+gradeList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+augmentsList = [1, 2, 3]
+
 TURRETSNM = [54, 56, 58, 62, 63, 60, 55]
 TURRETSRD = [133, 134, 135, 136, 137, 138, 139]
 
-def getFolder(dir):
-    for root, dirs, files in walk(dir):
-        for file in files:
-            if file == 'Profile.save' or file == 'Profile_unpacked.json':
-                if '\\Data\\Docs\\' in root:
-                    return root
 
-mainDir = getFolder('C:\\Program Files (x86)\\Steam\\userdata\\')
 
 def encodeFunct():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     if os.path.exists(f'{mainDir}\\Profile.save'):
         os.remove(f'{mainDir}\\Profile.save')
     d.encodeProfileSave()
@@ -32,6 +29,8 @@ def encodeFunct():
     return main.mainMenu()
 
 def factionGuild():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     factionCode = input('Please, move your "Profile.save" to the current folder.\n\nType your faction code (Ex: XKLFHL)\n\n>')
     main.title()
@@ -49,6 +48,8 @@ def factionGuild():
     encodeFunct()
 
 def factionCredits():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     try:
         main.title()
         factionWarCurrency = int(input('Set your ammount for faction war credits\n\n>'))
@@ -84,6 +85,8 @@ def factionCredits():
     encodeFunct()
 
 def reviveTokens():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     try:
         tokens = int(input('Set your revive tokens ammount\n\n>'))
@@ -102,6 +105,8 @@ def reviveTokens():
     encodeFunct()
 
 def blackKeys():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
     if profile == '1':
@@ -141,6 +146,8 @@ def blackKeys():
     encodeFunct()
 
 def blackBox():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
     if profile == '1':
@@ -188,6 +195,8 @@ def blackBox():
     encodeFunct()
 
 def augCores():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
     if profile == '1':
@@ -227,6 +236,8 @@ def augCores():
     encodeFunct()
 
 def sasCash():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
     if profile == '1':
@@ -266,6 +277,8 @@ def sasCash():
     encodeFunct()
 
 def removeAds():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     ads = input('Do you want to remove ads?\n\n[1] Yes\n[2] No\n\n>')
     if ads == '1':
@@ -289,6 +302,8 @@ def removeAds():
     encodeFunct()
 
 def premiumTickets():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     try:
         tickets = int(input('Set your premium tickets ammount\n\n>'))
@@ -309,6 +324,8 @@ def premiumTickets():
     encodeFunct()
 
 def premProfile():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     premprofile = input('Do you want to unlock 2 extra profiles?\n\n[1] Yes\n[2] No\n\n>')
     if premprofile == '1':
@@ -334,6 +351,8 @@ def premProfile():
 
 
 def premGuns():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     VAL1 = 1
     main.title()
     gun = input('''
@@ -441,6 +460,9 @@ def premGuns():
     encodeFunct()
 
 def weaponConfig(weaponType, weaponCategory, weaponVersion, profile):
+    
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     with open(f'{mainDir}\\IDs.json', 'r') as idf:
         IDs = json.load(idf)
@@ -525,6 +547,8 @@ def weaponConfig(weaponType, weaponCategory, weaponVersion, profile):
     encodeFunct()
 
 def weaponCat(weaponType, profile):
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     c.createFile()
     with open(f'{mainDir}\\IDs.json', 'r') as f:
@@ -629,6 +653,8 @@ def weapons():
         weaponCat(weaponType, profile)
 
 def equipConfig(equipType, equipCategory, equipVersion, profile):
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     with open(f'{mainDir}\\IDs.json', 'r') as idf:
         IDs = json.load(idf)
@@ -714,6 +740,8 @@ def equipConfig(equipType, equipCategory, equipVersion, profile):
     encodeFunct()
 
 def equipCat(equipType, profile):
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     c.createFile()
     with open(f'{mainDir}\\IDs.json', 'r') as f:
@@ -808,6 +836,8 @@ def equipment():
         return equipment()
 
 def setSupport():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
     if profile == '1':
@@ -928,6 +958,8 @@ def setSupport():
         return setSupport()
 
 def collection():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     VAL1 = -1
     VAL2 = -1
     main.title()
@@ -953,6 +985,8 @@ def collection():
     encodeFunct()
 
 def mastery():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
     if profile == '1':
@@ -995,6 +1029,8 @@ def mastery():
         return main.mainMenu()
 
 def skillReset():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
     if profile == '1':
@@ -1036,6 +1072,8 @@ def skillReset():
         return skillReset()
 
 def changeProfileName():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
     if profile == '1':
@@ -1114,6 +1152,8 @@ def decodeEnc():
         return decodeEnc()
 
 def setLVL():
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     totalXp = 0
     xp = [0, 1071, 1288, 1655, 2176, 2855, 3696, 4704, 5883, 7237, 8770, 10486, 12390, 14486, 16778, 19270, 21966, 24871, 27989, 31324, 34880, 38661, 42672, 46917, 51400, 56125, 91145, 98978, 107193, 115797, 124795, 134195, 144002, 154222, 164863, 175930, 187430, 199368, 211752, 224587, 237880, 251637, 265865, 280569, 295756, 311433, 327605, 344279, 361461, 379158, 397375, 416120, 435398, 455215, 475579, 496495, 517970, 540009, 562620, 585808, 609580, 844923, 878201, 912282, 947176, 982890, 1019433, 1056813, 1095038, 1134118, 1174060, 1214873, 1256565, 1299144, 1342620, 1387000, 1432293, 1478507, 1525650, 1573732, 1622760, 1672743, 1723689, 1775606, 1828504, 1882390, 1937273, 1993161, 2050062, 2107986, 2166940, 3339899, 3431459, 3524603, 3619342, 3715690, 3813659, 3913262, 4014512, 4117420]
     main.title()
@@ -1164,6 +1204,8 @@ def setLVL():
     encodeFunct()
 
 def setMulti(key, profile):
+    sF = main.getSteamFolder()
+    mainDir = main.getFolder(sF)
     main.title()
     try:
         ammount = int(input('Set your stat value\n\n>'))
@@ -1190,6 +1232,7 @@ def setMulti(key, profile):
     encodeFunct()
 
 def setMultiStats():
+    
     main.title()
     profile = input('Please, select your profile. (From left to right.)\n\n[1] Profile 1\n[2] Profile 2\n[3] Profile 3\n[4] Profile 4\n[5] Profile 5\n[6] Profile 6\n\n>')
     if profile == '1':
@@ -1228,3 +1271,15 @@ def setMultiStats():
         print('This option does not exist.')
         time.sleep(3)
         return setMultiStats()
+
+def getRandomItem():
+    main.title()
+    try:
+        itemAmmount = int(input('How many items do you want to get?\n\n>'))
+    except ValueError:
+        main.title()
+        print('Invalid value.')
+        time.sleep(3)
+        return getRandomItem()
+    main.title()
+    print('')
