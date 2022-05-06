@@ -1,20 +1,17 @@
 # SAS4Tool
 
-How to use:
+SAS4Tool is a cheat for [SAS 4](https://store.steampowered.com/app/678800/SAS_Zombie_Assault_4) developed by Ninja Kiwi.
 
-- Make sure SAS 4 is not running in the background.
-- Download "SAS4Tool.exe" from the latests releases. ( https://github.com/0daxelagnia/SAS4Tool/releases )
-- Make a folder in any place you want with any name.
-- Drag the tool inside the folder.
-- Open the tool and select your changes. ( Before using, make sure to make a backup in case of errors )
-- "Profile.save" will be replaced for a new one with the same name.
-- Open SAS 4 and enjoy.
+## Installation
 
-# Troublechute
+Download the latest release [here](https://github.com/0daxelagnia/SAS4Tool/releases).
 
-- If your Profile.save does not exist, try opening the game, that will make a new one using your TempProfile.save/OldProfile.save, if it doesnt, just rename TempProfile.save/OldProfile.save to "Profile.save"
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-How to find Profile.save file:
+## Credits
 
-- Open your Explorer
-- Go to this directory -> "C:\Program Files (x86)\Steam\userdata\" and open the folder with the latest modification date, ex: 1024408544 (It should look like this one.), then go to "\678800\local\Data\Docs\" and open the folder with random characters, ex: 6244d08ef3d565a6d36f22d6.
+- [0daxelagnia](https://github.com/0daxelagnia) (Main functions)
+- [adamdev-id](https://github.com/adamdev-id) (GUI)
+- [hemisemidemipresent](https://github.com/hemisemidemipresent) (dgdata.js from the [NKsku](https://github.com/hemisemidemipresent/NKsku) repo)
+- [cso-idn-player](https://github.com/cso-idn-player) (Converting dgdata.js to dgdata.py)
