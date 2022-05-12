@@ -1,6 +1,6 @@
 # SAS4Tool (WORKING ON A GUI UPDATE)
 
-SAS4Tool is a cheat for [SAS 4](https://store.steampowered.com/app/678800/SAS_Zombie_Assault_4) developed by Ninja Kiwi.
+SAS4Tool is a cheat for [SAS 4](https://store.steampowered.com/app/678800/SAS_Zombie_Assault_4) Game developed by Ninja Kiwi.
 
 ## Download
 
