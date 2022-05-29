@@ -25,7 +25,7 @@ def getFolder(dir):
     for root, dirs, files in walk(dir):
         for file in files:
             if file == 'Profile.save' or file == 'Profile_unpacked.json':
-                if '\\Data\\Docs\\' in root:
+                if '\\678800\\local\\Data\\Docs\\' in root:
                     return root
 
 def clear():
