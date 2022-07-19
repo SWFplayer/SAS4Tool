@@ -3,6 +3,7 @@ from _PROFILE_OPTIONS_ import addItemsMenu, changeUsername, addCash, setFreeSkil
 from _UTILS_ import mainTitle
 from _EDIT_MANUALLY_ import profileManualEdit
 from _SET_PROFILE_PATH_ import setProfilePath
+from _FIX_INVENTORY_CRASH_ import fixInventory
 from os import _exit, path
 from win32console import SetConsoleTitle
 from string import ascii_letters
@@ -12,7 +13,7 @@ from msvcrt import getch, kbhit
 from sys import stdout
 
 mainMenuSelection = ['Global', 'Profile', 'Edit manually', 'Settings', 'About', 'Exit']
-configMenuSelection = ['Set Profile', 'Set Profile Path Folder', 'Back']
+configMenuSelection = ['Set Profile', 'Set Profile Path Folder', 'Back up Profile.save [WORK IN PROGRESS]', 'Fix Inventory', 'Back']
 globalMenuSelection = ['Factions', 'Premium Items', 'Revive Tokens', 'Premium Nightmare Tickets', 'Remove ads (ADS ON MOBILE)', 'Unlock profile (5-6)', 'Back']
 profileMenuSelection = ['Add items', 'Change username', 'Add SAS Cash', 'Set free skill reset', 'Set level', 'Add black Strongboxes', 'Add random Strongboxes [PLACE HOLDER (THIS FEATURE IS WORK IN PROGRESS)]', 'Add black keys', 'Add augment cores', 'Add support items', 'Set stats', 'Back']
 
@@ -156,8 +157,6 @@ def setProfileConfig(consoleProfileList):
                     dump(data, f)
                     break
 
-
-
 def configMenu():
     consoleProfileList = ['Profile 1', 'Profile 2', 'Profile 3', 'Profile 4', 'Profile 5', 'Profile 6']
     SetConsoleTitle('SAS4Tool - Config Menu')
@@ -175,6 +174,11 @@ def configMenu():
                 setProfilePath()
                 return mainMenu()
             if key == b'c':
+                return mainMenu()
+            if key == b'd':
+                fixInventory()
+                return mainMenu()
+            if key == b'e':
                 return mainMenu()
 
 def mainMenu():

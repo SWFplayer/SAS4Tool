@@ -1,5 +1,3 @@
-from base64 import decode
-from re import I
 from numpy import random
 from time import sleep
 from _UTILS_ import ProfilePath, encode_profile as encode_pf, decode_profile as decode_pf, mainTitle, isWindowFocused, gunStrongbox, equipmentStrongbox, IDs
@@ -8,8 +6,6 @@ from os import path, remove
 from string import ascii_letters
 from win32console import SetConsoleTitle
 from msvcrt import getch, kbhit
-
-
 
 def ENDFUNC():
     PATH = ProfilePath()
@@ -246,7 +242,7 @@ def addEquipment2(equipType, equipVer):
         return addEquipment2(equipType, equipVer)
     mainTitle()
     try:
-        equip = itemIDs['equipmentIDs'][equipType][equipVer][a-1]
+        equip = itemIDs['equipmentIDs'][equipType][equipVer][a-1]['ID']
     except IndexError:
         mainTitle()
         print('Invalid input!')
@@ -310,10 +306,10 @@ def addEquipment2(equipType, equipVer):
         strongbox['BonusStatsLevel'] = bonus
         strongbox['EquippedSlot'] = IID['equipmentIDs'][equipType]['Extra'][0]['Type']
         strongbox['InventoryIndex'] = IID['equipmentIDs'][equipType]['Extra'][0]['Type']
-        data['Inventory'][profile]['Strongboxes']['Claimed'].append(int(1))
+        data['Inventory'][profile]['Strongboxes']['Claimed'].append(1)
         data['Inventory'][profile]['Strongboxes']['Claimed'].append(strongbox)
-        data['Inventory'][profile]['Strongboxes']['Claimed'].append(int(8))
-        data['Inventory'][profile]['Strongboxes']['Claimed'].append(int(0))
+        data['Inventory'][profile]['Strongboxes']['Claimed'].append(8)
+        data['Inventory'][profile]['Strongboxes']['Claimed'].append(0)
         dump(data, f)
     ENDFUNC()
 

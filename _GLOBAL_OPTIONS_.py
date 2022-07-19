@@ -6,9 +6,6 @@ from string import ascii_letters
 from win32console import SetConsoleTitle
 from msvcrt import getch, kbhit
 
-
-
-
 def ENDFUNC():
     PATH = ProfilePath()
     if path.exists(f'{PATH}\\Profile.save'):

@@ -10,7 +10,6 @@ init(autoreset=True)
 
 consoleColor = Fore.LIGHTRED_EX
 
-
 def loadConfig():
     with open('.\\config.json') as f:
         data = load(f)
