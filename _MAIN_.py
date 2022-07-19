@@ -12,7 +12,7 @@ from msvcrt import getch, kbhit
 from sys import stdout
 
 mainMenuSelection = ['Global', 'Profile', 'Edit manually', 'Settings', 'About', 'Exit']
-configMenuSelection = ['Set Profile', 'Set Profile Path Folder', 'Exit']
+configMenuSelection = ['Set Profile', 'Set Profile Path Folder', 'Back']
 globalMenuSelection = ['Factions', 'Premium Items', 'Revive Tokens', 'Premium Nightmare Tickets', 'Remove ads (ADS ON MOBILE)', 'Unlock profile (5-6)', 'Back']
 profileMenuSelection = ['Add items', 'Change username', 'Add SAS Cash', 'Set free skill reset', 'Set level', 'Add black Strongboxes', 'Add random Strongboxes [PLACE HOLDER (THIS FEATURE IS WORK IN PROGRESS)]', 'Add black keys', 'Add augment cores', 'Add support items', 'Set stats', 'Back']
 

@@ -9,7 +9,7 @@ def setProfilePath():
     mainTitle()
     print('''
 [A] - Set Profile Folder Path
-[B] - Let SAS4Tool choose the Profile Folder Path
+[B] - Let SAS4Tool choose the Profile Folder Path (Default)
 [C] - Back''')
     while True:
         if kbhit():
@@ -35,6 +35,6 @@ def setProfilePath():
                     dump(data, f)
                 break
             if key == b'c':
-                pass
-            
+                break
+    pass
     
